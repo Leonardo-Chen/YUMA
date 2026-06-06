@@ -210,61 +210,58 @@ section{
 
 /* ── Hero ── */
 .hero{
-  min-height:min(92vh,900px);
-  display:grid;
-  grid-template-columns:1fr 1.15fr;
-  gap:clamp(40px,5vw,80px);
-  align-items:center;
-  padding:clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px);
-}
-.hero-visual{
   position:relative;
+  isolation:isolate;
+  overflow:hidden;
   display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:60vh;
+  align-items:flex-end;
+  min-height:min(100vh,920px);
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  width:100vw;
+  max-width:100vw;
+  padding:
+    clamp(100px,14vh,140px)
+    max(clamp(24px,4vw,56px),env(safe-area-inset-right))
+    clamp(56px,8vw,96px)
+    max(clamp(24px,4vw,56px),env(safe-area-inset-left));
 }
-.hero-stage{
-  position:relative;
-  width:100%;
-  height:clamp(380px,60vh,620px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.hero-glow{
+.hero-bg{
   position:absolute;
-  inset:8% 5%;
-  border-radius:50%;
-  background:radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.85) 0%,transparent 68%);
-  pointer-events:none;
+  inset:0;
+  z-index:0;
+  background:var(--bg);
 }
-body.dark .hero-glow{
-  background:radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.06) 0%,transparent 68%);
+.hero-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
 }
-.hero-product{
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    105deg,
+    rgba(246,243,237,.94) 0%,
+    rgba(246,243,237,.82) 34%,
+    rgba(246,243,237,.42) 62%,
+    rgba(246,243,237,.18) 100%
+  );
+}
+body.dark .hero-overlay{
+  background:linear-gradient(
+    105deg,
+    rgba(15,15,15,.94) 0%,
+    rgba(15,15,15,.82) 34%,
+    rgba(15,15,15,.48) 62%,
+    rgba(15,15,15,.24) 100%
+  );
+}
+.hero-copy{
   position:relative;
   z-index:2;
-  width:100%;
-  max-width:580px;
-  height:auto;
-  object-fit:contain;
-  border-radius:32px;
-  filter:drop-shadow(0 40px 80px rgba(0,0,0,.12)) drop-shadow(0 12px 24px rgba(0,0,0,.06));
-  transform:translateY(-12px);
-  will-change:transform;
-  transition:transform .1s linear;
-}
-.hero-floor{
-  position:absolute;
-  bottom:6%;
-  left:50%;
-  transform:translateX(-50%);
-  width:72%;
-  height:28px;
-  background:radial-gradient(ellipse,rgba(0,0,0,.1) 0%,transparent 72%);
-  border-radius:50%;
-  filter:blur(8px);
+  max-width:min(640px,100%);
 }
 
 /* ── Product Story ── */
@@ -292,6 +289,62 @@ body.dark .hero-glow{
 }
 
 .story-visual:hover img{transform:scale(1.03)}
+
+/* ── Smart Stirrups ── */
+.stirrup-showcase{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:clamp(40px,5vw,80px);
+  align-items:center;
+}
+.stirrup-visual{
+  position:relative;
+  border-radius:32px;
+  overflow:hidden;
+  background:rgba(255,255,255,.45);
+  border:1px solid var(--line);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.stirrup-visual img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  transition:transform 1.2s var(--ease);
+}
+.stirrup-visual:hover img{transform:scale(1.03)}
+.stirrup-copy .text{max-width:620px}
+.stirrup-features{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:32px;
+  align-items:stretch;
+}
+.stirrup-feature{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.stirrup-feature strong{
+  display:block;
+  font-size:15px;
+  letter-spacing:-0.02em;
+  margin-bottom:4px;
+}
+.stirrup-feature span{
+  flex:1;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
 
 /* ── App Experience ── */
 .app-experience{
@@ -328,8 +381,12 @@ body.dark .hero-glow{
   grid-template-columns:repeat(2,1fr);
   gap:14px;
   margin-top:32px;
+  align-items:stretch;
 }
 .app-point{
+  height:100%;
+  display:flex;
+  flex-direction:column;
   padding:18px 20px;
   border:1px solid var(--line);
   border-radius:22px;
@@ -344,6 +401,7 @@ body.dark .hero-glow{
   margin-bottom:4px;
 }
 .app-point span{
+  flex:1;
   color:var(--muted);
   font-size:13px;
 }
@@ -445,8 +503,12 @@ body.dark .sys-node{background:rgba(30,30,30,.85)}
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
+  align-items:stretch;
 }
 .hw-card{
+  height:100%;
+  display:flex;
+  flex-direction:column;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:32px;
@@ -469,11 +531,18 @@ body.dark .sys-node{background:rgba(30,30,30,.85)}
   margin-bottom:20px;
 }
 .hw-card h3{font-size:26px;margin-bottom:14px}
-.hw-card p{color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:24px}
+.hw-card p{
+  flex:1;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:24px;
+}
 .spec-list{
   list-style:none;
   display:grid;
   gap:0;
+  margin-top:auto;
   border-top:1px solid var(--line);
 }
 .spec-list li{
@@ -498,8 +567,14 @@ body.dark .sys-node{background:rgba(30,30,30,.85)}
   grid-template-columns:repeat(3,1fr);
   gap:20px;
   margin-bottom:48px;
+  align-items:stretch;
 }
 .metric{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:32px;
@@ -631,8 +706,12 @@ body.dark .sys-node{background:rgba(30,30,30,.85)}
   grid-template-columns:repeat(3,1fr);
   gap:20px;
   margin-top:48px;
+  align-items:stretch;
 }
 .insight{
+  height:100%;
+  display:flex;
+  flex-direction:column;
   background:var(--ai-card-bg);
   border:1px solid var(--ai-card-border);
   border-radius:28px;
@@ -680,6 +759,7 @@ body.dark .insight::before{
   50%{opacity:1}
 }
 .insight p{
+  flex:1;
   font-size:17px;
   line-height:1.55;
   color:var(--ai-card-text);
@@ -733,8 +813,9 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 
 /* ── Responsive ── */
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-visual{order:-1;min-height:auto}
+  .hero{min-height:min(88vh,820px)}
+  .stirrup-showcase{grid-template-columns:1fr}
+  .stirrup-visual{order:-1}
   .story{grid-template-columns:1fr}
   .story-visual{max-height:480px}
   .app-experience{grid-template-columns:1fr}
@@ -772,11 +853,27 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
   .text{font-size:16px;max-width:none}
 
   .hero{
-    gap:28px;
-    padding:16px 0 clamp(40px,10vw,56px);
+    align-items:flex-end;
+    min-height:min(92vh,760px);
+    padding-top:clamp(88px,12vh,112px);
+    padding-bottom:clamp(40px,10vw,56px);
   }
-  .hero-stage{height:clamp(240px,62vw,360px)}
-  .hero-product{border-radius:24px;filter:drop-shadow(0 24px 48px rgba(0,0,0,.1)) drop-shadow(0 8px 16px rgba(0,0,0,.05))}
+  .hero-overlay{
+    background:linear-gradient(
+      to bottom,
+      rgba(246,243,237,.35) 0%,
+      rgba(246,243,237,.82) 48%,
+      rgba(246,243,237,.96) 100%
+    );
+  }
+  body.dark .hero-overlay{
+    background:linear-gradient(
+      to bottom,
+      rgba(15,15,15,.35) 0%,
+      rgba(15,15,15,.82) 48%,
+      rgba(15,15,15,.96) 100%
+    );
+  }
   .actions{width:100%}
   .actions .btn{
     flex:1;
@@ -788,6 +885,11 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 
   .story{gap:28px}
   .story-visual{border-radius:24px;max-height:none}
+
+  .stirrup-showcase{gap:28px}
+  .stirrup-visual{border-radius:24px}
+  .stirrup-features{grid-template-columns:1fr;gap:10px;margin-top:24px}
+  .stirrup-feature{padding:16px 18px;border-radius:18px}
 
   .app-experience{gap:28px}
   .app-showcase{min-height:min(110vw,440px);border-radius:24px}
@@ -905,7 +1007,17 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 }
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
-  .hero-product{transition:none}
+  .hero-video{display:none}
+  .hero-bg{
+    background:
+      linear-gradient(105deg,rgba(246,243,237,.94) 0%,rgba(246,243,237,.5) 100%),
+      url(yuma_stirrup_product.jpg) center/cover no-repeat;
+  }
+  body.dark .hero-bg{
+    background:
+      linear-gradient(105deg,rgba(15,15,15,.94) 0%,rgba(15,15,15,.5) 100%),
+      url(yuma_stirrup_product.jpg) center/cover no-repeat;
+  }
   .system-line{animation:none}
   .flow-arrow{animation:none}
   .insight .ai-badge::before{animation:none}
@@ -935,6 +1047,21 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 
 <!-- ── Hero ── -->
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="yuma_stirrup_product.jpg"
+    >
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
   <div class="hero-copy">
     <div class="kicker reveal" data-i18n="kicker">Reflective Riding System</div>
     <h1 class="reveal reveal-d1" data-i18n="heroTitle">Making the Invisible Visible.</h1>
@@ -946,19 +1073,39 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
       <a href="#tech" class="btn" data-i18n="btnTech">Technology</a>
     </div>
   </div>
+</section>
 
-  <div class="hero-visual reveal">
-    <div class="hero-stage" id="heroStage">
-      <div class="hero-glow"></div>
-      <div class="hero-floor"></div>
-      <img
-        class="hero-product"
-        id="heroProduct"
-        src="yuma_stirrup_product.jpg"
-        alt="YUMA Smart Stirrup"
-        decoding="async"
-        fetchpriority="high"
-      >
+<!-- ── Smart Stirrups ── -->
+<section class="stirrup-showcase" id="stirrup">
+  <div class="stirrup-visual reveal">
+    <img src="yuma_stirrup_product.jpg" alt="YUMA Smart Stirrup" loading="lazy" decoding="async">
+  </div>
+  <div class="stirrup-copy reveal reveal-d1">
+    <div class="kicker" data-i18n="stirrupKicker">Core Device</div>
+    <h2 data-i18n="stirrupSectionTitle">Where sensing meets the stirrup.</h2>
+    <p class="text" data-i18n="stirrupSectionText1">
+      The YUMA smart stirrup turns an everyday riding interface into a precision sensing node — capturing pressure, balance, and weight distribution from both feet in real time.
+    </p>
+    <p class="text" data-i18n="stirrupSectionText2">
+      Designed to feel familiar in the saddle while quietly translating foot-level signals into training insight.
+    </p>
+    <div class="stirrup-features">
+      <div class="stirrup-feature">
+        <strong data-i18n="stirrupFeat1Title">Pressure Mapping</strong>
+        <span data-i18n="stirrupFeat1Text">Left-right load balance across transitions and gaits.</span>
+      </div>
+      <div class="stirrup-feature">
+        <strong data-i18n="stirrupFeat2Title">Load Sensing</strong>
+        <span data-i18n="stirrupFeat2Text">50 kg load cell with HX711 amplification.</span>
+      </div>
+      <div class="stirrup-feature">
+        <strong data-i18n="stirrupFeat3Title">Motion Tracking</strong>
+        <span data-i18n="stirrupFeat3Text">IM948 motion data for lower-body rhythm.</span>
+      </div>
+      <div class="stirrup-feature">
+        <strong data-i18n="stirrupFeat4Title">Wireless Sync</strong>
+        <span data-i18n="stirrupFeat4Text">ESP32-S3 node streams telemetry at 50Hz.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1255,6 +1402,19 @@ const dict = {
     btnSystem:"Explore System",
     btnTech:"Technology",
 
+    stirrupKicker:"Core Device",
+    stirrupSectionTitle:"Where sensing meets the stirrup.",
+    stirrupSectionText1:"The YUMA smart stirrup turns an everyday riding interface into a precision sensing node — capturing pressure, balance, and weight distribution from both feet in real time.",
+    stirrupSectionText2:"Designed to feel familiar in the saddle while quietly translating foot-level signals into training insight.",
+    stirrupFeat1Title:"Pressure Mapping",
+    stirrupFeat1Text:"Left-right load balance across transitions and gaits.",
+    stirrupFeat2Title:"Load Sensing",
+    stirrupFeat2Text:"50 kg load cell with HX711 amplification.",
+    stirrupFeat3Title:"Motion Tracking",
+    stirrupFeat3Text:"IM948 motion data for lower-body rhythm.",
+    stirrupFeat4Title:"Wireless Sync",
+    stirrupFeat4Text:"ESP32-S3 node streams telemetry at 50Hz.",
+
     storyTitle:"Designed Around Communication.",
     storyText1:"Horse riding is full of invisible signals. Weight shifts, pressure changes and body posture affect the horse continuously.",
     storyText2:"YUMA transforms these invisible interactions into understandable insights.",
@@ -1356,6 +1516,19 @@ const dict = {
     btnSystem:"了解系统",
     btnTech:"技术",
 
+    stirrupKicker:"核心设备",
+    stirrupSectionTitle:"感知，从马镫开始。",
+    stirrupSectionText1:"YUMA 智能马镫将日常骑乘中最重要的接触点，转化为高精度传感节点——实时捕捉双脚的压力、平衡与重量分布。",
+    stirrupSectionText2:"在马鞍上保持熟悉的使用感受，同时将足部信号安静转化为可被理解的训练反馈。",
+    stirrupFeat1Title:"压力分布",
+    stirrupFeat1Text:"追踪转换动作与不同步态下的左右负重平衡。",
+    stirrupFeat2Title:"负载传感",
+    stirrupFeat2Text:"50 kg 称重传感器，配合 HX711 放大模块。",
+    stirrupFeat3Title:"运动追踪",
+    stirrupFeat3Text:"IM948 姿态数据，捕捉下肢运动节奏。",
+    stirrupFeat4Title:"无线同步",
+    stirrupFeat4Text:"ESP32-S3 节点以 50Hz 实时传输遥测数据。",
+
     storyTitle:"为沟通而设计。",
     storyText1:"马术充满了不可见的信号。重心移动、压力变化与身体姿态持续影响着马匹。",
     storyText2:"YUMA 将这些不可见的互动转化为可理解的洞察。",
@@ -1456,6 +1629,19 @@ const dict = {
     heroLead:"YUMAは、身体動作、バランス、圧力分布、馬の反応の隠れた関係を、ウェアラブルセンシングとAIリフレクションで理解するためのシステムです。",
     btnSystem:"システムを見る",
     btnTech:"技術",
+
+    stirrupKicker:"コアデバイス",
+    stirrupSectionTitle:"センシングは、鐙から始まる。",
+    stirrupSectionText1:"YUMAのスマート鐙は、日常の騎乗インターフェースを高精度センサーノードへと変換し、両足の圧力、バランス、体重分布をリアルタイムで取得します。",
+    stirrupSectionText2:"鞍上での使い慣れた感覚を保ちながら、足元の信号を静かにトレーニング洞察へ変換します。",
+    stirrupFeat1Title:"圧力マッピング",
+    stirrupFeat1Text:"移行動作や歩法における左右の荷重バランスを追跡。",
+    stirrupFeat2Title:"ロードセンシング",
+    stirrupFeat2Text:"50 kgロードセルとHX711アンプ。",
+    stirrupFeat3Title:"モーション追跡",
+    stirrupFeat3Text:"IM948による下半身のリズムデータ。",
+    stirrupFeat4Title:"無線同期",
+    stirrupFeat4Text:"ESP32-S3ノードが50Hzでテレメトリを送信。",
 
     storyTitle:"コミュニケーションのために設計。",
     storyText1:"騎乗には見えない信号が満ちています。体重移動、圧力変化、身体姿勢が馬に継続的に影響します。",
@@ -1586,30 +1772,23 @@ const revealObs = new IntersectionObserver((entries)=>{
 },{threshold:0.12,rootMargin:"0px 0px -40px 0px"});
 document.querySelectorAll(".reveal").forEach(el=>revealObs.observe(el));
 
-/* Hero parallax */
-const heroProduct = document.getElementById("heroProduct");
-const heroStage = document.getElementById("heroStage");
-let ticking = false;
+/* Hero video — respect reduced motion & page visibility */
+const heroVideo = document.querySelector(".hero-video");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-function updateParallax(){
-  if(!heroProduct || !heroStage) return;
-  const rect = heroStage.getBoundingClientRect();
-  const vh = window.innerHeight;
-  if(rect.bottom > 0 && rect.top < vh){
-    const progress = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
-    heroProduct.style.transform = `translateY(${-12 + progress * 24}px)`;
+function syncHeroVideo(){
+  if(!heroVideo) return;
+  const shouldPlay = !prefersReducedMotion.matches && document.visibilityState === "visible";
+  if(shouldPlay){
+    heroVideo.play().catch(()=>{});
+  } else {
+    heroVideo.pause();
   }
-  ticking = false;
 }
 
-const canParallax = window.matchMedia("(min-width: 701px) and (prefers-reduced-motion: no-preference)").matches;
-
-window.addEventListener("scroll", ()=>{
-  if(canParallax && !ticking){
-    ticking = true;
-    requestAnimationFrame(updateParallax);
-  }
-},{passive:true});
+prefersReducedMotion.addEventListener("change", syncHeroVideo);
+document.addEventListener("visibilitychange", syncHeroVideo);
+syncHeroVideo();
 
 /* Trigger initial hero reveal */
 requestAnimationFrame(()=>{
