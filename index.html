@@ -414,7 +414,7 @@ body.dark .hero-overlay{
 /* ── App Experience ── */
 .app-experience{
   display:grid;
-  grid-template-columns:.95fr 1.05fr;
+  grid-template-columns:1.05fr .95fr;
   gap:clamp(40px,5vw,80px);
   align-items:center;
 }
@@ -884,7 +884,7 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
   .story{grid-template-columns:1fr}
   .story-visual{max-height:480px}
   .app-experience{grid-template-columns:1fr}
-  .app-showcase{order:-1;min-height:min(72vw,520px)}
+  .app-showcase{min-height:min(72vw,520px)}
   .app-points{grid-template-columns:1fr 1fr}
   .hw-grid{grid-template-columns:1fr}
   .metrics{grid-template-columns:repeat(3,1fr)}
@@ -1209,7 +1209,11 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 
 <!-- ── App Experience ── -->
 <section class="app-experience">
-  <div class="app-copy reveal">
+  <div class="app-showcase reveal">
+    <img class="app-hand-img" src="yuma_app_hand.jpg" alt="YUMA mobile app held in hand" loading="lazy" decoding="async">
+  </div>
+
+  <div class="app-copy reveal reveal-d1">
     <div class="kicker" data-i18n="appKicker">Mobile Experience</div>
     <h2 data-i18n="appTitle">Training starts from the rider's hand.</h2>
     <p class="text" data-i18n="appText1">
@@ -1237,10 +1241,6 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
         <span data-i18n="appPoint4Text">Four nodes remain visible and easy to check.</span>
       </div>
     </div>
-  </div>
-
-  <div class="app-showcase reveal reveal-d1">
-    <img class="app-hand-img" src="yuma_app_hand.jpg" alt="YUMA mobile app held in hand" loading="lazy" decoding="async">
   </div>
 </section>
 
