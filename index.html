@@ -407,18 +407,20 @@ body.dark .hero-overlay{
   object-fit:cover;
   transition:transform 1.2s var(--ease);
 }
-.story-visual,.stirrup-visual{aspect-ratio:4/3}
+.story-visual{aspect-ratio:4/3}
 
 /* ── Smart Stirrups ── */
 .stirrup-showcase{
   display:grid;
-  grid-template-columns:.95fr 1.05fr;
+  grid-template-columns:1.15fr .85fr;
   gap:clamp(40px,5vw,80px);
   align-items:center;
 }
 .stirrup-visual{
   position:relative;
-  border-radius:32px;
+  aspect-ratio:4/5;
+  min-height:clamp(440px,50vw,640px);
+  border-radius:36px;
   overflow:hidden;
   background:rgba(255,255,255,.45);
   border:1px solid var(--line);
@@ -430,6 +432,7 @@ body.dark .hero-overlay{
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center center;
   transition:transform 1.2s var(--ease);
 }
 .stirrup-copy .text{max-width:620px}
@@ -928,18 +931,46 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 
 @media(max-width:900px){
   .hero{
-    align-items:flex-end;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    min-height:var(--viewport-height-small);
+    min-height:var(--viewport-height);
+    padding-top:calc(var(--nav-height) + clamp(28px,8svh,64px));
+    padding-bottom:clamp(56px,10svh,88px);
+  }
+  .hero-inner{
+    display:flex;
+    flex:1;
+    flex-direction:column;
     justify-content:center;
-    padding-bottom:clamp(48px,8svh,72px);
+    min-height:calc(var(--viewport-height-small) - var(--nav-height) - clamp(80px,14svh,120px));
   }
   .hero-copy{max-width:100%}
+  .hero-overlay{
+    background:linear-gradient(
+      to bottom,
+      rgba(246,243,237,.2) 0%,
+      rgba(246,243,237,.55) 50%,
+      rgba(246,243,237,.9) 100%
+    );
+  }
+  body.dark .hero-overlay{
+    background:linear-gradient(
+      to bottom,
+      rgba(15,15,15,.2) 0%,
+      rgba(15,15,15,.55) 50%,
+      rgba(15,15,15,.9) 100%
+    );
+  }
   .stirrup-showcase,
   .story,
   .app-experience,
   .research{grid-template-columns:1fr}
   .stirrup-visual,
   .story-visual{order:-1}
-  .story-visual,.stirrup-visual{aspect-ratio:16/10;max-height:none}
+  .story-visual{aspect-ratio:16/10;max-height:none}
+  .stirrup-visual{aspect-ratio:4/5;min-height:min(72vw,520px)}
   .app-experience{gap:clamp(32px,5vw,48px)}
   .app-showcase{max-height:min(72vw,520px);width:100%;margin:0 auto}
   .app-points,
@@ -1012,26 +1043,13 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
   .text{font-size:16px;max-width:none}
 
   .hero{
-    padding-top:calc(var(--nav-height) + clamp(12px,3svh,24px));
-    padding-bottom:max(clamp(40px,8svh,64px),env(safe-area-inset-bottom));
+    padding-top:calc(var(--nav-height) + clamp(24px,7svh,48px));
+    padding-bottom:max(clamp(48px,10svh,80px),env(safe-area-inset-bottom));
   }
-  .hero-copy .lead{margin-bottom:24px}
-  .hero-overlay{
-    background:linear-gradient(
-      to bottom,
-      rgba(246,243,237,.35) 0%,
-      rgba(246,243,237,.82) 48%,
-      rgba(246,243,237,.96) 100%
-    );
+  .hero-inner{
+    min-height:calc(var(--viewport-height-small) - var(--nav-height) - clamp(72px,16svh,112px));
   }
-  body.dark .hero-overlay{
-    background:linear-gradient(
-      to bottom,
-      rgba(15,15,15,.35) 0%,
-      rgba(15,15,15,.82) 48%,
-      rgba(15,15,15,.96) 100%
-    );
-  }
+  .hero-copy .lead{margin-bottom:28px}
   .actions{width:100%}
   .actions .btn{
     flex:1;
@@ -1042,7 +1060,8 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
   }
 
   .story{gap:28px}
-  .story-visual,.stirrup-visual{border-radius:24px;aspect-ratio:4/3}
+  .story-visual{border-radius:24px;aspect-ratio:4/3}
+  .stirrup-visual{border-radius:28px;aspect-ratio:3/4;min-height:min(85vw,480px)}
 
   .stirrup-showcase{gap:28px}
   .stirrup-features{grid-template-columns:1fr;gap:10px;margin-top:24px}
@@ -1132,6 +1151,12 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
 }
 @supports (-webkit-touch-callout:none){
   .hero{min-height:-webkit-fill-available}
+  @media(max-width:900px){
+    .hero-inner{min-height:calc(-webkit-fill-available - var(--nav-height) - clamp(80px,14svh,120px))}
+  }
+  @media(max-width:700px){
+    .hero-inner{min-height:calc(-webkit-fill-available - var(--nav-height) - clamp(72px,16svh,112px))}
+  }
   nav{
     -webkit-backdrop-filter:blur(12px);
     backdrop-filter:blur(12px);
