@@ -340,6 +340,8 @@ section.hero{
   object-position:center center;
   transform:translateZ(0);
   -webkit-transform:translateZ(0);
+  will-change:transform;
+  backface-visibility:hidden;
 }
 .hero-overlay{
   position:absolute;
@@ -929,6 +931,59 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
   .sys-node{width:clamp(128px,18vw,180px);padding:18px 16px}
 }
 
+@media (min-width: 768px) and (max-width: 1366px){
+  :root{
+    --page-gutter:clamp(32px,4vw,48px);
+  }
+
+  .hero-copy{
+    max-width:min(760px,60vw);
+  }
+
+  h1{
+    font-size:clamp(56px,6vw,82px);
+  }
+
+  h2{
+    font-size:clamp(40px,4vw,58px);
+  }
+
+  .lead{
+    font-size:20px;
+    max-width:640px;
+  }
+
+  .story,
+  .stirrup-showcase,
+  .app-experience{
+    gap:48px;
+  }
+
+  .stirrup-visual,
+  .app-showcase{
+    min-height:560px;
+  }
+
+  .system-map{
+    min-height:620px;
+  }
+
+  .sys-node{
+    width:190px;
+  }
+
+  .hw-grid,
+  .insight-cards{
+    gap:16px;
+  }
+
+  .hw-card,
+  .insight,
+  .metric{
+    border-radius:28px;
+  }
+}
+
 @media(max-width:900px){
   .hero{
     flex-direction:column;
@@ -945,6 +1000,7 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
     flex-direction:column;
     justify-content:center;
     min-height:calc(var(--viewport-height-small) - var(--nav-height) - clamp(80px,14svh,120px));
+    width:100%;
   }
   .hero-copy{max-width:100%}
   .hero-overlay{
