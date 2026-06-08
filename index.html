@@ -49,12 +49,9 @@ html{
   scroll-behavior:smooth;
   -webkit-text-size-adjust:100%;
   text-size-adjust:100%;
-  overflow-x:hidden;
   overscroll-behavior-x:none;
-  overscroll-behavior-y:none;
   background:var(--bg);
   min-height:100%;
-  min-height:-webkit-fill-available;
 }
 
 body{
@@ -64,10 +61,8 @@ body{
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
-  overflow-x:hidden;
-  overscroll-behavior-y:none;
+  overflow-x:clip;
   min-height:100%;
-  min-height:-webkit-fill-available;
   padding-bottom:env(safe-area-inset-bottom);
 }
 
@@ -92,7 +87,6 @@ body.dark{
   width:100%;
   max-width:1440px;
   margin:0 auto;
-  overflow-x:clip;
   padding:0 var(--page-gutter);
   padding-left:var(--page-gutter-left);
   padding-right:var(--page-gutter-right);
@@ -1275,13 +1269,8 @@ body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
     --viewport-height-small:100svh;
   }
 
-  html,
   body{
     min-height:100svh;
-    overflow-x:hidden;
-  }
-
-  body{
     -webkit-overflow-scrolling:touch;
   }
 
@@ -2100,16 +2089,20 @@ function toggleTheme(){
 }
 
 /* iPadOS / iOS — sync real viewport height for hero & video */
+const isTouchViewport = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 function syncViewportHeight(){
+  if(!isTouchViewport) return;
   const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   document.documentElement.style.setProperty("--viewport-height", `${h}px`);
   document.documentElement.style.setProperty("--viewport-height-small", `${h}px`);
 }
 syncViewportHeight();
-window.addEventListener("resize", syncViewportHeight,{passive:true});
-window.addEventListener("orientationchange", ()=>requestAnimationFrame(syncViewportHeight));
-if(window.visualViewport){
-  window.visualViewport.addEventListener("resize", syncViewportHeight,{passive:true});
+if(isTouchViewport){
+  window.addEventListener("resize", syncViewportHeight,{passive:true});
+  window.addEventListener("orientationchange", ()=>requestAnimationFrame(syncViewportHeight));
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize", syncViewportHeight,{passive:true});
+  }
 }
 
 /* Scroll reveal */
