@@ -4,354 +4,335 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="format-detection" content="telephone=no,email=no,address=no" />
 <meta name="theme-color" content="#F6F3ED" id="themeColorMeta" />
-<title>YUMA — Reflective Riding System</title>
+<meta name="description" content="YUMA is a reflective riding system that turns rider–horse interaction into measurable insights through wearable sensing, live feedback, and AI-assisted reflection." />
+<link rel="canonical" href="https://leonardo-chen.github.io/YUMA/" />
+<title>YUMA - Reflective Riding System</title>
+<link rel="icon" href="Yuma_Logo_Web.png" type="image/png" />
+<link rel="apple-touch-icon" href="Yuma_Logo_Web.png" />
+
+<!-- Open Graph / Instagram / Facebook link preview -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="YUMA" />
+<meta property="og:url" content="https://leonardo-chen.github.io/YUMA/" />
+<meta property="og:title" content="YUMA · Reflective Riding System" />
+<meta property="og:description" content="Making the invisible visible. A wearable sensing system for riders, coaches, and equestrian teams." />
+<meta property="og:image" content="https://leonardo-chen.github.io/YUMA/img/og-share.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="YUMA reflective riding system in use" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter / X link preview -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="YUMA · Reflective Riding System" />
+<meta name="twitter:description" content="Making the invisible visible. A wearable sensing system for riders, coaches, and equestrian teams." />
+<meta name="twitter:image" content="https://leonardo-chen.github.io/YUMA/img/og-share.jpg" />
+<meta name="twitter:image:alt" content="YUMA reflective riding system in use" />
 <link rel="stylesheet" href="/fonts/misans/misans.css">
 
 <style>
 :root{
   --font-sans:"MiSans",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --bg:#F6F3ED;
-  --text:#111111;
-  --muted:#6B6B6B;
-  --line:#DDD7CA;
-  --card:rgba(255,255,255,0.7);
+  --surface:rgba(255,255,255,.58);
+  --surface-strong:rgba(255,255,255,.78);
+  --text:#101010;
+  --muted:#676158;
+  --line:rgba(25,25,25,.12);
   --accent:#8B6F47;
-  --dark:#111111;
-  --ai-bg:#111111;
-  --ai-text:#ffffff;
-  --ai-muted:rgba(255,255,255,.6);
-  --ai-card-bg:rgba(255,255,255,.06);
-  --ai-card-border:rgba(255,255,255,.1);
-  --ai-card-text:rgba(255,255,255,.88);
-  --ai-card-hover:rgba(255,255,255,.09);
-  --ease:cubic-bezier(0.22,1,0.36,1);
-  --page-gutter:clamp(24px,4vw,56px);
-  --page-gutter-left:max(var(--page-gutter),env(safe-area-inset-left));
-  --page-gutter-right:max(var(--page-gutter),env(safe-area-inset-right));
-  --content-max:1440px;
-  --content-inset-left:var(--page-gutter-left);
-  --content-inset-right:var(--page-gutter-right);
-  --viewport-height:100vh;
-  --viewport-height-small:100svh;
-  --nav-height:calc(max(clamp(16px,2.5vw,28px),env(safe-area-inset-top)) + 30px + clamp(16px,2.5vw,28px));
+  --accent-soft:rgba(139,111,71,.12);
+  --shadow:0 24px 80px rgba(40,34,24,.08);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gutter:clamp(20px,4vw,56px);
+  --content:1180px;
+  --nav-height:76px;
+  --footer-space:clamp(76px,8vh,104px);
+  --texture-opacity:.12;
 }
-@supports (height:100dvh){
-  :root{
-    --viewport-height:100dvh;
-    --viewport-height-small:100svh;
-  }
+
+body.dark{
+  --bg:#101010;
+  --surface:rgba(255,255,255,.06);
+  --surface-strong:rgba(255,255,255,.1);
+  --text:#f4f1ea;
+  --muted:#aaa49a;
+  --line:rgba(255,255,255,.14);
+  --accent:#d6b982;
+  --accent-soft:rgba(214,185,130,.13);
+  --shadow:0 24px 80px rgba(0,0,0,.35);
+  --texture-opacity:.07;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 html{
   scroll-behavior:smooth;
+  scroll-snap-type:y proximity;
+  scroll-padding-top:var(--nav-height);
+  overflow-x:clip;
+  background:var(--bg);
   -webkit-text-size-adjust:100%;
   text-size-adjust:100%;
-  overscroll-behavior-x:none;
-  background:var(--bg);
-  min-height:100%;
 }
 
 body{
+  position:relative;
+  min-height:100%;
   font-family:var(--font-sans);
   background:var(--bg);
   color:var(--text);
-  line-height:1.55;
+  line-height:1.45;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
-  overflow-x:clip;
-  min-height:100%;
-  padding-bottom:env(safe-area-inset-bottom);
 }
 
-body.dark{
-  --bg:#0f0f0f;
-  --text:#f4f1ea;
-  --muted:#aaa49a;
-  --line:#2d2a25;
-  --card:rgba(27,27,27,0.8);
-  --accent:#d6b982;
-  --dark:#f4f1ea;
-  --ai-bg:#F6F3ED;
-  --ai-text:#111111;
-  --ai-muted:#6B6B6B;
-  --ai-card-bg:rgba(255,255,255,0.72);
-  --ai-card-border:#DDD7CA;
-  --ai-card-text:#111111;
-  --ai-card-hover:rgba(255,255,255,0.88);
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:url("img/YUMA_texture.png") center/cover no-repeat;
+  opacity:var(--texture-opacity);
+  mix-blend-mode:multiply;
 }
+
+body.dark::before{
+  mix-blend-mode:screen;
+}
+
+img,video{max-width:100%;display:block}
+button{font:inherit}
 
 .page{
+  position:relative;
+  z-index:1;
   width:100%;
-  max-width:1440px;
-  margin:0 auto;
-  padding:0 var(--page-gutter);
-  padding-left:var(--page-gutter-left);
-  padding-right:var(--page-gutter-right);
+  overflow:clip;
 }
 
-/* ── Nav ── */
 nav{
-  position:-webkit-sticky;
   position:sticky;
   top:0;
-  z-index:200;
-  width:calc(100% + var(--page-gutter-left) + var(--page-gutter-right));
-  max-width:none;
-  margin-left:calc(-1 * var(--page-gutter-left));
-  margin-right:calc(-1 * var(--page-gutter-right));
-  padding:
-    max(clamp(16px,2.5vw,28px),env(safe-area-inset-top))
-    0
-    clamp(16px,2.5vw,28px)
-    0;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  background:rgba(246,243,237,0.88);
-  border-bottom:1px solid var(--line);
-  transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease);
-}
-.nav-inner{
+  z-index:20;
+  min-height:var(--nav-height);
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:16px;
-  flex-wrap:nowrap;
+  border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 86%,transparent);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+}
+
+.nav-inner{
   width:100%;
-  max-width:var(--content-max);
+  max-width:calc(var(--content) + var(--gutter) * 2);
   margin:0 auto;
-  padding-left:var(--content-inset-left);
-  padding-right:var(--content-inset-right);
-}
-nav.is-scrolled{
-  background:rgba(246,243,237,0.96);
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-body.dark nav{background:rgba(15,15,15,0.88)}
-body.dark nav.is-scrolled{
-  background:rgba(15,15,15,0.96);
-  box-shadow:0 10px 30px rgba(0,0,0,.24);
+  padding:14px var(--gutter);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:12px;
-  min-width:0;
-  flex-shrink:1;
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:-0.05em;
-  text-decoration:none;
+  gap:10px;
   color:inherit;
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:-.045em;
+  min-width:0;
 }
-.brand-logo{
-  display:block;
-  height:30px;
-  width:auto;
-  object-fit:contain;
-}
+
+.brand-logo{height:28px;width:auto}
 body.dark .brand-logo{filter:invert(1) brightness(1.08)}
 
-.nav-right{
+.nav-actions{
   display:flex;
   align-items:center;
   gap:10px;
-  flex-shrink:0;
 }
+
 .lang{
   display:flex;
   align-items:center;
   gap:6px;
-  flex-wrap:nowrap;
 }
-button{font:inherit}
-.lang button,.theme{
+
+.lang button,
+.theme{
+  min-height:34px;
+  min-width:34px;
+  padding:7px 12px;
   border:1px solid var(--line);
+  border-radius:999px;
   background:transparent;
   color:var(--text);
-  padding:7px 14px;
-  border-radius:999px;
   cursor:pointer;
   font-size:12px;
-  letter-spacing:.02em;
-  min-height:36px;
-  min-width:36px;
-  -webkit-appearance:none;
-  appearance:none;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+  letter-spacing:.01em;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
 }
-.lang button.active{background:var(--dark);color:var(--bg);border-color:var(--dark)}
 
-/* ── Typography ── */
-.kicker{
+.lang button.active{
+  background:var(--text);
+  border-color:var(--text);
+  color:var(--bg);
+}
+
+.section{
+  min-height:calc(100svh - var(--nav-height));
+  scroll-snap-align:start;
+  scroll-snap-stop:normal;
+  display:flex;
+  align-items:center;
+  padding:clamp(56px,8vh,96px) var(--gutter);
+}
+
+.section-inner{
+  width:100%;
+  max-width:var(--content);
+  margin:0 auto;
+}
+
+.eyebrow{
   color:var(--accent);
   font-size:12px;
-  font-weight:600;
+  font-weight:700;
+  letter-spacing:.16em;
   text-transform:uppercase;
-  letter-spacing:.18em;
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
+
+h1,h2,h3{
+  font-weight:700;
+  letter-spacing:-.055em;
+  color:var(--text);
+}
+
 h1{
-  font-size:clamp(48px,6.5vw,96px);
-  line-height:.92;
-  letter-spacing:-0.055em;
-  font-weight:700;
-  margin-bottom:28px;
+  font-size:clamp(56px,8vw,116px);
+  line-height:.88;
+  max-width:850px;
 }
+
 h2{
-  font-size:clamp(36px,4.5vw,64px);
-  line-height:.95;
-  letter-spacing:-0.045em;
-  font-weight:700;
-  margin-bottom:24px;
+  font-size:clamp(42px,5.6vw,76px);
+  line-height:.94;
 }
+
+.why-title{
+  font-size:clamp(34px,4.4vw,58px);
+  line-height:1.02;
+}
+
 h3{
-  font-size:22px;
-  letter-spacing:-0.03em;
-  font-weight:600;
-  margin-bottom:12px;
+  font-size:clamp(21px,2vw,28px);
+  line-height:1.05;
+  letter-spacing:-.04em;
 }
+
 .lead{
-  font-size:clamp(17px,1.6vw,22px);
-  line-height:1.55;
+  max-width:670px;
   color:var(--muted);
-  max-width:540px;
-  margin-bottom:36px;
-  font-weight:400;
+  font-size:clamp(18px,1.8vw,24px);
+  line-height:1.55;
 }
+
 .text{
   color:var(--muted);
-  font-size:18px;
-  line-height:1.65;
-  max-width:560px;
+  font-size:clamp(16px,1.4vw,19px);
+  line-height:1.62;
 }
-.text + .text{margin-top:20px}
 
-/* ── Buttons ── */
-.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:32px;
+}
+
 .btn{
   display:inline-flex;
   align-items:center;
-  padding:14px 28px;
+  justify-content:center;
+  min-height:48px;
+  padding:14px 24px;
+  border:1px solid var(--line);
   border-radius:999px;
-  border:1px solid var(--dark);
   color:var(--text);
   text-decoration:none;
   font-size:15px;
-  font-weight:500;
-  letter-spacing:-0.01em;
-  -webkit-appearance:none;
-  appearance:none;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform .35s var(--ease),background .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease);
+  font-weight:600;
+  letter-spacing:-.015em;
+  background:var(--surface);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
 }
-@media (hover:hover) and (pointer:fine){
-  .lang button:hover:not(.active),.theme:hover{border-color:var(--accent)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-  .btn.primary:hover{box-shadow:0 12px 32px rgba(0,0,0,.18)}
-  .story-visual:hover img,.stirrup-visual:hover img,.app-showcase:hover .app-hand-img{transform:scale(1.03)}
-  .sys-node:hover{
-    transform:translate(-50%,calc(-50% - 4px));
-    box-shadow:0 16px 40px rgba(0,0,0,.08);
-    border-color:var(--accent);
-  }
-  .hw-card:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(0,0,0,.07)}
-  .metric:hover{transform:scale(1.02);border-color:var(--accent)}
-  .tech-pill:hover{border-color:var(--accent);color:var(--text)}
-  .flow-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
-  .insight:hover{transform:translateY(-6px);background:var(--ai-card-hover)}
-  .footer-link:hover{color:var(--accent)}
-}
-.btn.primary{background:var(--dark);color:var(--bg)}
 
-/* ── Sections ── */
-section{
-  padding:clamp(80px,10vw,140px) 0;
+.btn.primary{
+  background:var(--text);
+  border-color:var(--text);
+  color:var(--bg);
 }
-.section-head{
-  text-align:center;
-  max-width:820px;
-  margin:0 auto clamp(48px,6vw,80px);
-}
-.section-head .text{margin:0 auto}
 
-/* ── Reveal animation ── */
-.reveal{
-  opacity:0;
-  transform:translateY(32px);
-  transition:opacity .9s var(--ease),transform .9s var(--ease);
-}
-.reveal.visible{opacity:1;transform:none}
-.reveal-d1{transition-delay:.1s}
-.reveal-d2{transition-delay:.2s}
-.reveal-d3{transition-delay:.3s}
-.reveal-d4{transition-delay:.4s}
-
-/* ── Hero ── */
-section.hero{
-  padding:0;
-  margin-top:calc(-1 * var(--nav-height));
-}
-.hero{
+.hero-section{
   position:relative;
   isolation:isolate;
   overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:var(--viewport-height-small);
-  min-height:var(--viewport-height);
-  width:calc(100% + var(--page-gutter-left) + var(--page-gutter-right));
-  max-width:none;
-  margin-left:calc(-1 * var(--page-gutter-left));
-  margin-right:calc(-1 * var(--page-gutter-right));
+  min-height:100svh;
+  margin-top:calc(-1 * var(--nav-height));
   padding:
-    calc(var(--nav-height) + clamp(16px,3svh,32px))
-    0
-    clamp(48px,7svh,88px)
-    0;
+    calc(var(--nav-height) + clamp(42px,8vh,86px))
+    var(--gutter)
+    clamp(48px,8vh,92px);
 }
+
 .hero-inner{
   position:relative;
   z-index:2;
   width:100%;
-  max-width:var(--content-max);
+  max-width:var(--content);
   margin:0 auto;
-  padding-left:var(--content-inset-left);
-  padding-right:var(--content-inset-right);
 }
+
 .hero-bg{
   position:absolute;
   inset:0;
   z-index:0;
-  background:var(--bg);
   overflow:hidden;
+  background:
+    linear-gradient(105deg,rgba(246,243,237,.94) 0%,rgba(246,243,237,.5) 100%),
+    url(yuma_stirrup_product.jpg) center/cover no-repeat;
   pointer-events:none;
 }
+
+body.dark .hero-bg{
+  background:
+    linear-gradient(105deg,rgba(15,15,15,.94) 0%,rgba(15,15,15,.5) 100%),
+    url(yuma_stirrup_product.jpg) center/cover no-repeat;
+}
+
 .hero-video{
   position:absolute;
   inset:0;
+  z-index:0;
   width:100%;
   height:100%;
-  min-width:100%;
-  min-height:100%;
-  background:#F6F3ED;
   object-fit:cover;
-  object-position:center center;
+  object-position:center;
+  background:#F6F3ED;
   transform:translateZ(0);
   -webkit-transform:translateZ(0);
-  will-change:transform;
   backface-visibility:hidden;
-  pointer-events:none;
 }
-body.dark .hero-video{background:#0f0f0f}
-.hero-video{z-index:0}
+
+body.dark .hero-video{background:#101010}
+
 .hero-overlay{
   position:absolute;
   inset:0;
@@ -359,1817 +340,2493 @@ body.dark .hero-video{background:#0f0f0f}
   background:
     linear-gradient(
       to right,
-      rgba(246,243,237,.93) 0%,
-      rgba(246,243,237,.78) 38%,
-      rgba(246,243,237,.32) 68%,
+      rgba(246,243,237,.94) 0%,
+      rgba(246,243,237,.78) 36%,
+      rgba(246,243,237,.34) 68%,
       rgba(246,243,237,.08) 100%
     ),
-    linear-gradient(
-      to top,
-      rgba(246,243,237,.45) 0%,
-      transparent 42%
-    );
+    linear-gradient(to top,rgba(246,243,237,.44) 0%,transparent 44%);
 }
+
 body.dark .hero-overlay{
   background:
     linear-gradient(
       to right,
-      rgba(15,15,15,.93) 0%,
-      rgba(15,15,15,.78) 38%,
-      rgba(15,15,15,.36) 68%,
+      rgba(15,15,15,.94) 0%,
+      rgba(15,15,15,.78) 36%,
+      rgba(15,15,15,.38) 68%,
       rgba(15,15,15,.1) 100%
     ),
-    linear-gradient(
-      to top,
-      rgba(15,15,15,.5) 0%,
-      transparent 42%
-    );
+    linear-gradient(to top,rgba(15,15,15,.5) 0%,transparent 44%);
 }
+
 .hero-copy{
   width:100%;
-  max-width:min(680px,52vw);
+  max-width:min(700px,56vw);
 }
-.hero-copy .kicker{margin-bottom:clamp(16px,2.5svh,24px)}
-.hero-copy h1{margin-bottom:clamp(18px,3svh,28px)}
+
 .hero-copy .lead{
+  max-width:660px;
+  margin-top:28px;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(340px,1.05fr);
+  gap:clamp(34px,6vw,88px);
+  align-items:center;
+}
+
+.section-head{
+  max-width:760px;
+  margin-bottom:clamp(28px,5vh,56px);
+}
+
+.section-head .lead,
+.section-head .text{margin-top:20px}
+
+.pain-list,
+.audience-grid,
+.insight-grid{
+  display:grid;
+  gap:14px;
+}
+
+.pain-list{grid-template-columns:1fr}
+.audience-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.insight-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.line-card,
+.audience-card,
+.insight-card{
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:var(--surface);
+  padding:clamp(22px,3vw,34px);
+}
+
+.line-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:clamp(18px,2vw,24px);
+  font-weight:600;
+  letter-spacing:-.04em;
+  color:var(--text);
+}
+
+.line-card span{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:14px;
+}
+
+.closing-line{
+  margin-top:28px;
+  color:var(--text);
+  font-size:clamp(22px,2.5vw,34px);
+  line-height:1.18;
+  letter-spacing:-.05em;
+  font-weight:700;
+}
+
+.product-intro{
+  text-align:center;
+}
+
+.product-intro .section-inner{
+  max-width:980px;
+}
+
+.product-intro h2{
+  margin:0 auto;
+  max-width:920px;
+}
+
+.user-flow-section .section-head{
+  text-align:center;
+  max-width:760px;
+  margin-inline:auto;
+  margin-bottom:clamp(48px,7vh,88px);
+}
+
+.user-flow-section .section-head .lead{
+  margin-inline:auto;
+  max-width:580px;
+}
+
+.user-flow-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(14px,1.8vw,20px);
+}
+
+.user-flow-card{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height:100%;
+  border:1px solid var(--line);
+  border-radius:clamp(24px,2.4vw,28px);
+  background:var(--surface);
+  padding:clamp(24px,2.8vw,32px);
+  box-shadow:none;
+  opacity:0;
+  transform:translateY(18px);
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+}
+
+.user-flow-section.is-visible .user-flow-card{
+  animation:flowCardIn .62s var(--ease) forwards;
+}
+
+.user-flow-section.is-visible .user-flow-card:nth-child(1){animation-delay:0ms}
+.user-flow-section.is-visible .user-flow-card:nth-child(2){animation-delay:40ms}
+.user-flow-section.is-visible .user-flow-card:nth-child(3){animation-delay:80ms}
+.user-flow-section.is-visible .user-flow-card:nth-child(4){animation-delay:120ms}
+
+@keyframes flowCardIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.user-flow-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.user-flow-num{
+  color:var(--accent);
+  font-size:clamp(32px,3.2vw,42px);
+  font-weight:700;
+  letter-spacing:-.06em;
+  line-height:1;
+}
+
+.user-flow-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--bg);
+  font-size:18px;
+  line-height:1;
+}
+
+.user-flow-card h3{
+  font-size:clamp(20px,1.8vw,24px);
+  line-height:1.08;
+  letter-spacing:-.04em;
+}
+
+.user-flow-desc{
+  font-size:clamp(14px,1.3vw,15px);
+  line-height:1.55;
+  flex:1 1 auto;
+}
+
+.user-flow-chips{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:auto;
+  padding-top:6px;
+}
+
+.user-flow-chips li{
+  padding:7px 11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--surface-strong);
+  color:var(--text);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+
+.user-flow-closing{
+  margin-top:0;
+  text-align:center;
+  color:var(--text);
+  font-size:clamp(30px,4.5vw,48px);
+  font-weight:600;
+  line-height:1.14;
+  letter-spacing:-.048em;
+  text-wrap:balance;
+  opacity:0;
+  transform:translateY(14px);
+}
+
+.user-flow-statement{
+  align-items:center;
+  text-align:center;
+}
+
+.user-flow-statement .section-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+}
+
+.user-flow-statement .user-flow-closing{
+  max-width:min(880px,92vw);
+  margin-inline:auto;
+}
+
+.user-flow-statement.is-visible .user-flow-closing{
+  animation:flowCardIn .62s var(--ease) forwards;
+}
+
+.product-detail{
+  min-height:calc(100svh - var(--nav-height));
+}
+
+.product-layout{
+  display:grid;
+  grid-template-columns:minmax(380px,1.12fr) minmax(0,.88fr);
+  gap:clamp(36px,6vw,92px);
+  align-items:center;
+}
+
+.product-visual{order:1}
+.product-copy{order:2}
+
+.product-copy{
+  max-width:560px;
+}
+
+.product-copy h2{
+  font-size:clamp(44px,6.4vw,88px);
+  line-height:.9;
+}
+
+.product-subtitle{
+  margin-top:18px;
+  color:var(--text);
+  font-size:clamp(22px,2.4vw,34px);
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:-.05em;
+}
+
+.product-description{
+  margin-top:20px;
+  max-width:540px;
+}
+
+.highlight-list{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
+}
+
+.highlight-list li{
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+
+.product-actions{
+  display:none;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.ar-button::after{
+  content:"↗";
+  margin-left:8px;
+  font-size:13px;
+}
+
+.product-visual{
+  position:relative;
+  height:clamp(440px,62vh,680px);
+  border-radius:clamp(30px,4vw,52px);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 22%,var(--accent-soft),transparent 38%),
+    var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.product-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+#smart-stirrups .product-visual img{
+  object-fit:cover;
+  object-position:center 38%;
+}
+
+.product-visual.contain{
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+
+.product-visual.contain img{
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+}
+
+.product-visual.dashboard-visual{
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:clamp(480px,68vh,740px);
+  background:transparent;
+  box-shadow:none;
+  overflow:visible;
+}
+
+.product-visual.dashboard-visual img{
+  width:100%;
+  height:100%;
   max-width:100%;
-  margin-bottom:clamp(28px,4svh,40px);
+  max-height:100%;
+  object-fit:contain;
+  object-position:center;
 }
 
-/* ── Product Story ── */
-.story{
+.work-grid{
   display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:clamp(40px,5vw,80px);
+  grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);
+  gap:clamp(34px,6vw,88px);
   align-items:center;
 }
-.story-visual{
-  position:relative;
-  border-radius:32px;
-  overflow:hidden;
-  background:rgba(255,255,255,.45);
-  border:1px solid var(--line);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-}
-.story-visual img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform 1.2s var(--ease);
-}
-.story-visual{aspect-ratio:4/3}
 
-/* ── Smart Stirrups ── */
-.stirrup-showcase{
+.flow-minimal{
   display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:clamp(40px,5vw,80px);
-  align-items:center;
+  gap:12px;
 }
-.stirrup-visual{
-  position:relative;
-  aspect-ratio:4/5;
-  min-height:clamp(440px,50vw,640px);
-  border-radius:36px;
-  overflow:hidden;
-  background:rgba(255,255,255,.45);
-  border:1px solid var(--line);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-}
-.stirrup-visual img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center center;
-  transition:transform 1.2s var(--ease);
-}
-.stirrup-copy .text{max-width:620px}
-.stirrup-features{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:32px;
-  align-items:stretch;
-}
-.stirrup-feature{
-  height:100%;
+
+.flow-item{
   display:flex;
-  flex-direction:column;
-  padding:18px 20px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:var(--card);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-.stirrup-feature strong{
-  display:block;
-  font-size:15px;
-  letter-spacing:-0.02em;
-  margin-bottom:4px;
-}
-.stirrup-feature span{
-  flex:1;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.45;
-}
-
-/* ── App Experience ── */
-.app-experience{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:clamp(40px,5vw,80px);
   align-items:center;
-}
-.app-copy .text{max-width:620px}
-.app-showcase{
-  position:relative;
-  aspect-ratio:4/5;
-  max-height:680px;
-  border-radius:40px;
-  overflow:hidden;
-  background:var(--line);
-  border:1px solid var(--line);
-}
-.app-hand-img{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center center;
-  transition:transform .9s var(--ease);
-}
-.app-points{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:32px;
-  align-items:stretch;
-}
-.app-point{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  padding:18px 20px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:var(--card);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-.app-point strong{
-  display:block;
-  font-size:15px;
-  letter-spacing:-0.02em;
-  margin-bottom:4px;
-}
-.app-point span{
-  flex:1;
-  color:var(--muted);
-  font-size:13px;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  font-size:clamp(22px,2.6vw,36px);
+  font-weight:700;
+  letter-spacing:-.055em;
 }
 
-/* ── System Overview ── */
+.flow-item small{
+  color:var(--accent);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
 .system-map{
   position:relative;
-  padding:clamp(40px,5vw,72px);
-  background:var(--card);
+  min-height:clamp(420px,48vw,540px);
   border:1px solid var(--line);
-  border-radius:40px;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  min-height:520px;
+  border-radius:clamp(28px,4vw,40px);
+  background:var(--surface);
+  box-shadow:var(--shadow);
   overflow:hidden;
 }
+
 .system-svg{
   position:absolute;
   inset:0;
+  z-index:1;
   width:100%;
   height:100%;
   pointer-events:none;
 }
+
 .system-line{
   fill:none;
   stroke:var(--accent);
   stroke-width:1.5;
   stroke-dasharray:6 8;
-  opacity:.45;
+  opacity:.42;
   animation:dashFlow 24s linear infinite;
 }
+
 @keyframes dashFlow{
   to{stroke-dashoffset:-200}
 }
+
 .system-nodes{
-  position:relative;
+  position:absolute;
+  inset:clamp(26px,4vw,52px);
   z-index:2;
-  min-height:clamp(440px,52vw,540px);
-  max-width:860px;
-  margin:0 auto;
 }
+
 .sys-node{
   position:absolute;
-  width:clamp(148px,20vw,210px);
-  transform:translate(-50%,-50%);
-  background:rgba(255,255,255,.82);
+  width:clamp(128px,15vw,178px);
+  min-height:118px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:18px 20px;
   border:1px solid var(--line);
   border-radius:24px;
-  padding:22px 24px;
+  background:var(--surface-strong);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
-  text-align:center;
+  transform:translate(-50%,-50%);
 }
-body.dark .sys-node{background:rgba(30,30,30,.85)}
+
 .sys-node .icon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  background:var(--bg);
-  border:1px solid var(--line);
+  width:38px;
+  height:38px;
   display:grid;
   place-items:center;
-  margin:0 auto 14px;
-  font-size:18px;
-}
-.sys-node .name{
+  margin:0 auto 10px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--bg);
+  color:var(--accent);
   font-size:16px;
-  font-weight:600;
-  letter-spacing:-0.02em;
-  margin-bottom:4px;
 }
+
+.sys-node .name{
+  color:var(--text);
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:-.03em;
+}
+
 .sys-node .sub{
-  font-size:13px;
+  margin-top:4px;
   color:var(--muted);
+  font-size:12px;
 }
-.sys-node.horse{left:50%;top:14%}
-.sys-node.rider{left:50%;top:86%}
-.sys-node.stirrup-l{left:14%;top:50%}
-.sys-node.stirrup-r{left:86%;top:50%}
+
+.sys-node.horse{left:50%;top:9%}
+.sys-node.rider{left:50%;top:91%}
+.sys-node.stirrup-l{left:11%;top:50%}
+.sys-node.stirrup-r{left:89%;top:50%}
 .sys-node.ai{
   left:50%;
   top:50%;
   z-index:3;
-  background:var(--dark);
+  background:var(--text);
+  border-color:var(--text);
   color:var(--bg);
-  border-color:var(--dark);
-}
-.sys-node.ai .sub{color:rgba(255,255,255,.6)}
-.sys-node.ai .icon{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:var(--bg)}
-
-/* ── Hardware Cards ── */
-.hw-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  align-items:stretch;
-}
-.hw-card{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:32px;
-  padding:clamp(28px,3vw,40px);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
-}
-.hw-card .tag{
-  display:inline-block;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:20px;
-}
-.hw-card h3{font-size:26px;margin-bottom:14px}
-.hw-card p{
-  flex:1;
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.6;
-  margin-bottom:24px;
-}
-.spec-list{
-  list-style:none;
-  display:grid;
-  gap:0;
-  margin-top:auto;
-  border-top:1px solid var(--line);
-}
-.spec-list li{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
-  border-bottom:1px solid var(--line);
-  font-size:14px;
-  color:var(--muted);
-}
-.spec-list li strong{
-  color:var(--text);
-  font-weight:500;
-  font-size:14px;
 }
 
-/* ── Technology Metrics ── */
-.tech-section .section-head{margin-bottom:clamp(56px,7vw,96px)}
-.metrics{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-bottom:48px;
-  align-items:stretch;
+.sys-node.ai .name{color:var(--bg)}
+.sys-node.ai .sub{color:color-mix(in srgb,var(--bg) 68%,transparent)}
+.sys-node.ai .icon{
+  background:color-mix(in srgb,var(--bg) 12%,transparent);
+  border-color:color-mix(in srgb,var(--bg) 18%,transparent);
+  color:var(--bg);
 }
-.metric{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:32px;
-  padding:clamp(32px,4vw,48px);
-  text-align:center;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  transition:transform .4s var(--ease),border-color .4s var(--ease);
-}
-.metric b{
-  display:block;
-  font-size:clamp(48px,6vw,72px);
-  font-weight:700;
-  letter-spacing:-0.06em;
-  line-height:1;
-  margin-bottom:12px;
-}
-.metric span{
-  font-size:15px;
-  color:var(--muted);
-}
-.tech-pills{
+
+.tech-strip{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
+  gap:8px;
+  margin-top:22px;
 }
-.tech-pill{
-  padding:12px 22px;
+
+.tech-strip span{
+  padding:8px 12px;
+  border:1px solid var(--line);
   border-radius:999px;
-  border:1px solid var(--line);
-  background:var(--card);
-  font-size:14px;
-  color:var(--muted);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  transition:border-color .3s var(--ease),color .3s var(--ease);
-}
-/* ── Data Flow ── */
-.flow-track{
-  display:flex;
-  align-items:stretch;
-  gap:0;
-  overflow-x:auto;
-  padding-bottom:8px;
-  scrollbar-width:none;
-  scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch;
-}
-.flow-track::-webkit-scrollbar{display:none}
-.flow-step{
-  flex:1;
-  min-width:160px;
-  scroll-snap-align:start;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  padding:0 12px;
-}
-.flow-card{
-  width:100%;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:28px 20px;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
-  min-height:140px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-.flow-card .step-icon{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:var(--bg);
-  border:1px solid var(--line);
-  display:grid;
-  place-items:center;
-  font-size:16px;
-}
-.flow-card .step-label{
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:-0.01em;
-  line-height:1.35;
-}
-.flow-arrow{
-  flex:none;
-  width:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--accent);
-  font-size:20px;
-  opacity:.5;
-  padding-top:40px;
-  animation:arrowPulse 3s ease-in-out infinite;
-}
-@keyframes arrowPulse{
-  0%,100%{opacity:.35;transform:translateX(0)}
-  50%{opacity:.7;transform:translateX(3px)}
-}
-
-/* ── AI Section (inverts in dark mode) ── */
-.ai-section{
-  background:var(--ai-bg);
-  color:var(--ai-text);
-  margin:0;
-  padding:clamp(80px,10vw,140px) clamp(32px,4vw,56px);
-  border-radius:clamp(28px,4vw,40px);
-  overflow:hidden;
-  transition:background .4s var(--ease),color .4s var(--ease);
-}
-.ai-section .kicker{color:var(--accent)}
-.ai-section h2{color:var(--ai-text)}
-.ai-section .text{color:var(--ai-muted);max-width:640px}
-.ai-inner{max-width:1440px;margin:0 auto}
-.ai-head{margin-bottom:clamp(48px,6vw,72px)}
-.insight-cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-top:48px;
-  align-items:stretch;
-}
-.insight{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  background:var(--ai-card-bg);
-  border:1px solid var(--ai-card-border);
-  border-radius:28px;
-  padding:clamp(28px,3vw,36px);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  transition:transform .5s var(--ease),background .5s var(--ease),border-color .5s var(--ease);
-  position:relative;
-  overflow:hidden;
-}
-.insight::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(139,111,71,.35),transparent);
-}
-body.dark .insight::before{
-  background:linear-gradient(90deg,transparent,rgba(214,185,130,.45),transparent);
-}
-.insight .ai-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:18px;
-}
-.insight .ai-badge::before{
-  content:"";
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  animation:aiPulse 2.5s ease-in-out infinite;
-}
-@keyframes aiPulse{
-  0%,100%{opacity:.4}
-  50%{opacity:1}
-}
-.insight p{
-  flex:1;
-  font-size:17px;
-  line-height:1.55;
-  color:var(--ai-card-text);
-  letter-spacing:-0.01em;
-}
-
-/* ── Research ── */
-.research{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:clamp(40px,5vw,80px);
-  align-items:start;
-}
-
-/* ── Footer ── */
-.footer{
-  padding:clamp(40px,5vw,60px) 0;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
   color:var(--muted);
   font-size:13px;
 }
+
+.insight-card{
+  background:var(--surface);
+  border-color:var(--line);
+  color:var(--text);
+}
+
+.insight-card .text{font-size:16px}
+
+.ai-note{
+  margin-top:26px;
+  color:var(--accent);
+  font-size:clamp(18px,2vw,26px);
+  font-weight:700;
+  letter-spacing:-.04em;
+}
+
+.vision-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+  gap:clamp(34px,6vw,88px);
+  align-items:center;
+}
+
+.roadmap{
+  display:grid;
+  gap:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.roadmap-step{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  align-items:center;
+  gap:18px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  font-size:clamp(20px,2vw,28px);
+  font-weight:700;
+  letter-spacing:-.04em;
+}
+
+.roadmap-step:last-child{border-bottom:0}
+.roadmap-step span{color:var(--accent);font-size:14px;letter-spacing:.08em}
+
+.contact-section{
+  align-items:stretch;
+  min-height:calc(100svh - var(--nav-height) - var(--footer-space));
+  scroll-snap-align:start;
+  scroll-snap-stop:normal;
+  text-align:center;
+}
+
+.contact-section .section-inner{
+  max-width:none;
+  min-height:calc(100svh - var(--nav-height) - var(--footer-space) - clamp(112px,16vh,192px));
+  display:flex;
+  flex-direction:column;
+}
+
+.contact-main{
+  width:100%;
+  max-width:900px;
+  margin:auto auto;
+}
+
+.contact-section .lead{
+  margin:24px auto 0;
+}
+
+.footer{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:24px var(--gutter) max(24px,env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  scroll-snap-align:none;
+  scroll-snap-stop:normal;
+}
+
+.footer-inner{
+  width:100%;
+  max-width:var(--content);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:24px;
+  color:var(--muted);
+  font-size:13px;
+}
+
 .footer-brand{
   display:flex;
   align-items:center;
   gap:10px;
-  font-weight:600;
   color:var(--text);
-  letter-spacing:-0.03em;
+  font-weight:700;
+  letter-spacing:-.035em;
+  min-width:0;
 }
-.footer-brand img{height:22px;width:auto}
+
+.footer-brand img{height:22px;width:auto;flex:none}
+.footer-brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body.dark .footer-brand img{filter:invert(1) brightness(1.08)}
+
 .footer-meta{
   display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:6px;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:8px 16px;
   text-align:right;
 }
+
 .footer-link{
   color:var(--text);
   text-decoration:none;
-  font-weight:500;
-  letter-spacing:-0.02em;
-  transition:color .3s var(--ease);
+  font-weight:600;
 }
-/* ── Responsive ── */
-@media(min-width:1441px){
-  section{padding:clamp(96px,8vw,152px) 0}
-  .hero-copy{max-width:720px}
-  .hero-copy .lead{font-size:clamp(18px,1.4vw,22px)}
+.footer-copy{
+  color:var(--muted);
 }
 
-@media(max-width:1200px){
-  h1{font-size:clamp(42px,5.8vw,72px)}
-  h2{font-size:clamp(32px,4vw,56px)}
-  section{padding:clamp(64px,8vw,112px) 0}
-  .system-nodes{min-height:420px}
-  .sys-node{width:clamp(128px,18vw,180px);padding:18px 16px}
-}
-
-@media (min-width: 768px) and (max-width: 1366px){
-  :root{
-    --page-gutter:clamp(32px,4vw,48px);
-  }
-
-  .hero{
-    min-height:100svh;
-    min-height:var(--viewport-height);
-  }
-
-  .hero-inner{
-    min-height:auto;
-  }
-
-  .hero-copy{
-    max-width:min(760px,60vw);
-  }
-
-  h1{
-    font-size:clamp(56px,6vw,82px);
-  }
-
-  h2{
-    font-size:clamp(40px,4vw,58px);
-  }
-
-  .lead{
-    font-size:20px;
-    max-width:640px;
-  }
-
-  .story,
-  .stirrup-showcase,
-  .app-experience{
-    gap:48px;
-  }
-
-  .stirrup-visual,
-  .app-showcase{
-    min-height:560px;
-  }
-
-  .system-map{
-    min-height:620px;
-  }
-
-  .sys-node{
-    width:190px;
-  }
-
-  .hw-grid,
-  .insight-cards{
-    gap:16px;
-  }
-
-  .hw-card,
-  .insight,
-  .metric{
-    border-radius:28px;
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.08)}
+  .lang button:hover:not(.active),
+  .theme:hover,
+  .footer-link:hover{border-color:var(--accent);color:var(--accent)}
+  .user-flow-section.is-visible .user-flow-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+    border-color:color-mix(in srgb,var(--accent) 22%,var(--line));
   }
 }
 
-/* iPad portrait (incl. iPad mini) — desktop hero, full-bleed video */
-@media(min-width:701px) and (max-width:900px){
-  .hero{
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    min-height:100svh;
-    padding-top:calc(var(--nav-height) + clamp(20px,4svh,40px));
-    padding-bottom:clamp(48px,6svh,72px);
+@media(min-width:981px) and (min-height:760px) and (hover:hover) and (pointer:fine){
+  html{scroll-snap-type:y mandatory}
+  .hero-section,
+  .product-detail{
+    scroll-snap-stop:always;
   }
-  .hero-inner{
-    display:block;
-    flex:none;
-    min-height:auto;
-  }
-  .hero-copy{max-width:min(620px,58vw)}
-  .hero-overlay{
-    background:
-      linear-gradient(
-        to right,
-        rgba(246,243,237,.93) 0%,
-        rgba(246,243,237,.78) 38%,
-        rgba(246,243,237,.32) 68%,
-        rgba(246,243,237,.08) 100%
-      ),
-      linear-gradient(
-        to top,
-        rgba(246,243,237,.45) 0%,
-        transparent 42%
-      );
-  }
-  body.dark .hero-overlay{
-    background:
-      linear-gradient(
-        to right,
-        rgba(15,15,15,.93) 0%,
-        rgba(15,15,15,.78) 38%,
-        rgba(15,15,15,.36) 68%,
-        rgba(15,15,15,.1) 100%
-      ),
-      linear-gradient(
-        to top,
-        rgba(15,15,15,.5) 0%,
-        transparent 42%
-      );
-  }
-}
-
-@media(max-width:900px){
-  .stirrup-showcase,
-  .story,
-  .app-experience,
-  .research{grid-template-columns:1fr}
-  .stirrup-visual,
-  .story-visual{order:-1}
-  .story-visual{aspect-ratio:16/10;max-height:none}
-  .stirrup-visual{aspect-ratio:4/5;min-height:min(72vw,520px)}
-  .app-experience{gap:clamp(32px,5vw,48px)}
-  .app-showcase{max-height:min(72vw,520px);width:100%;margin:0 auto}
-  .app-points,
-  .stirrup-features{grid-template-columns:repeat(2,1fr)}
-  .hw-grid{grid-template-columns:repeat(2,1fr)}
-  .hw-grid .hw-card:last-child{grid-column:1/-1;max-width:560px;justify-self:center;width:100%}
-  .metrics{grid-template-columns:repeat(3,1fr);gap:12px}
-  .metric{padding:clamp(24px,4vw,36px)}
-  .metric b{font-size:clamp(36px,7vw,56px)}
-  .insight-cards{grid-template-columns:repeat(2,1fr)}
-  .insight-cards .insight:last-child{grid-column:1/-1;max-width:560px;justify-self:center;width:100%}
-  .system-map{min-height:auto;padding:28px 20px}
-  .system-svg{display:none}
-  .system-nodes{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    min-height:auto;
-    max-width:none;
-  }
-  .sys-node{
-    position:relative;
-    left:auto!important;
-    top:auto!important;
-    width:100%;
-    transform:none;
-    display:grid;
-    grid-template-columns:40px 1fr;
-    column-gap:14px;
-    row-gap:2px;
-    align-items:center;
-    text-align:left;
-    padding:14px 16px;
-    border-radius:18px;
-  }
-  .sys-node.ai{order:-1}
-  .sys-node:hover{transform:none;box-shadow:0 8px 24px rgba(0,0,0,.06)}
-  .sys-node .icon{
-    grid-column:1;
-    grid-row:1/span 2;
-    width:40px;
-    height:40px;
-    margin:0;
-    font-size:16px;
-    align-self:center;
-  }
-  .sys-node .name{grid-column:2;grid-row:1;font-size:15px;margin-bottom:0}
-  .sys-node .sub{grid-column:2;grid-row:2;font-size:12px}
-}
-
-@media(max-width:700px){
-  :root{
-    --page-gutter:20px;
-    --nav-height:calc(max(12px,env(safe-area-inset-top)) + 24px + 12px);
-  }
-  section{padding:clamp(48px,12vw,72px) 0}
-  .section-head{margin-bottom:clamp(32px,8vw,48px)}
-
-  .nav-inner{gap:12px}
-  .logo{font-size:17px;gap:8px}
-  .brand-logo{height:24px}
-  .nav-right{gap:6px;flex-shrink:0}
-  .lang button,.theme{padding:8px 11px;font-size:11px}
-
-  h1{font-size:clamp(34px,9.5vw,48px);margin-bottom:20px}
-  h2{font-size:clamp(28px,7.5vw,40px);margin-bottom:18px}
-  h3{font-size:20px}
-  .kicker{font-size:11px;letter-spacing:.12em;margin-bottom:14px}
-  .lead{font-size:16px;margin-bottom:24px;max-width:none}
-  .text{font-size:16px;max-width:none}
-
-  .hero{
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    min-height:var(--viewport-height-small);
-    min-height:var(--viewport-height);
-    padding-top:calc(var(--nav-height) + clamp(24px,7svh,48px));
-    padding-bottom:max(clamp(48px,10svh,80px),env(safe-area-inset-bottom));
-  }
-  .hero-inner{
-    display:flex;
-    flex:1;
-    flex-direction:column;
-    justify-content:center;
-    min-height:calc(var(--viewport-height-small) - var(--nav-height) - clamp(72px,16svh,112px));
-    width:100%;
-  }
-  .hero-copy{max-width:100%}
-  .hero-copy .lead{margin-bottom:28px}
-  .hero-overlay{
-    background:linear-gradient(
-      to bottom,
-      rgba(246,243,237,.2) 0%,
-      rgba(246,243,237,.55) 50%,
-      rgba(246,243,237,.9) 100%
-    );
-  }
-  body.dark .hero-overlay{
-    background:linear-gradient(
-      to bottom,
-      rgba(15,15,15,.2) 0%,
-      rgba(15,15,15,.55) 50%,
-      rgba(15,15,15,.9) 100%
-    );
-  }
-  .actions{width:100%}
-  .actions .btn{
-    flex:1;
-    justify-content:center;
-    min-height:48px;
-    padding:12px 20px;
-    font-size:14px;
-  }
-
-  .story{gap:28px}
-  .story-visual{border-radius:24px;aspect-ratio:4/3}
-  .stirrup-visual{border-radius:28px;aspect-ratio:3/4;min-height:min(85vw,480px)}
-
-  .stirrup-showcase{gap:28px}
-  .stirrup-features{grid-template-columns:1fr;gap:10px;margin-top:24px}
-  .stirrup-feature{padding:16px 18px;border-radius:18px}
-
-  .app-experience{gap:28px}
-  .app-showcase{aspect-ratio:3/4;max-height:min(110vw,440px);border-radius:24px}
-  .app-points{grid-template-columns:1fr;gap:10px;margin-top:24px}
-  .app-point{padding:16px 18px;border-radius:18px}
-
-  .hw-grid{grid-template-columns:1fr}
-  .hw-grid .hw-card:last-child{grid-column:auto;max-width:none}
-  .hw-card{border-radius:24px}
-  .hw-card h3{font-size:22px}
-  .spec-list li{
-    flex-wrap:wrap;
-    gap:4px 12px;
-    align-items:flex-start;
-    padding:12px 0;
-  }
-  .spec-list li span{margin-left:auto;text-align:right}
-
-  .metrics{grid-template-columns:1fr;gap:12px;margin-bottom:32px}
-  .insight-cards{grid-template-columns:1fr}
-  .insight-cards .insight:last-child{grid-column:auto;max-width:none}
-  .metric{padding:28px 24px;border-radius:24px}
-  .metric b{font-size:clamp(40px,12vw,56px)}
-  .tech-pill{padding:10px 16px;font-size:13px}
-
-  .flow-track{flex-direction:column;align-items:stretch;gap:0}
-  .flow-step{min-width:100%;padding:0}
-  .flow-card{min-height:0;padding:20px 18px;border-radius:20px}
-  .flow-arrow{
-    padding:2px 0;
-    transform:rotate(90deg);
-    animation:none;
-    opacity:.4;
-  }
-
-  .ai-section{
-    margin-left:calc(-1 * var(--page-gutter-left));
-    margin-right:calc(-1 * var(--page-gutter-right));
-    padding:clamp(48px,12vw,72px) var(--page-gutter-right) clamp(48px,12vw,72px) var(--page-gutter-left);
-    border-radius:0;
-  }
-  .ai-head{margin-bottom:32px}
-  .insight-cards{gap:12px;margin-top:32px}
-  .insight{border-radius:22px;padding:22px}
-  .insight p{font-size:16px}
-
-  .research{gap:20px}
-
+  .product-intro,
+  .contact-section,
   .footer{
-    flex-direction:column;
-    text-align:center;
-    gap:16px;
-    padding-bottom:max(32px,env(safe-area-inset-bottom));
+    scroll-snap-stop:normal;
   }
-  .footer-meta{
-    align-items:center;
-    text-align:center;
-  }
-  .footer-meta span{
-    line-height:1.5;
-    max-width:28em;
-  }
+}
 
-  .system-map{padding:20px 16px;border-radius:24px}
-}
-@media(max-width:600px){
-  .flow-step{min-width:132px}
-  .flow-card{padding:22px 16px;min-height:120px}
-  .flow-card .step-label{font-size:13px}
-}
-@media(max-width:380px){
-  .logo span{display:none}
-  .lang button{padding:8px 9px}
-}
-@media(max-height:520px) and (orientation:landscape){
-  .hero{
+@media(min-width:981px) and (max-height:759px){
+  html{scroll-snap-type:y proximity}
+  .section{
     min-height:auto;
-    padding-top:clamp(72px,10svh,96px);
-    padding-bottom:clamp(32px,6svh,48px);
+    scroll-snap-align:none;
   }
-  .hero-copy .lead{margin-bottom:20px}
-  .actions .btn{padding:10px 20px;min-height:40px}
+  .hero-section,
+  .product-detail{
+    min-height:calc(100svh - var(--nav-height));
+    scroll-snap-align:start;
+  }
 }
-@supports (-webkit-touch-callout:none){
+
+nav .nav-inner{
+  padding-left:max(var(--gutter),env(safe-area-inset-left));
+  padding-right:max(var(--gutter),env(safe-area-inset-right));
+}
+
+@media(max-width:980px){
   :root{
-    --viewport-height:100svh;
-    --viewport-height-small:100svh;
+    --section-height:calc(100dvh - var(--nav-height));
+    --section-pad-y:clamp(14px,2.5vh,22px);
   }
 
-  body{
-    min-height:100svh;
+  html{
+    scroll-snap-type:none;
+    scroll-padding-top:var(--nav-height);
     -webkit-overflow-scrolling:touch;
   }
 
-  .hero{
-    min-height:100svh;
-  }
-
-  .hero-inner{
+  .section{
+    position:relative;
+    height:auto;
     min-height:auto;
+    max-height:none;
+    overflow:visible;
+    scroll-snap-align:none;
+    scroll-snap-stop:normal;
+    align-items:center;
+    padding:clamp(58px,10vh,90px) max(var(--gutter),env(safe-area-inset-left)) clamp(58px,10vh,90px) max(var(--gutter),env(safe-area-inset-right));
   }
 
-  @media(max-width:900px){
-    .hero-inner{
-      min-height:auto;
-    }
+  .section-inner{
+    width:100%;
+    height:auto;
+    max-height:none;
+    min-height:0;
+    overflow:visible;
   }
 
-  .hero-bg{
-    inset:0;
+  .section-inner:not(.product-layout):not(.split):not(.work-grid):not(.vision-grid){
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+  }
+
+  .mobile-copy-stack{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:0;
+  }
+
+  h1,h2,h3,
+  .product-subtitle,
+  .closing-line{
+    text-wrap:balance;
+  }
+
+  .hero-section{
+    height:auto;
+    min-height:100svh;
+    max-height:none;
+    align-items:center;
+    scroll-snap-align:none;
+    scroll-snap-stop:normal;
+    padding:
+      calc(var(--nav-height) + max(28px,env(safe-area-inset-top)))
+      max(var(--gutter),env(safe-area-inset-right))
+      max(36px,env(safe-area-inset-bottom))
+      max(var(--gutter),env(safe-area-inset-left));
+  }
+
+  .hero-copy{max-width:100%}
+  .hero-copy .lead{max-width:100%;font-size:clamp(17px,4.2vw,20px);margin-top:16px}
+  .hero-copy .btn-row{margin-top:20px}
+
+  .hero-overlay{
+    background:
+      linear-gradient(to bottom,rgba(246,243,237,.92) 0%,rgba(246,243,237,.72) 38%,rgba(246,243,237,.28) 100%),
+      linear-gradient(to top,rgba(246,243,237,.5) 0%,transparent 42%);
+  }
+
+  body.dark .hero-overlay{
+    background:
+      linear-gradient(to bottom,rgba(15,15,15,.92) 0%,rgba(15,15,15,.74) 38%,rgba(15,15,15,.34) 100%),
+      linear-gradient(to top,rgba(15,15,15,.55) 0%,transparent 42%);
+  }
+
+  .btn-row .btn{
+    flex:1 1 auto;
+    min-width:min(100%,148px);
+  }
+
+  .product-intro{
+    align-items:center;
+    text-align:center;
+  }
+
+  .product-intro .section-inner{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:4px;
+  }
+
+  .product-intro h2{
+    font-size:clamp(28px,6.8vw,44px);
+    line-height:1.02;
+  }
+
+  .product-intro .eyebrow{margin-bottom:12px}
+
+  .user-flow-section .section-head{
+    text-align:center;
+    max-width:100%;
+    margin-bottom:clamp(32px,6vh,48px);
+  }
+
+  .user-flow-section .section-head .lead{
+    margin-inline:auto;
+    max-width:100%;
+  }
+
+  .user-flow-grid{
+    grid-template-columns:1fr;
+    gap:clamp(14px,3.5vw,18px);
+  }
+
+  .user-flow-card{
+    padding:clamp(22px,5vw,28px);
+    gap:12px;
+  }
+
+  .user-flow-statement{
+    display:flex;
+    flex-direction:column;
+    min-height:calc(100dvh - var(--nav-height));
+    align-items:stretch;
+    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
+  }
+
+  .user-flow-statement .section-inner{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:0;
+  }
+
+  .user-flow-statement .user-flow-closing{
+    font-size:clamp(28px,8.2vw,40px);
+    line-height:1.16;
+    letter-spacing:-.044em;
+  }
+
+  .product-detail .section-inner.product-layout{
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    gap:clamp(22px,5vw,34px);
+    align-content:start;
+  }
+
+  .contact-section{
+    align-items:center;
+    text-align:center;
+  }
+
+  .contact-section .section-inner{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    min-height:0;
+  }
+
+  .contact-main{margin:0 auto;width:100%}
+  .contact-section .lead{
+    margin:16px auto 0;
+    font-size:clamp(15px,3.8vw,17px);
+    line-height:1.5;
+  }
+  .contact-section .btn-row{justify-content:center;margin-top:20px}
+  .contact-section .btn-row .btn{
+    flex:1 1 100%;
+    max-width:280px;
+  }
+
+  .product-layout{
+    grid-template-columns:1fr;
+    gap:clamp(10px,2vh,16px);
+  }
+
+  .product-copy{
+    max-width:100%;
+    order:2;
+    min-height:0;
+    overflow:visible;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+  }
+
+  .product-copy h2{
+    font-size:clamp(31px,8vw,42px);
+    line-height:.94;
+  }
+
+  .product-subtitle{
+    font-size:clamp(18px,4.8vw,23px);
+    margin-top:7px;
+    letter-spacing:-.04em;
+  }
+
+  .product-description{
+    font-size:clamp(15px,3.8vw,17px);
+    line-height:1.55;
+    margin-top:12px;
+    max-width:100%;
+    display:block;
+    overflow:visible;
+  }
+
+  .product-visual{
+    order:1;
+    height:auto;
+    aspect-ratio:4 / 3;
+    min-height:0;
+    max-height:none;
+    border-radius:clamp(22px,5vw,30px);
+    box-shadow:var(--shadow);
+    align-self:stretch;
+  }
+
+  .product-visual img{
+    object-position:center 42%;
+  }
+
+  #smart-stirrups .product-visual img{
+    object-position:center 36%;
+  }
+
+  .product-visual.dashboard-visual{
+    height:auto;
+    aspect-ratio:16 / 10;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .product-visual.dashboard-visual img{
     width:100%;
     height:100%;
+    max-height:100%;
+    object-fit:contain;
   }
 
-  .hero-video{
-    inset:0;
+  .highlight-list{
+    margin-top:18px;
+    gap:8px;
+    max-height:none;
+    overflow:visible;
+  }
+
+  .highlight-list li{
+    font-size:12px;
+    padding:6px 10px;
+    line-height:1.08;
+  }
+
+  #why .section-inner.split{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:clamp(14px,2.8vh,22px);
+  }
+
+  #why .section-inner.split > div:first-child,
+  #vision .section-inner.vision-grid > div:first-child{
+    min-height:0;
+  }
+
+  #why .why-title{
+    font-size:clamp(27px,7vw,36px);
+    line-height:1.06;
+  }
+
+  #why .closing-line{
+    margin-top:12px;
+    font-size:clamp(18px,4.6vw,22px);
+    line-height:1.28;
+  }
+
+  #why .pain-list{
+    gap:9px;
+    min-height:0;
+  }
+
+  .split,
+  .work-grid,
+  .vision-grid{
+    grid-template-columns:1fr;
+    gap:clamp(12px,2.5vh,18px);
+  }
+
+  #how .section-inner.work-grid{
+    display:flex;
+    flex-direction:column;
+    gap:clamp(16px,3.5vh,24px);
+  }
+
+  #how .how-copy{
+    flex:0 0 auto;
+    min-height:0;
+  }
+
+  #how h2{
+    margin-bottom:12px;
+    font-size:clamp(26px,6.8vw,34px);
+    line-height:1.04;
+  }
+
+  #how .flow-minimal{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:6px;
+  }
+
+  #how .flow-item{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    padding:8px 10px;
+    font-size:11px;
+    font-weight:600;
+    line-height:1.2;
+    letter-spacing:-.02em;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--surface);
+  }
+
+  #how .flow-item small{
+    order:-1;
+    font-size:9px;
+    letter-spacing:.14em;
+  }
+
+  #how .how-visual{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
     width:100%;
-    height:100%;
-    min-width:100%;
-    min-height:100%;
-    transform:none;
-    -webkit-transform:none;
-    will-change:auto;
   }
 
-  nav{
-    position:-webkit-sticky;
-    position:sticky;
-    top:0;
-    transform:translateZ(0);
-    -webkit-backdrop-filter:blur(12px);
-    backdrop-filter:blur(12px);
-    background:rgba(246,243,237,0.94);
+  #how .system-map{
+    position:relative;
+    --map-h:clamp(232px,54vw,304px);
+    width:min(100%,calc(var(--map-h) * 900 / 520));
+    height:var(--map-h);
+    aspect-ratio:auto;
+    min-height:0;
+    max-height:var(--map-h);
+    margin-inline:auto;
+    padding:0;
+    border-radius:clamp(18px,4vw,24px);
+    border:1px solid var(--line);
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    overflow:hidden;
   }
-  nav.is-scrolled{background:rgba(246,243,237,0.98)}
-  body.dark nav{background:rgba(15,15,15,0.94)}
-  body.dark nav.is-scrolled{background:rgba(15,15,15,0.98)}
-  .lang button:active,.theme:active,.btn:active{
-    transform:scale(.98);
+
+  #how .system-svg{
+    display:block;
+  }
+
+  #how .system-line{
+    stroke-width:1.2;
+    opacity:.48;
+  }
+
+  #how .system-nodes{
+    position:absolute;
+    inset:14% 6% 14% 6%;
+    display:block;
+    height:auto;
+    margin-top:0;
+    padding:0;
+  }
+
+  #how .sys-node,
+  #how .sys-node.horse,
+  #how .sys-node.rider,
+  #how .sys-node.stirrup-l,
+  #how .sys-node.stirrup-r,
+  #how .sys-node.ai{
+    position:absolute;
+    width:clamp(62px,17vw,92px);
+    min-height:0;
+    padding:6px 4px;
+    border-radius:12px;
+    transform:translate(-50%,-50%);
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:0;
+  }
+
+  #how .sys-node.horse{left:50%;top:9%;z-index:2}
+  #how .sys-node.rider{left:50%;top:91%;z-index:2}
+  #how .sys-node.stirrup-l{left:11%;top:50%;z-index:2}
+  #how .sys-node.stirrup-r{left:89%;top:50%;display:flex;z-index:2}
+  #how .sys-node.ai{left:50%;top:50%;z-index:3}
+
+  #how .sys-node .icon{
+    margin:0 auto 2px;
+    flex-shrink:0;
+    width:22px;
+    height:22px;
+    font-size:10px;
+    border-radius:8px;
+  }
+
+  #how .sys-node .name{
+    font-size:9px;
+    line-height:1.1;
+  }
+
+  #how .sys-node .sub{
+    margin-top:1px;
+    font-size:7px;
+    line-height:1.15;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+  }
+
+  #how .tech-strip{
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:0;
+    gap:6px;
+    overflow:visible;
+    padding-bottom:0;
+  }
+
+  #how .tech-strip span{
+    flex:none;
+    font-size:11px;
+    padding:5px 9px;
+  }
+
+  #ai .section-head{
+    margin-bottom:clamp(13px,2.6vh,20px);
+    flex-shrink:0;
+  }
+
+  #ai h2{font-size:clamp(28px,7.2vw,36px);line-height:1}
+
+  #ai .lead{
+    margin-top:11px;
+    font-size:clamp(15px,3.8vw,17px);
+    line-height:1.5;
+    display:block;
+    overflow:visible;
+  }
+
+  #ai .insight-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+    flex:0 0 auto;
+    min-height:0;
+    align-content:start;
+  }
+
+  #ai .insight-card{
+    padding:13px;
+    border-radius:16px;
+  }
+
+  #ai .insight-card .text{
+    font-size:14px;
+    line-height:1.45;
+    display:block;
+    overflow:visible;
+  }
+
+  #ai .ai-note{
+    margin-top:14px;
+    font-size:clamp(15px,3.8vw,17px);
+    line-height:1.3;
+    flex-shrink:0;
+  }
+
+  #built-for .section-head{margin-bottom:clamp(10px,2vh,14px)}
+
+  #built-for h2{font-size:clamp(28px,7.2vw,36px);line-height:1.02}
+
+  #built-for .audience-grid{
+    grid-template-columns:1fr;
+    gap:9px;
+    min-height:0;
+  }
+
+  #built-for .audience-card{
+    padding:15px 16px;
+    border-radius:16px;
+  }
+
+  #built-for .audience-card h3{font-size:16px;margin-bottom:4px}
+
+  #built-for .audience-card .text{
+    font-size:15px;
+    line-height:1.45;
+    display:block;
+    overflow:visible;
+  }
+
+  #vision .section-inner.vision-grid{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:clamp(14px,2.8vh,22px);
+  }
+
+  #vision h2{font-size:clamp(28px,7.2vw,36px);line-height:1.02}
+
+  #vision .lead{
+    margin-top:11px;
+    font-size:clamp(15px,3.8vw,17px);
+    line-height:1.5;
+    display:block;
+    overflow:visible;
+  }
+
+  #vision .roadmap{
+    flex:1 1 auto;
+    min-height:0;
+    align-self:stretch;
+  }
+
+  #vision .roadmap-step{
+    padding:11px 0;
+    font-size:clamp(17px,4.2vw,20px);
+    gap:12px;
+  }
+
+  .line-card{
+    font-size:clamp(16px,4vw,19px);
+    padding:13px 14px;
+    border-radius:16px;
+  }
+
+  .line-card span{
+    width:24px;
+    height:24px;
+    font-size:12px;
+  }
+
+  .section-head .lead,
+  .section-head .text{
+    max-width:100%;
+    font-size:clamp(16px,4vw,18px);
+  }
+
+  .lead{max-width:100%}
+
+  .nav-actions{
+    flex:1;
+    justify-content:flex-end;
+    min-width:0;
+  }
+
+  .lang{
+    flex:1;
+    justify-content:flex-end;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    max-width:min(100%,280px);
+  }
+
+  .lang::-webkit-scrollbar{display:none}
+
+  .lang button,.theme{
+    flex:none;
+    min-height:36px;
+    min-width:36px;
+  }
+
+  .footer{
+    height:auto;
+    min-height:auto;
+    max-height:none;
+    overflow:visible;
+    scroll-snap-align:end;
+    scroll-snap-stop:always;
+    padding-bottom:max(24px,env(safe-area-inset-bottom));
   }
 }
+
+@media(max-width:680px){
+  :root{
+    --nav-height:64px;
+    --gutter:clamp(16px,4.5vw,22px);
+    --section-pad-y:clamp(10px,2vh,16px);
+  }
+
+  .nav-inner{padding:10px max(var(--gutter),env(safe-area-inset-left)) 10px max(var(--gutter),env(safe-area-inset-right));gap:8px}
+  .logo span{font-size:14px}
+  .brand-logo{height:22px}
+  .nav-actions{gap:4px}
+  .lang{gap:3px;max-width:min(100%,220px)}
+  .lang button,.theme{font-size:10px;padding:6px 8px;min-width:32px;min-height:32px}
+  h1{font-size:clamp(36px,11vw,52px);line-height:.9}
+  .hero-section{
+    padding:
+      calc(var(--nav-height) + max(20px,env(safe-area-inset-top)))
+      max(var(--gutter),env(safe-area-inset-right))
+      max(18px,env(safe-area-inset-bottom))
+      max(var(--gutter),env(safe-area-inset-left));
+  }
+  .hero-copy .lead{font-size:clamp(16px,4.4vw,18px);line-height:1.45;margin-top:14px}
+  .hero-copy .btn-row{margin-top:16px}
+  .hero-copy .btn-row .btn{flex:1 1 100%}
+  .product-detail .section-inner.product-layout{
+    grid-template-rows:auto auto;
+    gap:20px;
+  }
+  .product-visual{aspect-ratio:4 / 3}
+  .product-visual.dashboard-visual{aspect-ratio:16 / 10}
+  .product-copy h2{font-size:clamp(29px,8.4vw,36px)}
+  .product-subtitle{font-size:clamp(17px,4.7vw,21px)}
+  .product-description{display:block;overflow:visible}
+  .highlight-list li{font-size:12px;padding:5px 9px}
+  .btn{min-height:44px;padding:12px 16px;font-size:14px}
+  .eyebrow{font-size:10px;margin-bottom:8px;letter-spacing:.14em}
+  .product-intro h2{font-size:clamp(27px,7.6vw,36px)}
+  #why .why-title{font-size:clamp(25px,7vw,32px)}
+  #why .line-card{font-size:15px;padding:11px 12px;gap:10px}
+  #why .line-card span{width:22px;height:22px;font-size:11px}
+  #why .closing-line{font-size:16px;margin-top:8px}
+  #how h2{font-size:clamp(24px,6.5vw,30px);margin-bottom:10px;line-height:1.05}
+  #how .flow-minimal{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  #how .flow-item{padding:7px 8px;font-size:10px}
+  #how .system-map{
+    --map-h:clamp(212px,50vw,272px);
+    width:min(100%,calc(var(--map-h) * 900 / 520));
+    height:var(--map-h);
+    max-height:var(--map-h);
+    border-radius:16px;
+  }
+
+  #how .system-nodes{inset:13% 5% 13% 5%}
+  #how .sys-node{width:clamp(56px,16vw,84px);padding:5px 4px;border-radius:11px}
+  #how .sys-node .icon{width:20px;height:20px;font-size:9px;margin-bottom:2px}
+  #how .sys-node .name{font-size:8px}
+  #how .sys-node .sub{font-size:7px;-webkit-line-clamp:1}
+  #how .tech-strip span{font-size:10px;padding:4px 8px}
+  #ai h2{font-size:clamp(26px,7.2vw,32px)}
+  #ai .insight-grid{grid-template-columns:1fr}
+  #ai .insight-card{padding:11px}
+  #ai .insight-card .text{font-size:14px;-webkit-line-clamp:3}
+  #ai .ai-note{font-size:14px;margin-top:8px}
+  #built-for h2{font-size:clamp(26px,7.2vw,32px)}
+  #built-for .audience-card{padding:12px 14px}
+  #built-for .audience-card h3{font-size:16px}
+  #built-for .audience-card .text{font-size:15px}
+  #vision h2{font-size:clamp(26px,7.2vw,32px)}
+  #vision .roadmap-step{padding:8px 0;font-size:16px}
+  .contact-section h2{font-size:clamp(28px,8vw,36px)}
+  .user-flow-statement .user-flow-closing{
+    font-size:clamp(26px,7.8vw,36px);
+    line-height:1.18;
+  }
+  .footer{
+    padding:
+      clamp(18px,5vw,24px)
+      max(var(--gutter),env(safe-area-inset-right))
+      max(20px,env(safe-area-inset-bottom))
+      max(var(--gutter),env(safe-area-inset-left));
+    border-top:0;
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+    gap:12px;
+    padding:18px 16px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--surface);
+    box-shadow:0 16px 36px rgba(40,34,24,.06);
+  }
+
+  .footer-brand{justify-content:center;gap:8px}
+  .footer-brand img{height:24px}
+  .footer-brand span{
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    font-size:14px;
+    line-height:1.25;
+  }
+
+  .footer-meta{
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    gap:6px;
+    font-size:13px;
+    line-height:1.35;
+  }
+
+  .footer-copy{max-width:260px}
+  .footer-link{padding:4px 0}
+}
+
+@media(max-width:380px){
+  .logo span{display:none}
+  .lang{max-width:100%}
+  #how .flow-minimal{grid-template-columns:1fr 1fr}
+  #how .flow-item{font-size:10px;padding:6px 8px}
+  #how .system-map{--map-h:clamp(200px,48vw,252px)}
+  #how .system-nodes{inset:12% 4% 12% 4%}
+  #how .sys-node{width:clamp(52px,15vw,76px)}
+  #how .sys-node .name{font-size:8px}
+  #how .sys-node .sub{display:none}
+  #ai .insight-grid{gap:6px}
+  #ai .insight-card{padding:9px}
+}
+
+@media(max-width:980px) and (max-height:740px){
+  :root{--section-pad-y:8px}
+
+  .hero-copy .lead{margin-top:10px;font-size:15px}
+  .hero-copy .btn-row{margin-top:12px}
+  .product-detail .section-inner.product-layout{grid-template-rows:auto auto}
+  .product-description{display:block;overflow:visible}
+  #ai .lead{display:block;overflow:visible}
+  #ai .insight-card .text{-webkit-line-clamp:3}
+  #vision .lead{display:block;overflow:visible}
+  #vision .roadmap-step{padding:6px 0;font-size:15px}
+  #built-for .audience-card .text{display:block;overflow:visible}
+  #how .system-map{--map-h:clamp(196px,46vw,240px)}
+  #how .system-nodes{inset:11% 3% 11% 3%}
+  #how .sys-node .sub{display:none}
+  .user-flow-statement .user-flow-closing{
+    font-size:clamp(24px,7vw,32px);
+    line-height:1.2;
+  }
+}
+
 @media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .hero-video{display:none}
-  .hero-bg{
-    background:
-      linear-gradient(105deg,rgba(246,243,237,.94) 0%,rgba(246,243,237,.5) 100%),
-      url(yuma_stirrup_product.jpg) center/cover no-repeat;
+  html{scroll-behavior:auto;scroll-snap-type:none}
+  *{transition:none!important;animation:none!important}
+  .user-flow-card{
+    opacity:1!important;
+    transform:none!important;
   }
-  body.dark .hero-bg{
-    background:
-      linear-gradient(105deg,rgba(15,15,15,.94) 0%,rgba(15,15,15,.5) 100%),
-      url(yuma_stirrup_product.jpg) center/cover no-repeat;
+
+  .user-flow-closing{
+    opacity:1!important;
+    transform:none!important;
   }
-  .system-line{animation:none}
-  .flow-arrow{animation:none}
-  .insight .ai-badge::before{animation:none}
 }
 </style>
 </head>
 
 <body>
-
 <div class="page">
-
-<!-- ── Navigation ── -->
 <nav id="siteNav">
   <div class="nav-inner">
-    <a class="logo" href="#" aria-label="YUMA">
+    <a class="logo" href="#hero" aria-label="YUMA">
       <img class="brand-logo" src="Yuma_Logo_Web.png" alt="" decoding="async" fetchpriority="high">
-      <span>YUMA</span>
+    <span>YUMA</span>
     </a>
-    <div class="nav-right">
-      <div class="lang">
-        <button onclick="setLang('en', this)" class="active">EN</button>
-        <button onclick="setLang('zh', this)">中文</button>
-        <button onclick="setLang('jp', this)">日本語</button>
-      </div>
-      <button class="theme" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+    <div class="nav-actions">
+    <div class="lang">
+        <button type="button" onclick="setLang('en', this)" class="active">EN</button>
+        <button type="button" onclick="setLang('zh', this)">中文</button>
+        <button type="button" onclick="setLang('de', this)">DE</button>
+        <button type="button" onclick="setLang('fr', this)">FR</button>
+        <button type="button" onclick="setLang('it', this)">IT</button>
+    </div>
+      <button type="button" class="theme" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
     </div>
   </div>
 </nav>
 
-<!-- ── Hero ── -->
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true">
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      webkit-playsinline
-      disablepictureinpicture
-      preload="auto"
-      poster="yuma_stirrup_product.jpg"
-    >
-      <source src="video.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-  </div>
+<main>
+  <section class="section hero-section" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        disablepictureinpicture
+        preload="auto"
+        poster="yuma_stirrup_product.jpg"
+      >
+        <source src="video.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
 
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="kicker reveal" data-i18n="kicker">Reflective Riding System</div>
-      <h1 class="reveal reveal-d1" data-i18n="heroTitle">Making the Invisible Visible.</h1>
-      <p class="lead reveal reveal-d2" data-i18n="heroLead">
-        YUMA helps riders understand the hidden relationship between body movement, balance, pressure distribution, and horse response through wearable sensing and AI-powered reflection.
-      </p>
-      <div class="actions reveal reveal-d3">
-        <a href="#system" class="btn primary" data-i18n="btnSystem">Explore System</a>
-        <a href="#tech" class="btn" data-i18n="btnTech">Technology</a>
+    <div class="hero-inner">
+  <div class="hero-copy">
+        <div class="eyebrow" data-i18n="heroTitle">Reflective Riding System</div>
+        <h1 data-i18n="heroHeadline">Making the Invisible Visible.</h1>
+        <p class="lead" data-i18n="heroSubtitle">A wearable sensing system that transforms rider-horse interaction into measurable insights.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="#contact" data-i18n="requestDemo">Request Demo</a>
+          <a class="btn" href="#how" data-i18n="exploreSystem">Explore System</a>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="section-inner split">
+      <div class="mobile-copy-stack">
+        <div class="eyebrow" data-i18n="whyKicker">Why YUMA</div>
+        <h2 class="why-title" data-i18n="whyTitle">Riders can feel the movement.<br>But many important interactions remain invisible.</h2>
+        <p class="closing-line" data-i18n="whyClosing">YUMA reveals these hidden signals and turns them into clear training insight.</p>
       </div>
+      <div class="pain-list">
+        <div class="line-card"><span>1</span><div data-i18n="pain1">Balance shifts are hard to notice.</div></div>
+        <div class="line-card"><span>2</span><div data-i18n="pain2">Stirrup pressure cannot be seen in video.</div></div>
+        <div class="line-card"><span>3</span><div data-i18n="pain3">Rider-horse synchrony is difficult to measure.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── Smart Stirrups ── -->
-<section class="stirrup-showcase" id="stirrup">
-  <div class="stirrup-visual reveal">
-    <img src="yuma_stirrup_product.jpg" alt="YUMA Smart Stirrup" loading="lazy" decoding="async">
+  <section class="section product-intro" id="product">
+    <div class="section-inner">
+      <div class="eyebrow" data-i18n="productIntroKicker">THE YUMA ECOSYSTEM</div>
+      <h2 data-i18n="productIntroTitle">Every device has a purpose.<br>Together they create a shared understanding of rider and horse.</h2>
   </div>
-  <div class="stirrup-copy reveal reveal-d1">
-    <div class="kicker" data-i18n="stirrupKicker">Core Device</div>
-    <h2 data-i18n="stirrupSectionTitle">Where sensing meets the stirrup.</h2>
-    <p class="text" data-i18n="stirrupSectionText1">
-      The YUMA smart stirrup turns an everyday riding interface into a precision sensing node — capturing pressure, balance, and weight distribution from both feet in real time.
-    </p>
-    <p class="text" data-i18n="stirrupSectionText2">
-      Designed to feel familiar in the saddle while quietly translating foot-level signals into training insight.
-    </p>
-    <div class="stirrup-features">
-      <div class="stirrup-feature">
-        <strong data-i18n="stirrupFeat1Title">Pressure Mapping</strong>
-        <span data-i18n="stirrupFeat1Text">Left-right load balance across transitions and gaits.</span>
+</section>
+
+  <section class="section product-detail" id="smart-stirrups">
+    <div class="section-inner product-layout">
+      <div class="product-copy">
+        <h2 data-i18n="product01Title">Smart Stirrups</h2>
+        <p class="product-subtitle" data-i18n="product01Subtitle">Where rider and horse first connect.</p>
+        <p class="text product-description" data-i18n="product01Text">Capture pressure, balance, weight distribution, and lower-body rhythm directly from both feet. Designed to feel familiar in the saddle while revealing the subtle signals hidden inside every ride.</p>
+        <ul class="highlight-list">
+          <li data-i18n="product01Highlight1">Pressure Mapping</li>
+          <li data-i18n="product01Highlight2">Load Sensing</li>
+          <li data-i18n="product01Highlight3">Motion Tracking</li>
+          <li data-i18n="product01Highlight4">50Hz Wireless Telemetry</li>
+          <li data-i18n="product01Highlight5">Distance Sensing</li>
+        </ul>
+        <div class="product-actions">
+          <a class="btn primary ar-button" href="models/stirrup.usdz" rel="ar" data-i18n="product01ArButton">View in AR</a>
       </div>
-      <div class="stirrup-feature">
-        <strong data-i18n="stirrupFeat2Title">Load Sensing</strong>
-        <span data-i18n="stirrupFeat2Text">50 kg load cell with HX711 amplification.</span>
       </div>
-      <div class="stirrup-feature">
-        <strong data-i18n="stirrupFeat3Title">Motion Tracking</strong>
-        <span data-i18n="stirrupFeat3Text">IM948 motion data for lower-body rhythm.</span>
+      <div class="product-visual">
+        <img src="yuma_stirrup_product.jpg" alt="YUMA Smart Stirrups" loading="lazy" decoding="async">
       </div>
-      <div class="stirrup-feature">
-        <strong data-i18n="stirrupFeat4Title">Wireless Sync</strong>
-        <span data-i18n="stirrupFeat4Text">ESP32-S3 node streams telemetry at 50Hz.</span>
       </div>
+  </section>
+
+  <section class="section product-detail" id="wearable-nodes">
+    <div class="section-inner product-layout">
+      <div class="product-copy">
+        <h2 data-i18n="product02Title">Wearable Nodes</h2>
+        <p class="product-subtitle" data-i18n="product02Subtitle">Designed to disappear during riding.</p>
+        <p class="text product-description" data-i18n="product02Text">Lightweight rider and horse nodes continuously track posture, body orientation, and movement rhythm. Together they create a shared understanding of both partners throughout every training session.</p>
+        <ul class="highlight-list">
+          <li data-i18n="product02Highlight1">Rider Posture</li>
+          <li data-i18n="product02Highlight2">Horse Motion</li>
+          <li data-i18n="product02Highlight3">IM948 Motion Sensor</li>
+          <li data-i18n="product02Highlight4">ESP32-S3 Wireless</li>
+          <li data-i18n="product02Highlight5">Temperature Sensing</li>
+        </ul>
+        <div class="product-actions">
+          <a class="btn primary ar-button" href="models/rider.usdz" rel="ar" data-i18n="product02ArButton">View in AR</a>
+    </div>
+  </div>
+      <div class="product-visual">
+        <img src="yuma_rider_demo.jpg" alt="YUMA Wearable Nodes" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <section class="section product-detail" id="mobile-app">
+    <div class="section-inner product-layout">
+      <div class="product-copy">
+        <h2 data-i18n="product03Title">Mobile App</h2>
+        <p class="product-subtitle" data-i18n="product03Subtitle">Everything begins before the ride.</p>
+        <p class="text product-description" data-i18n="product03Text">Prepare every training session with confidence. Check horse information, device status, weather conditions, battery levels, and session readiness before riding. After training, quickly review important moments and AI reflections.</p>
+        <ul class="highlight-list">
+          <li data-i18n="product03Highlight1">Session Control</li>
+          <li data-i18n="product03Highlight2">Device Status</li>
+          <li data-i18n="product03Highlight3">Horse Profile</li>
+          <li data-i18n="product03Highlight4">Ride History</li>
+          <li data-i18n="product03Highlight5">Rider-Horse Harmony</li>
+        </ul>
+      </div>
+      <div class="product-visual">
+        <img src="yuma_app_hand.jpg" alt="YUMA Mobile App" loading="lazy" decoding="async">
+      </div>
+  </div>
+</section>
+
+  <section class="section product-detail" id="live-dashboard">
+    <div class="section-inner product-layout">
+      <div class="product-copy">
+        <h2 data-i18n="product04Title">Live Dashboard</h2>
+        <p class="product-subtitle" data-i18n="product04Subtitle">See what riders cannot feel.</p>
+        <p class="text product-description" data-i18n="product04Text">Transform live sensor streams into intuitive visualizations of synchrony, posture, balance, and pressure distribution. Built for riders, coaches, demonstrations, and reflective review after every training session.</p>
+        <ul class="highlight-list">
+          <li data-i18n="product04Highlight1">Live Synchronization</li>
+          <li data-i18n="product04Highlight2">Pressure Analysis</li>
+          <li data-i18n="product04Highlight3">AI Reflection</li>
+          <li data-i18n="product04Highlight4">Session Playback</li>
+        </ul>
+  </div>
+      <div class="product-visual dashboard-visual">
+        <img src="img/dashboard_mockup.png" alt="YUMA Live Dashboard" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <section class="section user-flow-section" id="user-flow">
+    <div class="section-inner">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="userFlowKicker">USER FLOW</div>
+        <h2 data-i18n="userFlowTitle">From Preparation to Reflection.</h2>
+        <p class="lead" data-i18n="userFlowText">YUMA fits naturally into every stage of training—<br>before, during and after every ride.</p>
+      </div>
+      <div class="user-flow-grid">
+        <article class="user-flow-card">
+          <div class="user-flow-card-top">
+            <span class="user-flow-num">01</span>
+            <div class="user-flow-icon" aria-hidden="true">📱</div>
+          </div>
+          <h3 data-i18n="userFlowStep1Title">Prepare</h3>
+          <p class="text user-flow-desc" data-i18n="userFlowStep1Text">Check horse information, device status, battery level, and weather before starting a riding session.</p>
+          <ul class="user-flow-chips">
+            <li data-i18n="userFlowStep1Chip1">Horse Profile</li>
+            <li data-i18n="userFlowStep1Chip2">Device Ready</li>
+            <li data-i18n="userFlowStep1Chip3">Start Session</li>
+          </ul>
+        </article>
+        <article class="user-flow-card">
+          <div class="user-flow-card-top">
+            <span class="user-flow-num">02</span>
+            <div class="user-flow-icon" aria-hidden="true">🐎</div>
+          </div>
+          <h3 data-i18n="userFlowStep2Title">Ride</h3>
+          <p class="text user-flow-desc" data-i18n="userFlowStep2Text">Ride naturally while wearable sensors continuously capture movement, pressure, balance, and synchronization.</p>
+          <ul class="user-flow-chips">
+            <li data-i18n="userFlowStep2Chip1">Pressure</li>
+            <li data-i18n="userFlowStep2Chip2">Balance</li>
+            <li data-i18n="userFlowStep2Chip3">Motion</li>
+          </ul>
+        </article>
+        <article class="user-flow-card">
+          <div class="user-flow-card-top">
+            <span class="user-flow-num">03</span>
+            <div class="user-flow-icon" aria-hidden="true">🖥</div>
+          </div>
+          <h3 data-i18n="userFlowStep3Title">Review</h3>
+          <p class="text user-flow-desc" data-i18n="userFlowStep3Text">Replay the session through synchronized visualizations, metrics, and important riding moments.</p>
+          <ul class="user-flow-chips">
+            <li data-i18n="userFlowStep3Chip1">Dashboard</li>
+            <li data-i18n="userFlowStep3Chip2">Timeline</li>
+            <li data-i18n="userFlowStep3Chip3">Session Replay</li>
+          </ul>
+        </article>
+        <article class="user-flow-card">
+          <div class="user-flow-card-top">
+            <span class="user-flow-num">04</span>
+            <div class="user-flow-icon" aria-hidden="true">✦</div>
+          </div>
+          <h3 data-i18n="userFlowStep4Title">Reflect</h3>
+          <p class="text user-flow-desc" data-i18n="userFlowStep4Text">AI summarizes key moments and helps riders and coaches better understand every training session.</p>
+          <ul class="user-flow-chips">
+            <li data-i18n="userFlowStep4Chip1">AI Insight</li>
+            <li data-i18n="userFlowStep4Chip2">Summary</li>
+            <li data-i18n="userFlowStep4Chip3">Progress</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section user-flow-statement" id="user-flow-closing">
+    <div class="section-inner">
+      <p class="user-flow-closing" data-i18n="userFlowClosing">One ride.<br>Four simple steps.<br>Continuous improvement.</p>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-inner work-grid">
+      <div class="how-copy mobile-copy-stack">
+        <div class="eyebrow" data-i18n="howKicker">How It Works</div>
+        <h2 data-i18n="howTitle">From invisible signals to usable feedback.</h2>
+        <div class="flow-minimal">
+          <div class="flow-item"><span data-i18n="flow1">Sensors</span><small>01</small></div>
+          <div class="flow-item"><span data-i18n="flow2">Wireless Telemetry</span><small>02</small></div>
+          <div class="flow-item"><span data-i18n="flow3">Live Dashboard</span><small>03</small></div>
+          <div class="flow-item"><span data-i18n="flow4">AI Reflection</span><small>04</small></div>
+        </div>
+      </div>
+      <div class="how-visual">
+        <div class="system-map">
+          <svg class="system-svg" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line class="system-line" x1="450" y1="74" x2="116" y2="260"/>
+            <line class="system-line" x1="116" y1="260" x2="450" y2="446"/>
+            <line class="system-line" x1="450" y1="446" x2="784" y2="260"/>
+            <line class="system-line" x1="784" y1="260" x2="450" y2="74"/>
+            <line class="system-line" x1="450" y1="260" x2="450" y2="74"/>
+            <line class="system-line" x1="450" y1="260" x2="116" y2="260"/>
+            <line class="system-line" x1="450" y1="260" x2="784" y2="260"/>
+            <line class="system-line" x1="450" y1="260" x2="450" y2="446"/>
+          </svg>
+          <div class="system-nodes">
+            <div class="sys-node ai">
+              <div class="icon">✦</div>
+              <div>
+                <div class="name" data-i18n="nodeAI">AI Layer</div>
+                <div class="sub" data-i18n="nodeAIText">Reflection and insight</div>
+              </div>
+            </div>
+            <div class="sys-node horse">
+              <div class="icon">◎</div>
+              <div>
+                <div class="name" data-i18n="nodeHorse">Horse Node</div>
+                <div class="sub" data-i18n="nodeHorseText">Motion response</div>
+              </div>
+            </div>
+            <div class="sys-node rider">
+              <div class="icon">◉</div>
+              <div>
+                <div class="name" data-i18n="nodeRider">Rider Node</div>
+                <div class="sub" data-i18n="nodeRiderText">Body posture</div>
+              </div>
+            </div>
+            <div class="sys-node stirrup-l">
+              <div class="icon">◇</div>
+              <div>
+                <div class="name" data-i18n="nodeStirrups">Smart Stirrups</div>
+                <div class="sub" data-i18n="nodeStirrupsText">Pressure and balance</div>
+              </div>
+            </div>
+            <div class="sys-node stirrup-r">
+              <div class="icon">◇</div>
+              <div>
+                <div class="name" data-i18n="nodeStirrups">Smart Stirrups</div>
+                <div class="sub" data-i18n="nodeStirrupsText">Pressure and balance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tech-strip">
+          <span>ESP32-S3</span>
+          <span>IM948</span>
+          <span>HX711</span>
+          <span>TSD10 LiDAR</span>
+          <span>JSONL</span>
+          <span>WebSocket</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ai-section" id="ai">
+    <div class="section-inner">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="aiKicker">AI Reflection</div>
+        <h2 data-i18n="aiTitle">Not only what happened.<br>But why it matters.</h2>
+        <p class="lead" data-i18n="aiText">YUMA turns riding data into calm, human-readable observations that help riders and coaches understand training habits without feeling judged.</p>
+  </div>
+      <div class="insight-grid">
+        <div class="insight-card"><p class="text" data-i18n="insight1">You tended to place more weight on the left stirrup during transitions.</p></div>
+        <div class="insight-card"><p class="text" data-i18n="insight2">Synchronization improved after the second minute.</p></div>
+        <div class="insight-card"><p class="text" data-i18n="insight3">Upper body stability remained strong throughout the session.</p></div>
+        <div class="insight-card"><p class="text" data-i18n="insight4">A short balance disturbance appeared before the jump approach.</p></div>
+    </div>
+      <p class="ai-note" data-i18n="aiNote">AI supports reflection while keeping the rider, horse, and coach at the center.</p>
+  </div>
+</section>
+
+  <section class="section" id="built-for">
+    <div class="section-inner">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="builtKicker">Built For</div>
+        <h2 data-i18n="builtTitle">Made for the people shaping each ride.</h2>
+  </div>
+      <div class="audience-grid">
+        <article class="audience-card"><h3 data-i18n="forRiders">For Riders</h3><p class="text" data-i18n="forRidersText">Improve body awareness, balance, and confidence through objective feedback.</p></article>
+        <article class="audience-card"><h3 data-i18n="forCoaches">For Coaches</h3><p class="text" data-i18n="forCoachesText">Support coaching decisions with measurable data and clearer post-session review.</p></article>
+        <article class="audience-card"><h3 data-i18n="forClubs">For Clubs</h3><p class="text" data-i18n="forClubsText">Build long-term training records and create a more professional training experience.</p></article>
     </div>
   </div>
 </section>
 
-<!-- ── Product Story ── -->
-<section class="story">
-  <div class="story-visual reveal">
-    <img src="yuma_rider_demo.jpg" alt="YUMA Smart Stirrup" loading="lazy" decoding="async">
-  </div>
-  <div class="reveal reveal-d1">
-    <h2 data-i18n="storyTitle">Designed Around Communication.</h2>
-    <p class="text" data-i18n="storyText1">
-      Horse riding is full of invisible signals. Weight shifts, pressure changes and body posture affect the horse continuously.
-    </p>
-    <p class="text" data-i18n="storyText2">
-      YUMA transforms these invisible interactions into understandable insights.
-    </p>
-  </div>
-</section>
-
-<!-- ── App Experience ── -->
-<section class="app-experience">
-  <div class="app-showcase reveal">
-    <img class="app-hand-img" src="yuma_app_hand.jpg" alt="YUMA mobile app held in hand" loading="lazy" decoding="async">
-  </div>
-
-  <div class="app-copy reveal reveal-d1">
-    <div class="kicker" data-i18n="appKicker">Mobile Experience</div>
-    <h2 data-i18n="appTitle">Training starts from the rider's hand.</h2>
-    <p class="text" data-i18n="appText1">
-      The YUMA mobile interface gives riders a calm starting point before training, combining horse status, weather, training frequency, device battery, and quick session access.
-    </p>
-    <p class="text" data-i18n="appText2">
-      It connects the physical smart stirrups with a familiar everyday gesture: holding the phone, checking readiness, and starting a reflective riding session.
-    </p>
-
-    <div class="app-points">
-      <div class="app-point">
-        <strong data-i18n="appPoint1Title">Before Training</strong>
-        <span data-i18n="appPoint1Text">Weather, horse profile and device readiness.</span>
-      </div>
-      <div class="app-point">
-        <strong data-i18n="appPoint2Title">During Training</strong>
-        <span data-i18n="appPoint2Text">Fast access to live session recording.</span>
-      </div>
-      <div class="app-point">
-        <strong data-i18n="appPoint3Title">After Training</strong>
-        <span data-i18n="appPoint3Text">Review metrics, moments and AI reflections.</span>
-      </div>
-      <div class="app-point">
-        <strong data-i18n="appPoint4Title">Device Status</strong>
-        <span data-i18n="appPoint4Text">Four nodes remain visible and easy to check.</span>
-      </div>
+  <section class="section" id="vision">
+    <div class="section-inner vision-grid">
+      <div class="mobile-copy-stack">
+        <div class="eyebrow" data-i18n="visionKicker">Vision</div>
+        <h2 data-i18n="visionTitle">Building the next generation of equestrian performance technology.</h2>
+        <p class="lead" data-i18n="visionText">YUMA brings sensing, live feedback, and AI-assisted reflection into everyday riding practice. It creates a new layer of measurable awareness for riders, coaches, and equestrian teams.</p>
+    </div>
+      <div class="roadmap">
+        <div class="roadmap-step"><span>01</span><div data-i18n="roadmap1">Prototype</div></div>
+        <div class="roadmap-step"><span>02</span><div data-i18n="roadmap2">Pilot Testing</div></div>
+        <div class="roadmap-step"><span>03</span><div data-i18n="roadmap3">Professional Clubs</div></div>
+        <div class="roadmap-step"><span>04</span><div data-i18n="roadmap4">Commercial Platform</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── System Overview ── -->
-<section id="system">
-  <div class="section-head reveal">
-    <div class="kicker" data-i18n="systemKicker">System Overview</div>
-    <h2 data-i18n="systemTitle">Four devices. One shared understanding.</h2>
-    <p class="text" data-i18n="systemText">Together, the four sensor nodes and AI layer create a real-time model of rider-horse interaction.</p>
+  <section class="section contact-section" id="contact">
+    <div class="section-inner">
+      <div class="contact-main">
+        <div class="eyebrow" data-i18n="contactKicker">Contact</div>
+        <h2 data-i18n="contactTitle">Interested in YUMA?</h2>
+        <p class="lead" data-i18n="contactText">We are looking for riders, coaches, equestrian clubs, and partners interested in testing the next generation of reflective riding technology.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn primary" href="mailto:leonardochen00@gmail.com?subject=YUMA%20Contact" data-i18n="contactButton">Contact</a>
   </div>
-
-  <div class="system-map reveal">
-    <svg class="system-svg" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet">
-      <!-- diamond perimeter -->
-      <line class="system-line" x1="450" y1="95" x2="130" y2="260"/>
-      <line class="system-line" x1="130" y1="260" x2="450" y2="425"/>
-      <line class="system-line" x1="450" y1="425" x2="770" y2="260"/>
-      <line class="system-line" x1="770" y1="260" x2="450" y2="95"/>
-      <!-- spokes to AI center -->
-      <line class="system-line" x1="450" y1="260" x2="450" y2="95"/>
-      <line class="system-line" x1="450" y1="260" x2="130" y2="260"/>
-      <line class="system-line" x1="450" y1="260" x2="770" y2="260"/>
-      <line class="system-line" x1="450" y1="260" x2="450" y2="425"/>
-    </svg>
-
-    <div class="system-nodes">
-      <div class="sys-node ai">
-        <div class="icon">✦</div>
-        <div class="name" data-i18n="aiNodeName">AI Layer</div>
-        <div class="sub" data-i18n="aiNodeSub">Reflection & Insight</div>
       </div>
-      <div class="sys-node horse">
-        <div class="icon">◎</div>
-        <div class="name" data-i18n="horseNodeName">Horse Node</div>
-        <div class="sub" data-i18n="horseNodeSub">Motion Tracking</div>
-      </div>
-      <div class="sys-node rider">
-        <div class="icon">◉</div>
-        <div class="name" data-i18n="riderNodeName">Rider Node</div>
-        <div class="sub" data-i18n="riderNodeSub">Body Awareness</div>
-      </div>
-      <div class="sys-node stirrup-l">
-        <div class="icon">◇</div>
-        <div class="name" data-i18n="stirrupNodeName">Smart Stirrups</div>
-        <div class="sub" data-i18n="stirrupNodeSub">Pressure & Balance</div>
-      </div>
-      <div class="sys-node stirrup-r">
-        <div class="icon">◇</div>
-        <div class="name" data-i18n="stirrupNodeNameR">Smart Stirrups</div>
-        <div class="sub" data-i18n="stirrupNodeSubR">Pressure & Balance</div>
-      </div>
-    </div>
   </div>
 </section>
-
-<!-- ── Hardware ── -->
-<section>
-  <div class="section-head reveal">
-    <div class="kicker" data-i18n="hardwareKicker">Hardware Architecture</div>
-    <h2 data-i18n="hardwareTitle">A distributed wearable sensing system.</h2>
-  </div>
-
-  <div class="hw-grid">
-    <div class="hw-card reveal">
-      <div class="tag" data-i18n="hwTag1">Device 01</div>
-      <h3 data-i18n="stirrupTitle">Smart Stirrups</h3>
-      <p data-i18n="stirrupText">Captures rider pressure, balance, weight distribution, and lower-body movement through precision load sensing.</p>
-      <ul class="spec-list">
-        <li><strong>IM948</strong><span data-i18n="specMotion">Motion Sensor</span></li>
-        <li><strong>HX711</strong><span data-i18n="specAmp">Amplifier</span></li>
-        <li><strong data-i18n="specLoadCell">Load Cell</strong><span>50 kg</span></li>
-        <li><strong>ESP32-S3</strong><span data-i18n="specMCU">Microcontroller</span></li>
-        <li><strong data-i18n="specBattery">LiPo Battery</strong><span data-i18n="specPower">Power</span></li>
-      </ul>
-    </div>
-
-    <div class="hw-card reveal reveal-d1">
-      <div class="tag" data-i18n="hwTag2">Device 02</div>
-      <h3 data-i18n="riderTitle">Rider Node</h3>
-      <p data-i18n="riderText">Tracks body posture, torso orientation, stability, and motion rhythm from the rider's center of mass.</p>
-      <ul class="spec-list">
-        <li><strong data-i18n="rider1">Motion Tracking</strong><span>IMU</span></li>
-        <li><strong data-i18n="rider2">Orientation</strong><span>9-DoF</span></li>
-        <li><strong data-i18n="rider3">Stability</strong><span data-i18n="rider3sub">Real-time</span></li>
-        <li><strong>ESP32-S3</strong><span data-i18n="specMCU">Microcontroller</span></li>
-      </ul>
-    </div>
-
-    <div class="hw-card reveal reveal-d2">
-      <div class="tag" data-i18n="hwTag3">Device 03</div>
-      <h3 data-i18n="horseTitle">Horse Node</h3>
-      <p data-i18n="horseText">Captures movement patterns from the horse, enabling comparison between rider action and horse response.</p>
-      <ul class="spec-list">
-        <li><strong data-i18n="horse1">Horse Movement</strong><span>IMU</span></li>
-        <li><strong data-i18n="horse2">Motion Pattern</strong><span data-i18n="horse2sub">Analysis</span></li>
-        <li><strong data-i18n="horse3">Response Detection</strong><span data-i18n="horse3sub">Sync</span></li>
-        <li><strong>ESP32-S3</strong><span data-i18n="specMCU">Microcontroller</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ── Technology ── -->
-<section id="tech" class="tech-section">
-  <div class="section-head reveal">
-    <div class="kicker" data-i18n="techKicker">Technology Stack</div>
-    <h2 data-i18n="techTitle">Built as a Real-Time Distributed Sensing System.</h2>
-    <p class="text" data-i18n="techText">Sensor nodes collect data locally, transmit telemetry wirelessly, and visualize the riding session through a Mac-based dashboard with AI reflection.</p>
-  </div>
-
-  <div class="metrics reveal">
-    <div class="metric">
-      <b>50Hz</b>
-      <span data-i18n="metric1">Real-time sensing</span>
-    </div>
-    <div class="metric reveal-d1">
-      <b>4</b>
-      <span data-i18n="metric2">Sensor Nodes</span>
-    </div>
-    <div class="metric reveal-d2">
-      <b>99%</b>
-      <span data-i18n="metric3">Synchronization</span>
-    </div>
-  </div>
-
-  <div class="tech-pills reveal">
-    <span class="tech-pill" data-i18n="tech1">50Hz Telemetry</span>
-    <span class="tech-pill" data-i18n="tech2">ESP32-S3</span>
-    <span class="tech-pill" data-i18n="tech3">Wi-Fi Communication</span>
-    <span class="tech-pill" data-i18n="tech4">WebSocket Dashboard</span>
-    <span class="tech-pill" data-i18n="tech5">JSONL Recording</span>
-    <span class="tech-pill" data-i18n="tech6">AI Reflection Engine</span>
-  </div>
-</section>
-
-<!-- ── Data Flow ── -->
-<section>
-  <div class="section-head reveal">
-    <div class="kicker" data-i18n="flowKicker">Data Flow</div>
-    <h2 data-i18n="flowTitle">From movement to meaning.</h2>
-  </div>
-
-  <div class="flow-track reveal">
-    <div class="flow-step">
-      <div class="flow-card">
-        <div class="step-icon">◈</div>
-        <div class="step-label" data-i18n="flowStep1">Sensors</div>
-      </div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-card">
-        <div class="step-icon">⚙</div>
-        <div class="step-label" data-i18n="flowStep2">Embedded Processing</div>
-      </div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-card">
-        <div class="step-icon">◎</div>
-        <div class="step-label" data-i18n="flowStep3">Wireless Telemetry</div>
-      </div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-card">
-        <div class="step-icon">▣</div>
-        <div class="step-label" data-i18n="flowStep4">Dashboard</div>
-      </div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="flow-card">
-        <div class="step-icon">✦</div>
-        <div class="step-label" data-i18n="flowStep5">AI Reflection</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── AI Reflection (dark) ── -->
-<section class="ai-section">
-  <div class="ai-inner">
-    <div class="ai-head reveal">
-      <div class="kicker" data-i18n="aiKicker">AI Reflection Layer</div>
-      <h2 data-i18n="aiTitle">Not only what happened.<br>But why it matters.</h2>
-      <p class="text" data-i18n="aiText">The AI reflection layer turns sensor data into calm, human-readable observations that help riders understand their habits without feeling judged.</p>
-    </div>
-
-    <div class="insight-cards">
-      <div class="insight reveal">
-        <div class="ai-badge" data-i18n="aiBadge">Insight</div>
-        <p data-i18n="quote1">"You tended to place more weight on the left stirrup during transitions."</p>
-      </div>
-      <div class="insight reveal reveal-d1">
-        <div class="ai-badge" data-i18n="aiBadge">Insight</div>
-        <p data-i18n="quote2">"Synchronization improved significantly after minute two."</p>
-      </div>
-      <div class="insight reveal reveal-d2">
-        <div class="ai-badge" data-i18n="aiBadge">Insight</div>
-        <p data-i18n="quote3">"Upper body stability remained strong throughout the session."</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Research ── -->
-<section class="research">
-  <div class="reveal">
-    <div class="kicker" data-i18n="researchKicker">Vision</div>
-    <h2 data-i18n="researchTitle">A new layer of intelligence for equestrian training.</h2>
-  </div>
-  <div class="reveal reveal-d1">
-    <p class="text" data-i18n="researchText">
-      YUMA brings sensing, live feedback, and AI-assisted reflection into everyday riding practice. It is designed to support riders, coaches, and equestrian teams with clearer training awareness, better communication, and more objective review after each session.
-    </p>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
+</main>
 <footer class="footer">
+  <div class="footer-inner">
   <div class="footer-brand">
-    <img src="Yuma_Logo_Web.png" alt="YUMA" decoding="async">
-    <span>Reflective Riding System</span>
+      <img src="Yuma_Logo_Web.png" alt="YUMA" decoding="async">
+      <span data-i18n="footerBrand">YUMA · Reflective Riding System</span>
   </div>
-  <div class="footer-meta">
-    <span data-i18n="footerText">© 2026 YUMA · Intelligent Equestrian Technology</span>
-    <a class="footer-link" href="https://leonardo-chen.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="footerLink">Zheng Chen</a>
+    <div class="footer-meta">
+      <span class="footer-copy" data-i18n="footerText">© 2026 YUMA · Intelligent Equestrian Technology</span>
+      <a class="footer-link" href="https://leonardo-chen.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="footerLink">Zheng Chen</a>
+    </div>
   </div>
 </footer>
-
 </div>
 
 <script>
 const dict = {
   en:{
-    kicker:"Reflective Riding System",
-    heroTitle:"Making the Invisible Visible.",
-    heroLead:"YUMA helps riders understand the hidden relationship between body movement, balance, pressure distribution, and horse response through wearable sensing and AI-powered reflection.",
-    btnSystem:"Explore System",
-    btnTech:"Technology",
-
-    stirrupKicker:"Core Device",
-    stirrupSectionTitle:"Where sensing meets the stirrup.",
-    stirrupSectionText1:"The YUMA smart stirrup turns an everyday riding interface into a precision sensing node — capturing pressure, balance, and weight distribution from both feet in real time.",
-    stirrupSectionText2:"Designed to feel familiar in the saddle while quietly translating foot-level signals into training insight.",
-    stirrupFeat1Title:"Pressure Mapping",
-    stirrupFeat1Text:"Left-right load balance across transitions and gaits.",
-    stirrupFeat2Title:"Load Sensing",
-    stirrupFeat2Text:"50 kg load cell with HX711 amplification.",
-    stirrupFeat3Title:"Motion Tracking",
-    stirrupFeat3Text:"IM948 motion data for lower-body rhythm.",
-    stirrupFeat4Title:"Wireless Sync",
-    stirrupFeat4Text:"ESP32-S3 node streams telemetry at 50Hz.",
-
-    storyTitle:"Designed Around Communication.",
-    storyText1:"Horse riding is full of invisible signals. Weight shifts, pressure changes and body posture affect the horse continuously.",
-    storyText2:"YUMA transforms these invisible interactions into understandable insights.",
-
-    appKicker:"Mobile Experience",
-    appTitle:"Training starts from the rider's hand.",
-    appText1:"The YUMA mobile interface gives riders a calm starting point before training, combining horse status, weather, training frequency, device battery, and quick session access.",
-    appText2:"It connects the physical smart stirrups with a familiar everyday gesture: holding the phone, checking readiness, and starting a reflective riding session.",
-    appPoint1Title:"Before Training",
-    appPoint1Text:"Weather, horse profile and device readiness.",
-    appPoint2Title:"During Training",
-    appPoint2Text:"Fast access to live session recording.",
-    appPoint3Title:"After Training",
-    appPoint3Text:"Review metrics, moments and AI reflections.",
-    appPoint4Title:"Device Status",
-    appPoint4Text:"Four nodes remain visible and easy to check.",
-
-    systemKicker:"System Overview",
-    systemTitle:"Four devices. One shared understanding.",
-    systemText:"Together, the four sensor nodes and AI layer create a real-time model of rider-horse interaction.",
-    horseNodeName:"Horse Node",
-    horseNodeSub:"Motion Tracking",
-    riderNodeName:"Rider Node",
-    riderNodeSub:"Body Awareness",
-    stirrupNodeName:"Left Stirrup",
-    stirrupNodeSub:"Pressure & Balance",
-    stirrupNodeNameR:"Right Stirrup",
-    stirrupNodeSubR:"Pressure & Balance",
-    aiNodeName:"AI Layer",
-    aiNodeSub:"Reflection & Insight",
-
-    hardwareKicker:"Hardware Architecture",
-    hardwareTitle:"A distributed wearable sensing system.",
-    hwTag1:"Device 01",
-    hwTag2:"Device 02",
-    hwTag3:"Device 03",
-    stirrupTitle:"Smart Stirrups",
-    stirrupText:"Captures rider pressure, balance, weight distribution, and lower-body movement through precision load sensing.",
-    specMotion:"Motion Sensor",
-    specAmp:"Amplifier",
-    specLoadCell:"Load Cell",
-    specMCU:"Microcontroller",
-    specBattery:"LiPo Battery",
-    specPower:"Power",
-    riderTitle:"Rider Node",
-    riderText:"Tracks body posture, torso orientation, stability, and motion rhythm from the rider's center of mass.",
-    rider1:"Motion Tracking",
-    rider2:"Orientation",
-    rider3:"Stability",
-    rider3sub:"Real-time",
-    horseTitle:"Horse Node",
-    horseText:"Captures movement patterns from the horse, enabling comparison between rider action and horse response.",
-    horse1:"Horse Movement",
-    horse2:"Motion Pattern",
-    horse2sub:"Analysis",
-    horse3:"Response Detection",
-    horse3sub:"Sync",
-
-    techKicker:"Technology Stack",
-    techTitle:"Built as a Real-Time Distributed Sensing System.",
-    techText:"Sensor nodes collect data locally, transmit telemetry wirelessly, and visualize the riding session through a Mac-based dashboard with AI reflection.",
-    metric1:"Real-time sensing",
-    metric2:"Sensor Nodes",
-    metric3:"Synchronization",
-    tech1:"50Hz Telemetry",
-    tech2:"ESP32-S3",
-    tech3:"Wi-Fi Communication",
-    tech4:"WebSocket Dashboard",
-    tech5:"JSONL Recording",
-    tech6:"AI Reflection Engine",
-
-    flowKicker:"Data Flow",
-    flowTitle:"From movement to meaning.",
-    flowStep1:"Sensors",
-    flowStep2:"Embedded Processing",
-    flowStep3:"Wireless Telemetry",
-    flowStep4:"Dashboard",
-    flowStep5:"AI Reflection",
-
-    aiKicker:"AI Reflection Layer",
+    heroTitle:"Reflective Riding System",
+    heroHeadline:"Making the Invisible Visible.",
+    heroSubtitle:"A wearable sensing system that transforms rider-horse interaction into measurable insights.",
+    requestDemo:"Request Demo",
+    exploreSystem:"Explore System",
+    whyKicker:"Why YUMA",
+    whyTitle:"Riders can feel the movement.\nBut many important interactions remain invisible.",
+    whyClosing:"YUMA reveals these hidden signals and turns them into clear training insight.",
+    pain1:"Body posture and self-awareness are hard to align.",
+    pain2:"Subtle stirrup dynamics are hard to capture on video.",
+    pain3:"Rider-horse synchrony is difficult to measure.",
+    productKicker:"Product",
+    productTitle:"One connected riding system.",
+    productIntroKicker:"THE YUMA ECOSYSTEM",
+    productIntroTitle:"Every device has its own role.\nTogether they build the connection between rider and horse.",
+    userFlowKicker:"USER FLOW",
+    userFlowTitle:"From Preparation to Reflection.",
+    userFlowText:"YUMA fits naturally into every stage of training—\nbefore, during and after every ride.",
+    userFlowStep1Title:"Prepare",
+    userFlowStep1Text:"Check horse information, device status, battery level, and weather before starting a riding session.",
+    userFlowStep1Chip1:"Horse Profile",
+    userFlowStep1Chip2:"Device Ready",
+    userFlowStep1Chip3:"Start Session",
+    userFlowStep2Title:"Ride",
+    userFlowStep2Text:"Ride naturally while wearable sensors continuously capture movement, pressure, balance, and synchronization.",
+    userFlowStep2Chip1:"Pressure",
+    userFlowStep2Chip2:"Balance",
+    userFlowStep2Chip3:"Motion",
+    userFlowStep3Title:"Review",
+    userFlowStep3Text:"Replay the session through synchronized visualizations, metrics, and important riding moments.",
+    userFlowStep3Chip1:"Dashboard",
+    userFlowStep3Chip2:"Timeline",
+    userFlowStep3Chip3:"Session Replay",
+    userFlowStep4Title:"Reflect",
+    userFlowStep4Text:"AI summarizes key moments and helps riders and coaches better understand every training session.",
+    userFlowStep4Chip1:"AI Insight",
+    userFlowStep4Chip2:"Summary",
+    userFlowStep4Chip3:"Progress",
+    userFlowClosing:"One ride.\nFour simple steps.\nContinuous improvement.",
+    product01Kicker:"PRODUCT 01",
+    product01Title:"Smart Stirrups",
+    product01Subtitle:"Where rider and horse first connect.",
+    product01Text:"Capture pressure, balance, weight distribution, and lower-body rhythm directly from both feet. Designed to feel familiar in the saddle while revealing the subtle signals hidden inside every ride.",
+    product01Highlight1:"Pressure Mapping",
+    product01Highlight2:"Load Sensing",
+    product01Highlight3:"Motion Tracking",
+    product01Highlight4:"50Hz Wireless Telemetry",
+    product01Highlight5:"Distance Sensing",
+    product01ArButton:"View in AR",
+    product02Kicker:"PRODUCT 02",
+    product02Title:"Wearable Nodes",
+    product02Subtitle:"Designed to disappear during riding.",
+    product02Text:"Lightweight rider and horse nodes continuously track posture, body orientation, and movement rhythm. Together they create a shared understanding of both partners throughout every training session.",
+    product02Highlight1:"Rider Posture",
+    product02Highlight2:"Horse Motion",
+    product02Highlight3:"IM948 Motion Sensor",
+    product02Highlight4:"ESP32-S3 Wireless",
+    product02Highlight5:"Temperature Sensing",
+    product02ArButton:"View in AR",
+    product03Kicker:"PRODUCT 03",
+    product03Title:"Mobile App",
+    product03Subtitle:"Everything begins before the ride.",
+    product03Text:"Prepare every training session with confidence. Check horse information, device status, weather conditions, battery levels, and session readiness before riding. After training, quickly review important moments and AI reflections.",
+    product03Highlight1:"Session Control",
+    product03Highlight2:"Device Status",
+    product03Highlight3:"Horse Profile",
+    product03Highlight4:"Ride History",
+    product03Highlight5:"Rider-Horse Harmony",
+    product04Title:"Live Dashboard",
+    product04Subtitle:"See what riders cannot feel.",
+    product04Text:"Transform live sensor streams into intuitive visualizations of synchrony, posture, balance, and pressure distribution. Built for riders, coaches, demonstrations, and reflective review after every training session.",
+    product04Highlight1:"Live Synchronization",
+    product04Highlight2:"Pressure Analysis",
+    product04Highlight3:"AI Reflection",
+    product04Highlight4:"Session Playback",
+    howKicker:"How It Works",
+    howTitle:"From invisible signals to usable feedback.",
+    flow1:"Sensors",
+    flow2:"Wireless Telemetry",
+    flow3:"Live Dashboard",
+    flow4:"AI Reflection",
+    nodeHorse:"Horse Node",
+    nodeHorseText:"Motion response",
+    nodeRider:"Rider Node",
+    nodeRiderText:"Body posture",
+    nodeStirrups:"Smart Stirrups",
+    nodeStirrupsText:"Pressure and balance",
+    nodeAI:"AI Layer",
+    nodeAIText:"Reflection and insight",
+    aiKicker:"AI Reflection",
     aiTitle:"Not only what happened.\nBut why it matters.",
-    aiText:"The AI reflection layer turns sensor data into calm, human-readable observations that help riders understand their habits without feeling judged.",
-    aiBadge:"Insight",
-    quote1:"\"You tended to place more weight on the left stirrup during transitions.\"",
-    quote2:"\"Synchronization improved significantly after minute two.\"",
-    quote3:"\"Upper body stability remained strong throughout the session.\"",
-
-    researchKicker:"Vision",
-    researchTitle:"A new layer of intelligence for equestrian training.",
-    researchText:"YUMA brings sensing, live feedback, and AI-assisted reflection into everyday riding practice. It is designed to support riders, coaches, and equestrian teams with clearer training awareness, better communication, and more objective review after each session.",
+    aiText:"YUMA turns riding data into calm, human-readable observations that help riders and coaches understand training habits without feeling judged.",
+    insight1:"You tended to place more weight on the left stirrup during transitions.",
+    insight2:"Synchronization improved after the second minute.",
+    insight3:"Upper body stability remained strong throughout the session.",
+    insight4:"A short balance disturbance appeared before the jump approach.",
+    aiNote:"AI supports reflection while keeping the rider, horse, and coach at the center.",
+    builtKicker:"Built For",
+    builtTitle:"Made for the people shaping each ride.",
+    forRiders:"For Riders",
+    forRidersText:"Improve body awareness, balance, and confidence through objective feedback.",
+    forCoaches:"For Coaches",
+    forCoachesText:"Support coaching decisions with measurable data and clearer post-session review.",
+    forClubs:"For Clubs",
+    forClubsText:"Build long-term training records and create a more professional training experience.",
+    visionKicker:"Vision",
+    visionTitle:"Building the next generation of equestrian performance technology.",
+    visionText:"YUMA brings sensing, live feedback, and AI-assisted reflection into everyday riding practice. It creates a new layer of measurable awareness for riders, coaches, and equestrian teams.",
+    roadmap1:"Prototype",
+    roadmap2:"Pilot Testing",
+    roadmap3:"Professional Clubs",
+    roadmap4:"Commercial Platform",
+    contactKicker:"Contact",
+    contactTitle:"Interested in YUMA?",
+    contactText:"We are looking for riders, coaches, equestrian clubs, and partners interested in testing the next generation of reflective riding technology.",
+    contactButton:"Contact",
+    footerBrand:"YUMA · Reflective Riding System",
     footerText:"© 2026 YUMA · Intelligent Equestrian Technology",
     footerLink:"Zheng Chen"
   },
-
   zh:{
-    kicker:"反思型骑乘系统",
-    heroTitle:"让不可见，变得可见。",
-    heroLead:"YUMA 帮助骑手理解身体动作、平衡、压力分布与马匹反应之间隐藏的关系，通过可穿戴传感与 AI 反思反馈实现。",
-    btnSystem:"了解系统",
-    btnTech:"技术",
-
-    stirrupKicker:"核心设备",
-    stirrupSectionTitle:"感知，从马镫开始。",
-    stirrupSectionText1:"YUMA 智能马镫将日常骑乘中最重要的接触点，转化为高精度传感节点——实时捕捉双脚的压力、平衡与重量分布。",
-    stirrupSectionText2:"在马鞍上保持熟悉的使用感受，同时将足部信号安静转化为可被理解的训练反馈。",
-    stirrupFeat1Title:"压力分布",
-    stirrupFeat1Text:"追踪转换动作与不同步态下的左右负重平衡。",
-    stirrupFeat2Title:"负载传感",
-    stirrupFeat2Text:"50 kg 称重传感器，配合 HX711 放大模块。",
-    stirrupFeat3Title:"运动追踪",
-    stirrupFeat3Text:"IM948 姿态数据，捕捉下肢运动节奏。",
-    stirrupFeat4Title:"无线同步",
-    stirrupFeat4Text:"ESP32-S3 节点以 50Hz 实时传输遥测数据。",
-
-    storyTitle:"为沟通而设计。",
-    storyText1:"马术充满了不可见的信号。重心移动、压力变化与身体姿态持续影响着马匹。",
-    storyText2:"YUMA 将这些不可见的互动转化为可理解的洞察。",
-
-    appKicker:"移动端体验",
-    appTitle:"训练，从骑手手中开始。",
-    appText1:"YUMA 移动端界面为骑手提供一个平静清晰的训练入口，整合马匹状态、天气、训练频率、设备电量与快速开始训练功能。",
-    appText2:"它把实体智能马镫与一个熟悉的日常动作连接起来：拿起手机，检查状态，然后开始一次可被反思的骑乘训练。",
-    appPoint1Title:"训练前",
-    appPoint1Text:"查看天气、马匹档案与设备状态。",
-    appPoint2Title:"训练中",
-    appPoint2Text:"快速进入实时训练记录。",
-    appPoint3Title:"训练后",
-    appPoint3Text:"回顾数据、关键时刻与 AI 反思。",
-    appPoint4Title:"设备状态",
-    appPoint4Text:"四个节点状态保持可见，便于确认。",
-
-    systemKicker:"系统概览",
-    systemTitle:"四个设备，共同构建一个理解系统。",
-    systemText:"四个传感节点与 AI 层共同构建实时的人马互动模型。",
-    horseNodeName:"马匹节点",
-    horseNodeSub:"运动追踪",
-    riderNodeName:"骑手节点",
-    riderNodeSub:"身体感知",
-    stirrupNodeName:"左马镫",
-    stirrupNodeSub:"压力与平衡",
-    stirrupNodeNameR:"右马镫",
-    stirrupNodeSubR:"压力与平衡",
-    aiNodeName:"AI 层",
-    aiNodeSub:"反思与洞察",
-
-    hardwareKicker:"硬件架构",
-    hardwareTitle:"分布式可穿戴传感系统。",
-    hwTag1:"设备 01",
-    hwTag2:"设备 02",
-    hwTag3:"设备 03",
-    stirrupTitle:"智能马镫",
-    stirrupText:"通过精密负载传感捕捉骑手的压力、平衡、重量分布与下肢运动。",
-    specMotion:"姿态传感器",
-    specAmp:"放大模块",
-    specLoadCell:"称重传感器",
-    specMCU:"微控制器",
-    specBattery:"锂电池",
-    specPower:"供电",
-    riderTitle:"骑手节点",
-    riderText:"从骑手重心追踪身体姿态、躯干朝向、稳定性与运动节奏。",
-    rider1:"运动追踪",
-    rider2:"朝向感知",
-    rider3:"稳定性",
-    rider3sub:"实时",
-    horseTitle:"马匹节点",
-    horseText:"捕捉马匹运动模式，比较骑手动作与马匹反应之间的关系。",
-    horse1:"马匹运动",
-    horse2:"运动模式",
-    horse2sub:"分析",
-    horse3:"反应检测",
-    horse3sub:"同步",
-
-    techKicker:"技术栈",
-    techTitle:"实时分布式传感系统。",
-    techText:"传感节点在本地采集数据，通过无线传输到 Mac 端服务器，并在 Dashboard 中可视化骑乘过程与 AI 反思。",
-    metric1:"实时传感",
-    metric2:"传感节点",
-    metric3:"同步率",
-    tech1:"50Hz 遥测",
-    tech2:"ESP32-S3",
-    tech3:"Wi-Fi 通信",
-    tech4:"WebSocket Dashboard",
-    tech5:"JSONL 记录",
-    tech6:"AI 反思引擎",
-
-    flowKicker:"数据流",
-    flowTitle:"从动作到意义。",
-    flowStep1:"传感器",
-    flowStep2:"嵌入式处理",
-    flowStep3:"无线遥测",
-    flowStep4:"Dashboard",
-    flowStep5:"AI 反思",
-
-    aiKicker:"AI 反思层",
+    heroTitle:"反思型骑乘系统",
+    heroHeadline:"让不可见的互动变得可见。",
+    heroSubtitle:"一套可穿戴传感系统，将骑手与马匹之间的互动转化为可衡量的训练反馈。",
+    requestDemo:"申请演示",
+    exploreSystem:"了解系统",
+    whyKicker:"为什么是 YUMA",
+    whyTitle:"骑手能感受到动作，\n但许多关键互动依然不可见。",
+    whyClosing:"YUMA 揭示这些隐藏信号，并将它们转化为清晰的训练洞察。",
+    pain1:"身体姿态和自我感知很难对齐。",
+    pain2:"马蹬上细小的动态难以用视频记录。",
+    pain3:"骑手与马匹的同步性难以衡量。",
+    productKicker:"产品",
+    productTitle:"一个连接完整骑乘过程的系统。",
+    productIntroKicker:"YUMA 生态系统",
+    productIntroTitle:"每一个设备都有自己的作用。\n它们共同建立骑手与马匹之间的联系。",
+    userFlowKicker:"使用流程",
+    userFlowTitle:"从准备到反思。",
+    userFlowText:"YUMA 自然融入训练的每个阶段——\n骑乘前、训练中与每次骑乘后。",
+    userFlowStep1Title:"准备",
+    userFlowStep1Text:"在开始骑乘前，检查马匹信息、设备状态、电量与天气。",
+    userFlowStep1Chip1:"马匹档案",
+    userFlowStep1Chip2:"设备就绪",
+    userFlowStep1Chip3:"开始训练",
+    userFlowStep2Title:"骑乘",
+    userFlowStep2Text:"自然骑乘，可穿戴传感器持续捕捉运动、压力、平衡与同步性。",
+    userFlowStep2Chip1:"压力",
+    userFlowStep2Chip2:"平衡",
+    userFlowStep2Chip3:"运动",
+    userFlowStep3Title:"回顾",
+    userFlowStep3Text:"通过同步可视化、指标与关键骑乘时刻回放本次训练。",
+    userFlowStep3Chip1:"仪表板",
+    userFlowStep3Chip2:"时间线",
+    userFlowStep3Chip3:"训练回放",
+    userFlowStep4Title:"反思",
+    userFlowStep4Text:"AI 总结关键时刻，帮助骑手与教练更好地理解每次训练。",
+    userFlowStep4Chip1:"AI 洞察",
+    userFlowStep4Chip2:"总结",
+    userFlowStep4Chip3:"进步",
+    userFlowClosing:"一次骑乘。\n四个简单步骤。\n持续进步。",
+    product01Kicker:"产品 01",
+    product01Title:"智能马镫",
+    product01Subtitle:"骑手与马匹最先连接的地方。",
+    product01Text:"从双脚直接捕捉压力、平衡、重量分布与下肢节奏。它在骑乘中保持熟悉的使用感，同时揭示每一次骑乘里隐藏的细微信号。",
+    product01Highlight1:"压力映射",
+    product01Highlight2:"负载感知",
+    product01Highlight3:"运动追踪",
+    product01Highlight4:"50Hz 无线遥测",
+    product01Highlight5:"距离感知",
+    product01ArButton:"使用 AR 查看",
+    product02Kicker:"产品 02",
+    product02Title:"可穿戴节点",
+    product02Subtitle:"为骑乘中自然隐形而设计。",
+    product02Text:"轻量的骑手与马匹节点持续追踪姿态、身体朝向和运动节奏。它们共同建立训练过程中双方的共享理解。",
+    product02Highlight1:"骑手姿态",
+    product02Highlight2:"马匹运动",
+    product02Highlight3:"IM948 运动传感器",
+    product02Highlight4:"ESP32-S3 无线连接",
+    product02Highlight5:"体温感知",
+    product02ArButton:"使用 AR 查看",
+    product03Kicker:"产品 03",
+    product03Title:"APP",
+    product03Subtitle:"一切从骑乘前开始。",
+    product03Text:"更有信心地准备每一次训练。骑乘前检查马匹信息、设备状态、天气条件、电量和训练准备情况；训练后快速回顾关键时刻与 AI 反思。",
+    product03Highlight1:"训练控制",
+    product03Highlight2:"设备状态",
+    product03Highlight3:"马匹档案",
+    product03Highlight4:"骑乘历史",
+    product03Highlight5:"人马和谐度",
+    product04Title:"实时仪表",
+    product04Subtitle:"看见骑手无法感受到的细节。",
+    product04Text:"将实时传感数据转化为同步性、姿态、平衡与压力分布的直观可视化，适用于骑手、教练、演示和每次训练后的反思复盘。",
+    product04Highlight1:"实时同步",
+    product04Highlight2:"压力分析",
+    product04Highlight3:"AI 反思",
+    product04Highlight4:"训练回放",
+    howKicker:"工作方式",
+    howTitle:"从隐藏信号到可用反馈。",
+    flow1:"传感收集数据",
+    flow2:"无线传输",
+    flow3:"数据分析与可视化",
+    flow4:"AI 辅助学习",
+    nodeHorse:"马匹节点",
+    nodeHorseText:"运动响应",
+    nodeRider:"骑手节点",
+    nodeRiderText:"身体姿态",
+    nodeStirrups:"智能马镫",
+    nodeStirrupsText:"压力与平衡",
+    nodeAI:"AI 层",
+    nodeAIText:"反思与洞察",
+    aiKicker:"AI 反思",
     aiTitle:"不只是发生了什么，\n而是它为什么重要。",
-    aiText:"AI 反思层将传感器数据转化为平静、易读的人类语言，帮助骑手理解自己的习惯，而不是简单地评判表现。",
-    aiBadge:"洞察",
-    quote1:"「你在转换动作时更倾向于把重量放在左侧马镫上。」",
-    quote2:"「第二分钟后同步性显著改善。」",
-    quote3:"「上半身稳定性在整个训练过程中保持出色。」",
-
-    researchKicker:"愿景",
-    researchTitle:"为马术训练增加一层智能感知。",
-    researchText:"YUMA 将传感、实时反馈与 AI 辅助反思带入日常骑乘训练。它面向骑手、教练与马术团队，帮助训练过程获得更清晰的感知、更顺畅的沟通，以及更客观的赛后复盘。",
+    aiText:"YUMA 将骑乘数据转化为平静、易读的观察，帮助骑手与教练理解训练习惯，而不是简单评判表现。",
+    insight1:"你在转换动作中更倾向于把重量放在左侧马镫。",
+    insight2:"第二分钟后同步性有所改善。",
+    insight3:"整个训练过程中上半身稳定性保持良好。",
+    insight4:"起跳路线前出现了一次短暂的平衡扰动。",
+    aiNote:"AI 支持反思，同时始终让骑手、马匹和教练处于中心。",
+    builtKicker:"适用人群",
+    builtTitle:"为塑造每一次骑乘体验的人而设计。",
+    forRiders:"面向骑手",
+    forRidersText:"通过客观反馈提升身体感知、平衡与信心。",
+    forCoaches:"面向教练",
+    forCoachesText:"用可衡量数据支持训练判断，并让课后复盘更清晰。",
+    forClubs:"面向俱乐部",
+    forClubsText:"建立长期训练记录，创造更专业的训练体验。",
+    visionKicker:"愿景",
+    visionTitle:"构建下一代马术表现科技。",
+    visionText:"YUMA 将传感、实时反馈与 AI 辅助反思带入日常骑乘训练，为骑手、教练和马术团队创造新的可衡量感知层。",
+    roadmap1:"原型",
+    roadmap2:"试点测试",
+    roadmap3:"专业俱乐部",
+    roadmap4:"商业平台",
+    contactKicker:"联系",
+    contactTitle:"对 YUMA 感兴趣？",
+    contactText:"我们正在寻找希望测试下一代反思型骑乘科技的骑手、教练、马术俱乐部和合作伙伴。",
+    contactButton:"联系",
+    footerBrand:"YUMA · 反思型骑乘系统",
     footerText:"© 2026 YUMA · 智能马术科技",
     footerLink:"陈政"
   },
-
-  jp:{
-    kicker:"リフレクティブ・ライディング・システム",
-    heroTitle:"見えないものを、見える形へ。",
-    heroLead:"YUMAは、身体動作、バランス、圧力分布、馬の反応の隠れた関係を、ウェアラブルセンシングとAIリフレクションで理解するためのシステムです。",
-    btnSystem:"システムを見る",
-    btnTech:"技術",
-
-    stirrupKicker:"コアデバイス",
-    stirrupSectionTitle:"センシングは、鐙から始まる。",
-    stirrupSectionText1:"YUMAのスマート鐙は、日常の騎乗インターフェースを高精度センサーノードへと変換し、両足の圧力、バランス、体重分布をリアルタイムで取得します。",
-    stirrupSectionText2:"鞍上での使い慣れた感覚を保ちながら、足元の信号を静かにトレーニング洞察へ変換します。",
-    stirrupFeat1Title:"圧力マッピング",
-    stirrupFeat1Text:"移行動作や歩法における左右の荷重バランスを追跡。",
-    stirrupFeat2Title:"ロードセンシング",
-    stirrupFeat2Text:"50 kgロードセルとHX711アンプ。",
-    stirrupFeat3Title:"モーション追跡",
-    stirrupFeat3Text:"IM948による下半身のリズムデータ。",
-    stirrupFeat4Title:"無線同期",
-    stirrupFeat4Text:"ESP32-S3ノードが50Hzでテレメトリを送信。",
-
-    storyTitle:"コミュニケーションのために設計。",
-    storyText1:"騎乗には見えない信号が満ちています。体重移動、圧力変化、身体姿勢が馬に継続的に影響します。",
-    storyText2:"YUMAは、これらの見えない相互作用を理解可能な洞察へ変換します。",
-
-    appKicker:"モバイル体験",
-    appTitle:"トレーニングは、騎手の手元から始まる。",
-    appText1:"YUMAのモバイルUIは、馬の状態、天気、トレーニング頻度、デバイスのバッテリー、セッション開始を一つにまとめた落ち着いた入口です。",
-    appText2:"物理的なスマート鐙と、スマートフォンを手に取り状態を確認してトレーニングを始めるという日常的な動作をつなぎます。",
-    appPoint1Title:"トレーニング前",
-    appPoint1Text:"天気、馬のプロフィール、デバイス状態を確認。",
-    appPoint2Title:"トレーニング中",
-    appPoint2Text:"ライブセッション記録へ素早くアクセス。",
-    appPoint3Title:"トレーニング後",
-    appPoint3Text:"指標、重要な瞬間、AIリフレクションを確認。",
-    appPoint4Title:"デバイス状態",
-    appPoint4Text:"四つのノード状態を分かりやすく確認。",
-
-    systemKicker:"システム概要",
-    systemTitle:"四つのデバイス。一つの共有理解。",
-    systemText:"四つのセンサーノードとAI層が、人馬の相互作用をリアルタイムにモデル化します。",
-    horseNodeName:"馬ノード",
-    horseNodeSub:"モーション追跡",
-    riderNodeName:"騎手ノード",
-    riderNodeSub:"身体認識",
-    stirrupNodeName:"左鐙",
-    stirrupNodeSub:"圧力とバランス",
-    stirrupNodeNameR:"右鐙",
-    stirrupNodeSubR:"圧力とバランス",
-    aiNodeName:"AI層",
-    aiNodeSub:"リフレクションと洞察",
-
-    hardwareKicker:"ハードウェア構成",
-    hardwareTitle:"分散型ウェアラブル・センシングシステム。",
-    hwTag1:"デバイス 01",
-    hwTag2:"デバイス 02",
-    hwTag3:"デバイス 03",
-    stirrupTitle:"スマート鐙",
-    stirrupText:"精密なロードセンシングにより、足圧、バランス、体重分布、下半身の動きを取得します。",
-    specMotion:"モーションセンサー",
-    specAmp:"アンプ",
-    specLoadCell:"ロードセル",
-    specMCU:"マイコン",
-    specBattery:"LiPoバッテリー",
-    specPower:"電源",
-    riderTitle:"騎手ノード",
-    riderText:"騎手の重心から、身体姿勢、胴体の向き、安定性、動作リズムを追跡します。",
-    rider1:"モーション追跡",
-    rider2:"向き感知",
-    rider3:"安定性",
-    rider3sub:"リアルタイム",
-    horseTitle:"馬ノード",
-    horseText:"馬側の動きパターンを取得し、騎手の動作と馬の反応を比較します。",
-    horse1:"馬の動き",
-    horse2:"動作パターン",
-    horse2sub:"分析",
-    horse3:"反応検出",
-    horse3sub:"同期",
-
-    techKicker:"技術スタック",
-    techTitle:"リアルタイム分散型センシングシステム。",
-    techText:"各センサーノードがデータを収集し、無線で送信し、MacベースのDashboardで騎乗セッションとAIリフレクションを可視化します。",
-    metric1:"リアルタイムセンシング",
-    metric2:"センサーノード",
-    metric3:"同期率",
-    tech1:"50Hzテレメトリー",
-    tech2:"ESP32-S3",
-    tech3:"Wi-Fi通信",
-    tech4:"WebSocket Dashboard",
-    tech5:"JSONL記録",
-    tech6:"AIリフレクションエンジン",
-
-    flowKicker:"データフロー",
-    flowTitle:"動きから意味へ。",
-    flowStep1:"センサー",
-    flowStep2:"組込み処理",
-    flowStep3:"無線テレメトリー",
-    flowStep4:"Dashboard",
-    flowStep5:"AIリフレクション",
-
-    aiKicker:"AIリフレクション層",
-    aiTitle:"何が起きたかだけでなく、\nなぜ重要か。",
-    aiText:"AIリフレクション層は、センサーデータを落ち着いた人間の言葉へ変換し、騎手が自分の癖を理解できるよう支援します。",
-    aiBadge:"洞察",
-    quote1:"「移行動作の際、左の鐙により多く体重をかける傾向がありました。」",
-    quote2:"「2分後から同期性が大幅に改善しました。」",
-    quote3:"「上半身の安定性はセッション全体を通じて良好でした。」",
-
-    researchKicker:"ビジョン",
-    researchTitle:"馬術トレーニングに新しい知能層を加える。",
-    researchText:"YUMAは、センシング、ライブフィードバック、AI支援リフレクションを日常の騎乗トレーニングに取り入れます。騎手、コーチ、馬術チームに、より明確な気づき、円滑なコミュニケーション、客観的なセッションレビューを提供するために設計されています。",
-    footerText:"© 2026 YUMA · Intelligent Equestrian Technology",
+  de:{
+    heroTitle:"Reflective Riding System",
+    heroHeadline:"Das Unsichtbare sichtbar machen.",
+    heroSubtitle:"Ein Wearable-Sensing-System, das die Interaktion zwischen Reiter und Pferd in messbare Erkenntnisse verwandelt.",
+    requestDemo:"Demo anfragen",
+    exploreSystem:"System ansehen",
+    whyKicker:"Warum YUMA",
+    whyTitle:"Reiter spüren die Bewegung.\nDoch viele wichtige Interaktionen bleiben unsichtbar.",
+    whyClosing:"YUMA macht diese verborgenen Signale sichtbar und übersetzt sie in klare Trainingsimpulse.",
+    pain1:"Körperhaltung und Selbstwahrnehmung sind schwer in Einklang zu bringen.",
+    pain2:"Feine Dynamik am Steigbügel lässt sich im Video schwer festhalten.",
+    pain3:"Die Synchronität von Reiter und Pferd ist schwer messbar.",
+    productKicker:"Produkt",
+    productTitle:"Ein verbundenes Reitsystem.",
+    productIntroKicker:"DAS YUMA ÖKOSYSTEM",
+    productIntroTitle:"Jedes Gerät hat seine eigene Funktion.\nGemeinsam schaffen sie die Verbindung zwischen Reiter und Pferd.",
+    userFlowKicker:"NUTZERABLAUF",
+    userFlowTitle:"Von der Vorbereitung zur Reflexion.",
+    userFlowText:"YUMA fügt sich natürlich in jede Phase des Trainings ein—\nvor, während und nach jedem Ritt.",
+    userFlowStep1Title:"Vorbereiten",
+    userFlowStep1Text:"Pferdeinformationen, Gerätestatus, Akkustand und Wetter prüfen, bevor eine Reitsession startet.",
+    userFlowStep1Chip1:"Pferdeprofil",
+    userFlowStep1Chip2:"Gerät bereit",
+    userFlowStep1Chip3:"Session starten",
+    userFlowStep2Title:"Reiten",
+    userFlowStep2Text:"Natürlich reiten, während Wearables Bewegung, Druck, Balance und Synchronität kontinuierlich erfassen.",
+    userFlowStep2Chip1:"Druck",
+    userFlowStep2Chip2:"Balance",
+    userFlowStep2Chip3:"Bewegung",
+    userFlowStep3Title:"Überblick",
+    userFlowStep3Text:"Die Session durch synchronisierte Visualisierungen, Metriken und wichtige Reitmomente erneut ansehen.",
+    userFlowStep3Chip1:"Dashboard",
+    userFlowStep3Chip2:"Zeitachse",
+    userFlowStep3Chip3:"Session-Wiedergabe",
+    userFlowStep4Title:"Reflektieren",
+    userFlowStep4Text:"KI fasst Schlüsselmomente zusammen und hilft Reitern und Trainern, jede Session besser zu verstehen.",
+    userFlowStep4Chip1:"KI-Insight",
+    userFlowStep4Chip2:"Zusammenfassung",
+    userFlowStep4Chip3:"Fortschritt",
+    userFlowClosing:"Ein Ritt.\nVier einfache Schritte.\nKontinuierliche Verbesserung.",
+    product01Kicker:"PRODUKT 01",
+    product01Title:"Smart Steigbügel",
+    product01Subtitle:"Wo Reiter und Pferd zuerst verbunden sind.",
+    product01Text:"Erfassen Druck, Balance, Gewichtsverteilung und Rhythmus des Unterkörpers direkt über beide Füße. Vertraut im Sattel und zugleich präzise in den verborgenen Signalen jedes Ritts.",
+    product01Highlight1:"Druckmapping",
+    product01Highlight2:"Lastmessung",
+    product01Highlight3:"Bewegungstracking",
+    product01Highlight4:"50Hz drahtlose Telemetrie",
+    product01Highlight5:"Entfernungserfassung",
+    product01ArButton:"In AR ansehen",
+    product02Kicker:"PRODUKT 02",
+    product02Title:"Wearable Nodes",
+    product02Subtitle:"Gemacht, um beim Reiten zu verschwinden.",
+    product02Text:"Leichte Reiter- und Pferdeknoten verfolgen Haltung, Körperausrichtung und Bewegungsrhythmus kontinuierlich. Zusammen schaffen sie ein gemeinsames Verständnis beider Partner.",
+    product02Highlight1:"Reiterhaltung",
+    product02Highlight2:"Pferdebewegung",
+    product02Highlight3:"IM948 Bewegungssensor",
+    product02Highlight4:"ESP32-S3 Wireless",
+    product02Highlight5:"Temperaturerfassung",
+    product02ArButton:"In AR ansehen",
+    product03Kicker:"PRODUKT 03",
+    product03Title:"Mobile App",
+    product03Subtitle:"Alles beginnt vor dem Ritt.",
+    product03Text:"Bereiten Sie jede Trainingseinheit sicher vor. Prüfen Sie Pferdeinformationen, Gerätestatus, Wetter, Akkustand und Session-Bereitschaft. Nach dem Training lassen sich wichtige Momente und KI-Reflexionen schnell ansehen.",
+    product03Highlight1:"Session-Steuerung",
+    product03Highlight2:"Gerätestatus",
+    product03Highlight3:"Pferdeprofil",
+    product03Highlight4:"Ritthistorie",
+    product03Highlight5:"Reiter-Pferd-Harmonie",
+    product04Title:"Live-Dashboard",
+    product04Subtitle:"Sehen, was Reiter nicht spüren können.",
+    product04Text:"Verwandelt Live-Sensordaten in intuitive Visualisierungen von Synchronität, Haltung, Balance und Druckverteilung. Für Reiter, Trainer, Demos und reflektierte Nachbesprechungen.",
+    product04Highlight1:"Live-Synchronisation",
+    product04Highlight2:"Druckanalyse",
+    product04Highlight3:"KI-Reflexion",
+    product04Highlight4:"Session-Wiedergabe",
+    howKicker:"Funktionsweise",
+    howTitle:"Von unsichtbaren Signalen zu nutzbarem Feedback.",
+    flow1:"Sensoren",
+    flow2:"Drahtlose Telemetrie",
+    flow3:"Live-Dashboard",
+    flow4:"KI-Reflexion",
+    nodeHorse:"Pferdeknoten",
+    nodeHorseText:"Bewegungsreaktion",
+    nodeRider:"Reiterknoten",
+    nodeRiderText:"Körperhaltung",
+    nodeStirrups:"Smart Steigbügel",
+    nodeStirrupsText:"Druck und Balance",
+    nodeAI:"KI-Schicht",
+    nodeAIText:"Reflexion und Insight",
+    aiKicker:"KI-Reflexion",
+    aiTitle:"Nicht nur, was passiert ist.\nSondern warum es wichtig ist.",
+    aiText:"YUMA verwandelt Reitdaten in ruhige, menschlich lesbare Beobachtungen, die Reitern und Trainern helfen, Trainingsgewohnheiten ohne Bewertung zu verstehen.",
+    insight1:"Bei Übergängen lag mehr Gewicht auf dem linken Steigbügel.",
+    insight2:"Die Synchronisation verbesserte sich nach der zweiten Minute.",
+    insight3:"Die Stabilität des Oberkörpers blieb während der Session stark.",
+    insight4:"Vor der Sprungannäherung zeigte sich eine kurze Balance-Störung.",
+    aiNote:"KI unterstützt Reflexion und hält Reiter, Pferd und Trainer im Mittelpunkt.",
+    builtKicker:"Gebaut Für",
+    builtTitle:"Für die Menschen, die jeden Ritt gestalten.",
+    forRiders:"Für Reiter",
+    forRidersText:"Körperbewusstsein, Balance und Vertrauen durch objektives Feedback verbessern.",
+    forCoaches:"Für Trainer",
+    forCoachesText:"Coaching-Entscheidungen mit messbaren Daten und klareren Nachbesprechungen unterstützen.",
+    forClubs:"Für Clubs",
+    forClubsText:"Langfristige Trainingsdaten aufbauen und ein professionelleres Trainingserlebnis schaffen.",
+    visionKicker:"Vision",
+    visionTitle:"Die nächste Generation von Reitsport-Performance-Technologie.",
+    visionText:"YUMA bringt Sensing, Live-Feedback und KI-gestützte Reflexion in die tägliche Reitpraxis und schafft eine neue Ebene messbarer Wahrnehmung.",
+    roadmap1:"Prototyp",
+    roadmap2:"Pilotphase",
+    roadmap3:"Professionelle Clubs",
+    roadmap4:"Kommerzielle Plattform",
+    contactKicker:"Kontakt",
+    contactTitle:"Interessiert an YUMA?",
+    contactText:"Wir suchen Reiter, Trainer, Reitclubs und Partner, die die nächste Generation reflektiver Reittechnologie testen möchten.",
+    contactButton:"Kontakt",
+    footerBrand:"YUMA · Reflective Riding System",
+    footerText:"© 2026 YUMA · Intelligente Reittechnologie",
+    footerLink:"Zheng Chen"
+  },
+  fr:{
+    heroTitle:"Système d'équitation réflexif",
+    heroHeadline:"Rendre l'invisible visible.",
+    heroSubtitle:"Un système de capteurs portables qui transforme l'interaction cavalier-cheval en informations mesurables.",
+    requestDemo:"Demander une démo",
+    exploreSystem:"Explorer le système",
+    whyKicker:"Pourquoi YUMA",
+    whyTitle:"Les cavaliers sentent le mouvement.\nMais de nombreuses interactions restent invisibles.",
+    whyClosing:"YUMA révèle ces signaux cachés et les transforme en insights d'entraînement clairs.",
+    pain1:"La posture corporelle et la conscience de soi sont difficiles à aligner.",
+    pain2:"Les dynamiques subtiles sur les étriers sont difficiles à capturer en vidéo.",
+    pain3:"La synchronie cavalier-cheval est difficile à mesurer.",
+    productKicker:"Produit",
+    productTitle:"Un système d'équitation connecté.",
+    productIntroKicker:"L'ÉCOSYSTÈME YUMA",
+    productIntroTitle:"Chaque appareil a son propre rôle.\nEnsemble, ils établissent le lien entre le cavalier et le cheval.",
+    userFlowKicker:"PARCOURS UTILISATEUR",
+    userFlowTitle:"De la préparation à la réflexion.",
+    userFlowText:"YUMA s'intègre naturellement à chaque étape de l'entraînement—\navant, pendant et après chaque séance.",
+    userFlowStep1Title:"Préparer",
+    userFlowStep1Text:"Vérifier les informations du cheval, l'état des appareils, la batterie et la météo avant de démarrer une séance.",
+    userFlowStep1Chip1:"Profil cheval",
+    userFlowStep1Chip2:"Appareils prêts",
+    userFlowStep1Chip3:"Démarrer la séance",
+    userFlowStep2Title:"Monter",
+    userFlowStep2Text:"Monter naturellement pendant que les capteurs portables capturent en continu mouvement, pression, équilibre et synchronie.",
+    userFlowStep2Chip1:"Pression",
+    userFlowStep2Chip2:"Équilibre",
+    userFlowStep2Chip3:"Mouvement",
+    userFlowStep3Title:"Revoir",
+    userFlowStep3Text:"Revoir la séance via des visualisations synchronisées, des métriques et des moments clés.",
+    userFlowStep3Chip1:"Dashboard",
+    userFlowStep3Chip2:"Chronologie",
+    userFlowStep3Chip3:"Relecture",
+    userFlowStep4Title:"Réfléchir",
+    userFlowStep4Text:"L'IA résume les moments clés et aide cavaliers et coachs à mieux comprendre chaque séance.",
+    userFlowStep4Chip1:"Insight IA",
+    userFlowStep4Chip2:"Résumé",
+    userFlowStep4Chip3:"Progrès",
+    userFlowClosing:"Une séance.\nQuatre étapes simples.\nAmélioration continue.",
+    product01Kicker:"PRODUIT 01",
+    product01Title:"Étriers intelligents",
+    product01Subtitle:"Là où le cavalier et le cheval se connectent d'abord.",
+    product01Text:"Capturer pression, équilibre, répartition du poids et rythme du bas du corps directement depuis les deux pieds. Un ressenti familier en selle, avec les signaux subtils de chaque séance rendus visibles.",
+    product01Highlight1:"Cartographie de pression",
+    product01Highlight2:"Mesure de charge",
+    product01Highlight3:"Suivi du mouvement",
+    product01Highlight4:"Télémétrie 50Hz sans fil",
+    product01Highlight5:"Détection de distance",
+    product01ArButton:"Voir en AR",
+    product02Kicker:"PRODUIT 02",
+    product02Title:"Nœuds portables",
+    product02Subtitle:"Conçus pour disparaître pendant la monte.",
+    product02Text:"Des nœuds légers pour le cavalier et le cheval suivent en continu posture, orientation corporelle et rythme du mouvement. Ensemble, ils créent une compréhension partagée des deux partenaires.",
+    product02Highlight1:"Posture du cavalier",
+    product02Highlight2:"Mouvement du cheval",
+    product02Highlight3:"Capteur IM948",
+    product02Highlight4:"ESP32-S3 sans fil",
+    product02Highlight5:"Détection de température",
+    product02ArButton:"Voir en AR",
+    product03Kicker:"PRODUIT 03",
+    product03Title:"Application mobile",
+    product03Subtitle:"Tout commence avant la séance.",
+    product03Text:"Préparer chaque entraînement avec confiance. Vérifier les informations du cheval, l'état des appareils, la météo, les batteries et la disponibilité de session avant de monter. Après la séance, revoir rapidement les moments importants et les réflexions IA.",
+    product03Highlight1:"Contrôle de session",
+    product03Highlight2:"État des appareils",
+    product03Highlight3:"Profil cheval",
+    product03Highlight4:"Historique de monte",
+    product03Highlight5:"Harmonie cavalier-cheval",
+    product04Title:"Dashboard live",
+    product04Subtitle:"Voir ce que les cavaliers ne peuvent pas sentir.",
+    product04Text:"Transformer les flux capteurs en visualisations intuitives de la synchronie, posture, équilibre et répartition de pression. Conçu pour cavaliers, coachs, démonstrations et revues réflexives.",
+    product04Highlight1:"Synchronisation live",
+    product04Highlight2:"Analyse de pression",
+    product04Highlight3:"Réflexion IA",
+    product04Highlight4:"Relecture de session",
+    howKicker:"Fonctionnement",
+    howTitle:"Des signaux invisibles au feedback utile.",
+    flow1:"Capteurs",
+    flow2:"Télémétrie sans fil",
+    flow3:"Dashboard live",
+    flow4:"Réflexion IA",
+    nodeHorse:"Nœud cheval",
+    nodeHorseText:"Réponse du mouvement",
+    nodeRider:"Nœud cavalier",
+    nodeRiderText:"Posture corporelle",
+    nodeStirrups:"Étriers intelligents",
+    nodeStirrupsText:"Pression et équilibre",
+    nodeAI:"Couche IA",
+    nodeAIText:"Réflexion et insight",
+    aiKicker:"Réflexion IA",
+    aiTitle:"Pas seulement ce qui s'est passé.\nMais pourquoi c'est important.",
+    aiText:"YUMA transforme les données d'équitation en observations calmes et lisibles qui aident cavaliers et coachs à comprendre les habitudes sans jugement.",
+    insight1:"Vous aviez tendance à mettre plus de poids sur l'étrier gauche lors des transitions.",
+    insight2:"La synchronisation s'est améliorée après la deuxième minute.",
+    insight3:"La stabilité du haut du corps est restée forte pendant la session.",
+    insight4:"Une courte perturbation d'équilibre est apparue avant l'approche du saut.",
+    aiNote:"L'IA soutient la réflexion tout en gardant le cavalier, le cheval et le coach au centre.",
+    builtKicker:"Conçu Pour",
+    builtTitle:"Pour celles et ceux qui façonnent chaque séance.",
+    forRiders:"Pour les cavaliers",
+    forRidersText:"Améliorer conscience corporelle, équilibre et confiance grâce à un feedback objectif.",
+    forCoaches:"Pour les coachs",
+    forCoachesText:"Soutenir les décisions d'entraînement avec des données mesurables et une revue plus claire.",
+    forClubs:"Pour les clubs",
+    forClubsText:"Construire des historiques d'entraînement et créer une expérience plus professionnelle.",
+    visionKicker:"Vision",
+    visionTitle:"Construire la prochaine génération de technologie de performance équestre.",
+    visionText:"YUMA intègre capteurs, feedback live et réflexion assistée par IA dans la pratique quotidienne.",
+    roadmap1:"Prototype",
+    roadmap2:"Tests pilotes",
+    roadmap3:"Clubs professionnels",
+    roadmap4:"Plateforme commerciale",
+    contactKicker:"Contact",
+    contactTitle:"Intéressé par YUMA ?",
+    contactText:"Nous recherchons cavaliers, coachs, clubs et partenaires souhaitant tester la prochaine génération de technologie d'équitation réflexive.",
+    contactButton:"Contact",
+    footerBrand:"YUMA · Système d'équitation réflexif",
+    footerText:"© 2026 YUMA · Technologie équestre intelligente",
+    footerLink:"Zheng Chen"
+  },
+  it:{
+    heroTitle:"Sistema di equitazione riflessiva",
+    heroHeadline:"Rendere visibile l'invisibile.",
+    heroSubtitle:"Un sistema di sensing indossabile che trasforma l'interazione cavaliere-cavallo in insight misurabili.",
+    requestDemo:"Richiedi demo",
+    exploreSystem:"Esplora il sistema",
+    whyKicker:"Perché YUMA",
+    whyTitle:"I cavalieri sentono il movimento.\nMa molte interazioni restano invisibili.",
+    whyClosing:"YUMA rivela questi segnali nascosti e li trasforma in insight di allenamento chiari.",
+    pain1:"Postura corporea e consapevolezza del corpo sono difficili da allineare.",
+    pain2:"Le dinamiche sottili sulle staffe sono difficili da registrare in video.",
+    pain3:"La sincronia cavaliere-cavallo è difficile da misurare.",
+    productKicker:"Prodotto",
+    productTitle:"Un sistema di equitazione connesso.",
+    productIntroKicker:"L'ECOSISTEMA YUMA",
+    productIntroTitle:"Ogni dispositivo ha il proprio ruolo.\nInsieme creano il legame tra cavaliere e cavallo.",
+    userFlowKicker:"FLUSSO UTENTE",
+    userFlowTitle:"Dalla preparazione alla riflessione.",
+    userFlowText:"YUMA si integra naturalmente in ogni fase dell'allenamento—\nprima, durante e dopo ogni uscita.",
+    userFlowStep1Title:"Preparare",
+    userFlowStep1Text:"Controllare informazioni del cavallo, stato dispositivi, batteria e meteo prima di iniziare una sessione.",
+    userFlowStep1Chip1:"Profilo cavallo",
+    userFlowStep1Chip2:"Dispositivi pronti",
+    userFlowStep1Chip3:"Avvia sessione",
+    userFlowStep2Title:"Cavalcare",
+    userFlowStep2Text:"Cavalcare naturalmente mentre i sensori indossabili catturano continuamente movimento, pressione, equilibrio e sincronia.",
+    userFlowStep2Chip1:"Pressione",
+    userFlowStep2Chip2:"Equilibrio",
+    userFlowStep2Chip3:"Movimento",
+    userFlowStep3Title:"Rivedere",
+    userFlowStep3Text:"Rivedere la sessione con visualizzazioni sincronizzate, metriche e momenti importanti dell'uscita.",
+    userFlowStep3Chip1:"Dashboard",
+    userFlowStep3Chip2:"Timeline",
+    userFlowStep3Chip3:"Replay sessione",
+    userFlowStep4Title:"Riflettere",
+    userFlowStep4Text:"L'IA riassume i momenti chiave e aiuta cavalieri e coach a comprendere meglio ogni sessione.",
+    userFlowStep4Chip1:"Insight IA",
+    userFlowStep4Chip2:"Riepilogo",
+    userFlowStep4Chip3:"Progressi",
+    userFlowClosing:"Un'uscita.\nQuattro semplici passi.\nMiglioramento continuo.",
+    product01Kicker:"PRODOTTO 01",
+    product01Title:"Staffe smart",
+    product01Subtitle:"Dove cavaliere e cavallo si connettono per primi.",
+    product01Text:"Catturano pressione, equilibrio, distribuzione del peso e ritmo della parte inferiore del corpo direttamente da entrambi i piedi. Familiari in sella, ma capaci di rivelare i segnali sottili nascosti in ogni uscita.",
+    product01Highlight1:"Mappatura pressione",
+    product01Highlight2:"Rilevamento carico",
+    product01Highlight3:"Tracking movimento",
+    product01Highlight4:"Telemetria wireless 50Hz",
+    product01Highlight5:"Rilevamento distanza",
+    product01ArButton:"Vedi in AR",
+    product02Kicker:"PRODOTTO 02",
+    product02Title:"Nodi indossabili",
+    product02Subtitle:"Progettati per scomparire durante la monta.",
+    product02Text:"Nodi leggeri per cavaliere e cavallo tracciano continuamente postura, orientamento corporeo e ritmo del movimento. Insieme creano una comprensione condivisa di entrambi i partner.",
+    product02Highlight1:"Postura cavaliere",
+    product02Highlight2:"Movimento cavallo",
+    product02Highlight3:"Sensore IM948",
+    product02Highlight4:"ESP32-S3 wireless",
+    product02Highlight5:"Rilevamento temperatura",
+    product02ArButton:"Vedi in AR",
+    product03Kicker:"PRODOTTO 03",
+    product03Title:"App mobile",
+    product03Subtitle:"Tutto comincia prima della sessione.",
+    product03Text:"Prepara ogni allenamento con fiducia. Controlla informazioni del cavallo, stato dispositivi, meteo, batteria e prontezza della sessione prima di montare. Dopo l'allenamento, rivedi rapidamente momenti importanti e riflessioni IA.",
+    product03Highlight1:"Controllo sessione",
+    product03Highlight2:"Stato dispositivi",
+    product03Highlight3:"Profilo cavallo",
+    product03Highlight4:"Storico uscite",
+    product03Highlight5:"Armonia cavaliere-cavallo",
+    product04Title:"Dashboard live",
+    product04Subtitle:"Vedere ciò che i cavalieri non possono sentire.",
+    product04Text:"Trasforma i flussi sensore live in visualizzazioni intuitive di sincronia, postura, equilibrio e distribuzione della pressione. Pensato per cavalieri, coach, demo e revisione riflessiva.",
+    product04Highlight1:"Sincronizzazione live",
+    product04Highlight2:"Analisi pressione",
+    product04Highlight3:"Riflessione IA",
+    product04Highlight4:"Replay sessione",
+    howKicker:"Come funziona",
+    howTitle:"Dai segnali invisibili a feedback utilizzabile.",
+    flow1:"Sensori",
+    flow2:"Telemetria wireless",
+    flow3:"Dashboard live",
+    flow4:"Riflessione IA",
+    nodeHorse:"Nodo cavallo",
+    nodeHorseText:"Risposta del movimento",
+    nodeRider:"Nodo cavaliere",
+    nodeRiderText:"Postura corporea",
+    nodeStirrups:"Staffe smart",
+    nodeStirrupsText:"Pressione ed equilibrio",
+    nodeAI:"Strato IA",
+    nodeAIText:"Riflessione e insight",
+    aiKicker:"Riflessione IA",
+    aiTitle:"Non solo cosa è successo.\nMa perché conta.",
+    aiText:"YUMA trasforma i dati di equitazione in osservazioni calme e leggibili per aiutare cavalieri e coach a capire le abitudini senza sentirsi giudicati.",
+    insight1:"Tendevi a mettere più peso sulla staffa sinistra durante le transizioni.",
+    insight2:"La sincronizzazione è migliorata dopo il secondo minuto.",
+    insight3:"La stabilità della parte superiore del corpo è rimasta forte per tutta la sessione.",
+    insight4:"Una breve perturbazione dell'equilibrio è apparsa prima dell'approccio al salto.",
+    aiNote:"L'IA supporta la riflessione mantenendo al centro cavaliere, cavallo e coach.",
+    builtKicker:"Pensato Per",
+    builtTitle:"Per chi dà forma a ogni sessione.",
+    forRiders:"Per i cavalieri",
+    forRidersText:"Migliora consapevolezza corporea, equilibrio e fiducia con feedback oggettivi.",
+    forCoaches:"Per i coach",
+    forCoachesText:"Supporta le decisioni di coaching con dati misurabili e revisioni più chiare.",
+    forClubs:"Per i club",
+    forClubsText:"Costruisci registri di allenamento e un'esperienza più professionale.",
+    visionKicker:"Visione",
+    visionTitle:"Costruire la prossima generazione di tecnologia per la performance equestre.",
+    visionText:"YUMA porta sensing, feedback live e riflessione assistita dall'IA nella pratica quotidiana.",
+    roadmap1:"Prototipo",
+    roadmap2:"Test pilota",
+    roadmap3:"Club professionali",
+    roadmap4:"Piattaforma commerciale",
+    contactKicker:"Contatto",
+    contactTitle:"Ti interessa YUMA?",
+    contactText:"Cerchiamo cavalieri, coach, club e partner interessati a testare la prossima generazione di tecnologia riflessiva per l'equitazione.",
+    contactButton:"Contatto",
+    footerBrand:"YUMA · Sistema di equitazione riflessiva",
+    footerText:"© 2026 YUMA · Tecnologia equestre intelligente",
     footerLink:"Zheng Chen"
   }
 };
 
 function setLang(lang, btn){
-  document.documentElement.lang = lang === 'jp' ? 'ja' : (lang === 'zh' ? 'zh' : 'en');
-
+  document.documentElement.lang = lang === "zh" ? "zh" : lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key = el.dataset.i18n;
-    if(dict[lang] && dict[lang][key]){
-      const val = dict[lang][key];
-      if(val.includes('\n') && el.tagName === 'H2'){
-        el.innerHTML = val.replace(/\n/g, '<br>');
-      } else {
-        el.textContent = val;
-      }
+    const value = dict[lang]?.[key];
+    if(!value) return;
+    if(value.includes("\n")){
+      el.innerHTML = value.split("\n").map(part=>part.trim()).join("<br>");
+    }else{
+      el.textContent = value;
     }
   });
-
-  document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
+  document.querySelectorAll(".lang button").forEach(item=>item.classList.remove("active"));
+  btn?.classList.add("active");
 }
 
 function toggleTheme(){
   document.body.classList.toggle("dark");
   const themeMeta = document.getElementById("themeColorMeta");
   if(themeMeta){
-    themeMeta.setAttribute("content", document.body.classList.contains("dark") ? "#0f0f0f" : "#F6F3ED");
+    themeMeta.setAttribute("content", document.body.classList.contains("dark") ? "#101010" : "#F6F3ED");
   }
 }
 
-/* iPadOS / iOS — sync real viewport height for hero & video */
-const isTouchViewport = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-function syncViewportHeight(){
-  if(!isTouchViewport) return;
-  const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  document.documentElement.style.setProperty("--viewport-height", `${h}px`);
-  document.documentElement.style.setProperty("--viewport-height-small", `${h}px`);
-}
-syncViewportHeight();
-if(isTouchViewport){
-  window.addEventListener("resize", syncViewportHeight,{passive:true});
-  window.addEventListener("orientationchange", ()=>requestAnimationFrame(syncViewportHeight));
-  if(window.visualViewport){
-    window.visualViewport.addEventListener("resize", syncViewportHeight,{passive:true});
-  }
-}
-
-/* Scroll reveal */
-const revealObs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("visible");
-      revealObs.unobserve(e.target);
+(function initUserFlowReveal(){
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  ["user-flow","user-flow-closing"].forEach(id=>{
+    const section = document.getElementById(id);
+    if(!section) return;
+    if(prefersReduced){
+      section.classList.add("is-visible");
+      return;
     }
+    const observer = new IntersectionObserver(([entry])=>{
+      if(!entry.isIntersecting) return;
+      section.classList.add("is-visible");
+      observer.disconnect();
+    },{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+    observer.observe(section);
   });
-},{threshold:0.12,rootMargin:"0px 0px -40px 0px"});
-document.querySelectorAll(".reveal").forEach(el=>revealObs.observe(el));
-
-/* Nav — scroll state */
-const siteNav = document.getElementById("siteNav");
-function updateNav(){
-  if(!siteNav) return;
-  siteNav.classList.toggle("is-scrolled", window.scrollY > 12);
-}
-updateNav();
-window.addEventListener("scroll", updateNav,{passive:true});
-
-/* Hero video — respect reduced motion & page visibility */
-const heroVideo = document.querySelector(".hero-video");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-function syncHeroVideo(){
-  if(!heroVideo) return;
-  heroVideo.muted = true;
-  heroVideo.defaultMuted = true;
-  heroVideo.setAttribute("muted","");
-  heroVideo.setAttribute("playsinline","");
-  heroVideo.setAttribute("webkit-playsinline","");
-
-  const shouldPlay = !prefersReducedMotion.matches && document.visibilityState === "visible";
-  if(!shouldPlay){
-    heroVideo.pause();
-    return;
-  }
-
-  const playAttempt = heroVideo.play();
-  if(playAttempt && typeof playAttempt.catch === "function"){
-    playAttempt.catch(()=>{});
-  }
-}
-
-function unlockHeroVideo(){
-  syncHeroVideo();
-}
-
-prefersReducedMotion.addEventListener("change", syncHeroVideo);
-document.addEventListener("visibilitychange", syncHeroVideo);
-heroVideo?.addEventListener("loadeddata", syncHeroVideo,{passive:true});
-heroVideo?.addEventListener("canplay", syncHeroVideo,{passive:true});
-document.addEventListener("touchstart", unlockHeroVideo,{once:true,passive:true});
-document.addEventListener("click", unlockHeroVideo,{once:true});
-window.addEventListener("pageshow", (event)=>{
-  if(event.persisted) syncHeroVideo();
-});
-syncHeroVideo();
-
-/* Trigger initial hero reveal */
-requestAnimationFrame(()=>{
-  document.querySelectorAll(".hero .reveal").forEach(el=>el.classList.add("visible"));
-});
+})();
 </script>
-
 </body>
 </html>
