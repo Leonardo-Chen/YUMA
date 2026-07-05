@@ -10,8 +10,8 @@
 <meta name="description" content="YUMA is a reflective riding system that turns rider–horse interaction into measurable insights through wearable sensing, live feedback, and AI-assisted reflection." />
 <link rel="canonical" href="https://leonardo-chen.github.io/YUMA/" />
 <title>YUMA - Reflective Riding System</title>
-<link rel="icon" href="Yuma_Logo_Web.png" type="image/png" />
-<link rel="apple-touch-icon" href="Yuma_Logo_Web.png" />
+<link rel="icon" href="img/Yuma_Logo_Web.png" type="image/png" />
+<link rel="apple-touch-icon" href="img/Yuma_Logo_Web.png" />
 
 <!-- Open Graph / Instagram / Facebook link preview -->
 <meta property="og:type" content="website" />
@@ -31,7 +31,6 @@
 <meta name="twitter:description" content="Making the invisible visible. A wearable sensing system for riders, coaches, and equestrian teams." />
 <meta name="twitter:image" content="https://leonardo-chen.github.io/YUMA/img/og-share.jpg" />
 <meta name="twitter:image:alt" content="YUMA reflective riding system in use" />
-<link rel="stylesheet" href="/fonts/misans/misans.css">
 
 <style>
 :root{
@@ -311,14 +310,14 @@ h3{
   overflow:hidden;
   background:
     linear-gradient(105deg,rgba(246,243,237,.94) 0%,rgba(246,243,237,.5) 100%),
-    url(yuma_stirrup_product.jpg) center/cover no-repeat;
+    url(img/yuma_stirrup_product.jpg) center/cover no-repeat;
   pointer-events:none;
 }
 
 body.dark .hero-bg{
   background:
     linear-gradient(105deg,rgba(15,15,15,.94) 0%,rgba(15,15,15,.5) 100%),
-    url(yuma_stirrup_product.jpg) center/cover no-repeat;
+    url(img/yuma_stirrup_product.jpg) center/cover no-repeat;
 }
 
 .hero-video{
@@ -625,6 +624,243 @@ body.dark .user-flow-accent-3{
 
 .user-flow-statement.is-visible .user-flow-closing{
   animation:flowCardIn .62s var(--ease) forwards;
+}
+
+.demo-video-section{
+  text-align:center;
+  padding:clamp(72px,10vh,120px) var(--gutter);
+}
+
+.demo-video-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(32px,5vh,52px);
+}
+
+.demo-video-head{
+  max-width:680px;
+  margin:0 auto;
+}
+
+.demo-video-head h2{
+  font-size:clamp(36px,5.2vw,64px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+
+.demo-video-lead{
+  max-width:560px;
+  margin:clamp(16px,2.4vh,22px) auto 0;
+  font-size:clamp(16px,1.6vw,20px);
+  line-height:1.5;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+
+.demo-video-stage{
+  width:min(100%,880px);
+  max-width:88%;
+}
+
+.demo-video-preview{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  border-radius:32px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  cursor:pointer;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+  opacity:0;
+  transform:translateY(20px) scale(0.98);
+}
+
+.demo-video-section.is-visible .demo-video-preview{
+  animation:demoVideoIn .7s var(--ease) forwards;
+}
+
+@keyframes demoVideoIn{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.demo-video-poster-vid{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  pointer-events:none;
+}
+
+.demo-video-play{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(64px,8vw,88px);
+  height:clamp(64px,8vw,88px);
+  border-radius:50%;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
+  display:grid;
+  place-items:center;
+  color:var(--text);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+  animation:demoPlayPulse 3.2s var(--ease) infinite;
+  pointer-events:none;
+}
+
+.demo-video-play svg{
+  width:34%;
+  height:34%;
+  margin-left:5%;
+  fill:currentColor;
+}
+
+@keyframes demoPlayPulse{
+  0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 18%,transparent)}
+  50%{box-shadow:0 0 0 14px transparent}
+}
+
+.demo-video-duration{
+  position:absolute;
+  right:16px;
+  bottom:14px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:color-mix(in srgb,#101010 74%,transparent);
+  color:#f4f1ea;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+  pointer-events:none;
+}
+
+.demo-video-keywords{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:clamp(14px,2.4vw,28px);
+  max-width:720px;
+  opacity:0;
+  transform:translateY(12px);
+}
+
+.demo-video-section.is-visible .demo-video-keywords{
+  animation:demoVideoIn .7s var(--ease) .12s forwards;
+}
+
+.demo-video-keywords span:not(.demo-video-kw-sep){
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+
+.demo-video-kw-sep{
+  color:var(--muted);
+  font-size:11px;
+  opacity:.42;
+  font-weight:400;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+@media(hover:hover) and (pointer:fine){
+  .demo-video-preview:hover{
+    transform:translateY(0) scale(1.014);
+    box-shadow:0 32px 96px rgba(40,34,24,.14);
+  }
+
+  body.dark .demo-video-preview:hover{
+    box-shadow:0 32px 96px rgba(0,0,0,.42);
+  }
+
+  .demo-video-preview:hover .demo-video-play{
+    transform:translate(-50%,-50%) scale(1.08);
+    animation:none;
+  }
+}
+
+.demo-video-modal{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:grid;
+  place-items:center;
+  padding:
+    max(20px,env(safe-area-inset-top))
+    max(16px,env(safe-area-inset-right))
+    max(20px,env(safe-area-inset-bottom))
+    max(16px,env(safe-area-inset-left));
+}
+
+.demo-video-modal[hidden]{
+  display:none;
+}
+
+.demo-video-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(10,10,10,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.demo-video-modal-panel{
+  position:relative;
+  z-index:1;
+  width:min(960px,100%);
+}
+
+.demo-video-modal-panel video{
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  border-radius:16px;
+  background:#000;
+  object-fit:contain;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+
+.demo-video-modal-close{
+  position:absolute;
+  top:max(-48px,calc(-1 * clamp(36px,6vh,48px)));
+  right:0;
+  width:40px;
+  height:40px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  color:#f4f1ea;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:background .25s var(--ease),transform .25s var(--ease);
+}
+
+.demo-video-modal-close:hover{
+  background:rgba(255,255,255,.16);
 }
 
 .product-detail{
@@ -1322,6 +1558,53 @@ nav .nav-inner{
     font-size:1.06em;
   }
 
+  .demo-video-section{
+    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
+  }
+
+  .demo-video-inner{
+    gap:clamp(14px,2.2vh,22px);
+    height:100%;
+    justify-content:center;
+  }
+
+  .demo-video-head h2{
+    font-size:clamp(24px,6.2vw,32px);
+  }
+
+  .demo-video-lead{
+    font-size:clamp(13px,3.4vw,15px);
+    margin-top:10px;
+    -webkit-line-clamp:2;
+  }
+
+  .demo-video-stage{
+    width:100%;
+    max-width:100%;
+  }
+
+  .demo-video-preview{
+    border-radius:clamp(20px,5vw,28px);
+  }
+
+  .demo-video-play{
+    width:clamp(56px,14vw,72px);
+    height:clamp(56px,14vw,72px);
+  }
+
+  .demo-video-keywords{
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    overflow-x:auto;
+    max-width:100%;
+    padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:clamp(12px,3vw,20px);
+  }
+
+  .demo-video-keywords::-webkit-scrollbar{display:none}
+
   .product-detail{
     min-height:var(--section-height);
   }
@@ -1885,6 +2168,10 @@ nav .nav-inner{
     max-width:min(94vw,20em);
   }
   .user-flow-accent{font-size:1.05em}
+  .demo-video-head h2{font-size:clamp(22px,6vw,28px)}
+  .demo-video-lead{font-size:13px}
+  .demo-video-preview{border-radius:20px}
+  .demo-video-duration{right:12px;bottom:10px;font-size:11px}
   .footer{
     padding:
       clamp(18px,5vw,24px)
@@ -2008,6 +2295,17 @@ nav .nav-inner{
     opacity:1!important;
     transform:none!important;
   }
+
+  .demo-video-preview,
+  .demo-video-keywords{
+    opacity:1!important;
+    transform:none!important;
+    animation:none!important;
+  }
+
+  .demo-video-play{
+    animation:none!important;
+  }
 }
 </style>
 </head>
@@ -2017,7 +2315,7 @@ nav .nav-inner{
 <nav id="siteNav">
   <div class="nav-inner">
     <a class="logo" href="#hero" aria-label="YUMA">
-      <img class="brand-logo" src="Yuma_Logo_Web.png" alt="" decoding="async" fetchpriority="high">
+      <img class="brand-logo" src="img/Yuma_Logo_Web.png" alt="" decoding="async" fetchpriority="high">
     <span>YUMA</span>
     </a>
     <div class="nav-actions">
@@ -2045,7 +2343,7 @@ nav .nav-inner{
         webkit-playsinline
         disablepictureinpicture
         preload="auto"
-        poster="yuma_stirrup_product.jpg"
+        poster="img/yuma_stirrup_product.jpg"
       >
         <source src="video.mp4" type="video/mp4">
       </video>
@@ -2105,7 +2403,7 @@ nav .nav-inner{
       </div>
       </div>
       <div class="product-visual">
-        <img src="yuma_stirrup_product.jpg" alt="YUMA Smart Stirrups" loading="lazy" decoding="async">
+        <img src="img/yuma_stirrup_product.jpg" alt="YUMA Smart Stirrups" loading="lazy" decoding="async">
       </div>
       </div>
   </section>
@@ -2128,7 +2426,7 @@ nav .nav-inner{
     </div>
   </div>
       <div class="product-visual">
-        <img src="yuma_rider_demo.jpg" alt="YUMA Wearable Nodes" loading="lazy" decoding="async">
+        <img src="img/yuma_rider_demo.jpg" alt="YUMA Wearable Nodes" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -2148,7 +2446,7 @@ nav .nav-inner{
         </ul>
       </div>
       <div class="product-visual">
-        <img src="yuma_app_hand.jpg" alt="YUMA Mobile App" loading="lazy" decoding="async">
+        <img src="img/yuma_app_hand.jpg" alt="YUMA Mobile App" loading="lazy" decoding="async">
       </div>
   </div>
 </section>
@@ -2326,6 +2624,36 @@ nav .nav-inner{
     </div>
   </section>
 
+  <section class="section demo-video-section" id="demo-video">
+    <div class="section-inner demo-video-inner">
+      <div class="section-head demo-video-head">
+        <div class="eyebrow" data-i18n="demoVideoKicker">LIVE DEMONSTRATION</div>
+        <h2 data-i18n="demoVideoTitle">See YUMA in Action.</h2>
+        <p class="lead demo-video-lead" data-i18n="demoVideoText">Experience how YUMA supports a complete riding session—from preparation and wearable sensing to live visualization and AI-powered reflection.</p>
+      </div>
+      <div class="demo-video-stage">
+        <button type="button" class="demo-video-preview" id="demoVideoTrigger" aria-label="Play demonstration video" data-i18n-aria="demoVideoPlayLabel">
+          <video class="demo-video-poster-vid" preload="metadata" playsinline muted poster="img/yuma_rider_demo.jpg" aria-hidden="true">
+            <source src="video.mp4" type="video/mp4">
+          </video>
+          <span class="demo-video-play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="demo-video-duration" id="demoVideoDuration">1:08</span>
+        </button>
+      </div>
+      <div class="demo-video-keywords" aria-label="Session flow">
+        <span data-i18n="demoVideoKw1">Prepare</span>
+        <span class="demo-video-kw-sep" aria-hidden="true">↓</span>
+        <span data-i18n="demoVideoKw2">Ride</span>
+        <span class="demo-video-kw-sep" aria-hidden="true">↓</span>
+        <span data-i18n="demoVideoKw3">Review</span>
+        <span class="demo-video-kw-sep" aria-hidden="true">↓</span>
+        <span data-i18n="demoVideoKw4">Reflect</span>
+      </div>
+    </div>
+  </section>
+
   <section class="section ai-section" id="ai">
     <div class="section-inner">
       <div class="section-head">
@@ -2389,7 +2717,7 @@ nav .nav-inner{
 <footer class="footer">
   <div class="footer-inner">
   <div class="footer-brand">
-      <img src="Yuma_Logo_Web.png" alt="YUMA" decoding="async">
+      <img src="img/Yuma_Logo_Web.png" alt="YUMA" decoding="async">
       <span data-i18n="footerBrand">YUMA · Reflective Riding System</span>
   </div>
     <div class="footer-meta">
@@ -2398,6 +2726,16 @@ nav .nav-inner{
     </div>
   </div>
 </footer>
+</div>
+
+<div class="demo-video-modal" id="demoVideoModal" hidden aria-hidden="true">
+  <div class="demo-video-modal-backdrop" id="demoVideoBackdrop"></div>
+  <div class="demo-video-modal-panel" role="dialog" aria-modal="true" aria-label="YUMA demonstration video" data-i18n-aria="demoVideoModalLabel">
+    <button type="button" class="demo-video-modal-close" id="demoVideoClose" aria-label="Close video" data-i18n-aria="demoVideoCloseLabel">×</button>
+    <video id="demoVideoPlayer" controls playsinline preload="none">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
 </div>
 
 <script>
@@ -2484,6 +2822,16 @@ const dict = {
     product04Highlight2:"Pressure Analysis",
     product04Highlight3:"AI Reflection",
     product04Highlight4:"Session Playback",
+    demoVideoKicker:"LIVE DEMONSTRATION",
+    demoVideoTitle:"See YUMA in Action.",
+    demoVideoText:"Experience how YUMA supports a complete riding session—from preparation and wearable sensing to live visualization and AI-powered reflection.",
+    demoVideoKw1:"Prepare",
+    demoVideoKw2:"Ride",
+    demoVideoKw3:"Review",
+    demoVideoKw4:"Reflect",
+    demoVideoPlayLabel:"Play demonstration video",
+    demoVideoModalLabel:"YUMA demonstration video",
+    demoVideoCloseLabel:"Close video",
     howKicker:"How It Works",
     howTitle:"From invisible signals to usable feedback.",
     flow1:"Sensors",
@@ -2611,6 +2959,16 @@ const dict = {
     product04Highlight2:"压力分析",
     product04Highlight3:"AI 反思",
     product04Highlight4:"训练回放",
+    demoVideoKicker:"现场演示",
+    demoVideoTitle:"看 YUMA 如何运作。",
+    demoVideoText:"体验 YUMA 如何支持完整骑乘流程——\n从准备与可穿戴感知，到实时可视化与 AI 反思。",
+    demoVideoKw1:"准备",
+    demoVideoKw2:"骑乘",
+    demoVideoKw3:"回顾",
+    demoVideoKw4:"反思",
+    demoVideoPlayLabel:"播放演示视频",
+    demoVideoModalLabel:"YUMA 演示视频",
+    demoVideoCloseLabel:"关闭视频",
     howKicker:"工作方式",
     howTitle:"从隐藏信号到可用反馈。",
     flow1:"传感收集数据",
@@ -2738,6 +3096,16 @@ const dict = {
     product04Highlight2:"Druckanalyse",
     product04Highlight3:"KI-Reflexion",
     product04Highlight4:"Session-Wiedergabe",
+    demoVideoKicker:"LIVE-DEMONSTRATION",
+    demoVideoTitle:"YUMA in Aktion erleben.",
+    demoVideoText:"Erleben Sie, wie YUMA eine komplette Reiteinheit unterstützt—\nvon Vorbereitung und Wearable-Sensing bis zu Live-Visualisierung und KI-Reflexion.",
+    demoVideoKw1:"Vorbereiten",
+    demoVideoKw2:"Reiten",
+    demoVideoKw3:"Review",
+    demoVideoKw4:"Reflektieren",
+    demoVideoPlayLabel:"Demonstrationsvideo abspielen",
+    demoVideoModalLabel:"YUMA-Demonstrationsvideo",
+    demoVideoCloseLabel:"Video schließen",
     howKicker:"Funktionsweise",
     howTitle:"Von unsichtbaren Signalen zu nutzbarem Feedback.",
     flow1:"Sensoren",
@@ -2865,6 +3233,16 @@ const dict = {
     product04Highlight2:"Analyse de pression",
     product04Highlight3:"Réflexion IA",
     product04Highlight4:"Relecture de session",
+    demoVideoKicker:"DÉMONSTRATION LIVE",
+    demoVideoTitle:"Voir YUMA en action.",
+    demoVideoText:"Découvrez comment YUMA accompagne une séance complète—\nde la préparation et du sensing wearable à la visualisation live et à la réflexion IA.",
+    demoVideoKw1:"Préparer",
+    demoVideoKw2:"Monter",
+    demoVideoKw3:"Revoir",
+    demoVideoKw4:"Réfléchir",
+    demoVideoPlayLabel:"Lire la vidéo de démonstration",
+    demoVideoModalLabel:"Vidéo de démonstration YUMA",
+    demoVideoCloseLabel:"Fermer la vidéo",
     howKicker:"Fonctionnement",
     howTitle:"Des signaux invisibles au feedback utile.",
     flow1:"Capteurs",
@@ -2992,6 +3370,16 @@ const dict = {
     product04Highlight2:"Analisi pressione",
     product04Highlight3:"Riflessione IA",
     product04Highlight4:"Replay sessione",
+    demoVideoKicker:"DEMO LIVE",
+    demoVideoTitle:"Guarda YUMA in azione.",
+    demoVideoText:"Scopri come YUMA supporta un'intera sessione di allenamento—\ndalla preparazione e dal sensing wearable alla visualizzazione live e alla riflessione IA.",
+    demoVideoKw1:"Preparare",
+    demoVideoKw2:"Cavalcare",
+    demoVideoKw3:"Revisione",
+    demoVideoKw4:"Riflettere",
+    demoVideoPlayLabel:"Riproduci video dimostrativo",
+    demoVideoModalLabel:"Video dimostrativo YUMA",
+    demoVideoCloseLabel:"Chiudi video",
     howKicker:"Come funziona",
     howTitle:"Dai segnali invisibili a feedback utilizzabile.",
     flow1:"Sensori",
@@ -3051,6 +3439,12 @@ function setLang(lang, btn){
       el.textContent = value;
     }
   });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{
+    const key = el.dataset.i18nAria;
+    const value = dict[lang]?.[key];
+    if(value === undefined) return;
+    el.setAttribute("aria-label", value);
+  });
   document.querySelectorAll(".lang button").forEach(item=>item.classList.remove("active"));
   btn?.classList.add("active");
 }
@@ -3065,7 +3459,7 @@ function toggleTheme(){
 
 (function initUserFlowReveal(){
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  ["user-flow","user-flow-closing"].forEach(id=>{
+  ["user-flow","user-flow-closing","demo-video"].forEach(id=>{
     const section = document.getElementById(id);
     if(!section) return;
     if(prefersReduced){
@@ -3078,6 +3472,54 @@ function toggleTheme(){
       observer.disconnect();
     },{threshold:.12,rootMargin:"0px 0px -6% 0px"});
     observer.observe(section);
+  });
+})();
+
+(function initDemoVideo(){
+  const trigger = document.getElementById("demoVideoTrigger");
+  const modal = document.getElementById("demoVideoModal");
+  const backdrop = document.getElementById("demoVideoBackdrop");
+  const closeBtn = document.getElementById("demoVideoClose");
+  const player = document.getElementById("demoVideoPlayer");
+  const previewVid = document.querySelector(".demo-video-poster-vid");
+  const durationEl = document.getElementById("demoVideoDuration");
+  if(!trigger || !modal || !player) return;
+
+  function formatDuration(seconds){
+    if(!Number.isFinite(seconds) || seconds <= 0) return "1:08";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${String(s).padStart(2,"0")}`;
+  }
+
+  if(previewVid && durationEl){
+    previewVid.addEventListener("loadedmetadata", ()=>{
+      durationEl.textContent = formatDuration(previewVid.duration);
+    });
+  }
+
+  function openModal(){
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    player.currentTime = 0;
+    player.play().catch(()=>{});
+    closeBtn?.focus();
+  }
+
+  function closeModal(){
+    player.pause();
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    trigger.focus();
+  }
+
+  trigger.addEventListener("click", openModal);
+  backdrop?.addEventListener("click", closeModal);
+  closeBtn?.addEventListener("click", closeModal);
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape" && !modal.hidden) closeModal();
   });
 })();
 </script>
