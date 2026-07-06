@@ -3911,6 +3911,16 @@ nav .nav-inner{
     aspect-ratio:4 / 3;
   }
 
+  #mobile-app .product-visual{
+    aspect-ratio:16 / 10;
+    max-height:360px;
+    align-self:center;
+  }
+
+  #mobile-app .product-visual img{
+    object-position:center 46%;
+  }
+
   .demo-video-inner{
     justify-items:center;
   }
@@ -3995,6 +4005,16 @@ nav .nav-inner{
 
   .product-visual{
     aspect-ratio:4 / 3;
+  }
+
+  #mobile-app .product-visual{
+    aspect-ratio:16 / 10;
+    max-height:420px;
+    align-self:center;
+  }
+
+  #mobile-app .product-visual img{
+    object-position:center 46%;
   }
 
   .user-flow-grid{
@@ -5411,9 +5431,11 @@ function toggleTheme(){
 
   function getEmbedSrc(){
     const params = new URLSearchParams({
+      autoplay:"1",
       rel:"0",
       modestbranding:"1",
-      playsinline:"1"
+      playsinline:"1",
+      fs:"1"
     });
 
     if(location.protocol === "http:" || location.protocol === "https:"){
@@ -5437,7 +5459,10 @@ function toggleTheme(){
     playerWrap.appendChild(iframe);
   }
 
-  function openModal(){
+  function openModal(event){
+    event?.preventDefault();
+    if(!modal.hidden) return;
+
     if(location.protocol === "file:"){
       window.open(DEMO_YOUTUBE_WATCH, "_blank", "noopener,noreferrer");
       return;
@@ -5459,6 +5484,7 @@ function toggleTheme(){
   }
 
   trigger.addEventListener("click", openModal);
+  trigger.addEventListener("touchend", openModal, {passive:false});
   backdrop?.addEventListener("click", closeModal);
   closeBtn?.addEventListener("click", closeModal);
   document.addEventListener("keydown", e=>{
