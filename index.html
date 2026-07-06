@@ -3476,6 +3476,7 @@ nav .nav-inner{
 
   .product-visual{
     order:1;
+    width:100%;
     height:auto;
     min-height:0;
     aspect-ratio:4 / 3;
@@ -3484,6 +3485,7 @@ nav .nav-inner{
   }
 
   .product-visual img{
+    display:block;
     width:100%;
     height:100%;
     object-fit:cover;
@@ -3859,8 +3861,54 @@ nav .nav-inner{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   }
 
+  #how .section-inner.work-grid{
+    grid-template-columns:1fr;
+  }
+
+  #how .system-map{
+    max-width:720px;
+    margin-inline:auto;
+    aspect-ratio:900 / 560;
+  }
+
+  #how .system-nodes{
+    inset:clamp(18px,3vw,30px);
+  }
+
+  #how .sys-node,
+  #how .sys-node.horse,
+  #how .sys-node.rider,
+  #how .sys-node.stirrup-l,
+  #how .sys-node.stirrup-r,
+  #how .sys-node.ai{
+    width:clamp(82px,11vw,108px);
+    padding:8px 7px;
+  }
+
+  #how .sys-node.horse{left:50%;top:12%}
+  #how .sys-node.rider{left:50%;top:88%}
+  #how .sys-node.stirrup-l{left:15%;top:50%}
+  #how .sys-node.stirrup-r{left:85%;top:50%}
+  #how .sys-node.ai{left:50%;top:50%}
+
+  #how .sys-node .icon{
+    width:24px;
+    height:24px;
+    margin-bottom:4px;
+    font-size:11px;
+  }
+
+  #how .sys-node .name{
+    font-size:10px;
+    line-height:1.15;
+  }
+
+  #how .sys-node .sub{
+    display:none;
+  }
+
   .product-visual{
-    aspect-ratio:1 / 1;
+    aspect-ratio:4 / 3;
   }
 
   .user-flow-grid{
@@ -3926,7 +3974,7 @@ nav .nav-inner{
   }
 
   .product-visual{
-    aspect-ratio:1 / 1;
+    aspect-ratio:4 / 3;
   }
 
   .user-flow-grid{
