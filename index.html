@@ -1337,13 +1337,29 @@ nav .nav-inner{
 
   nav{
     padding-top:env(safe-area-inset-top);
+    background:var(--bg);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 
-  html,
-  body{
+  html{
     scroll-snap-type:y mandatory;
     scroll-padding-top:var(--nav-height);
     -webkit-overflow-scrolling:touch;
+  }
+
+  body{
+    scroll-snap-type:none;
+  }
+
+  body::before{
+    display:none;
+  }
+
+  .demo-video-play,
+  .demo-video-modal-backdrop{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 
   .section,
@@ -1352,7 +1368,7 @@ nav .nav-inner{
     min-height:var(--section-height);
     max-height:var(--section-height);
     scroll-snap-align:start;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     overflow:hidden;
     display:flex;
     align-items:center;
@@ -1400,7 +1416,7 @@ nav .nav-inner{
     align-items:stretch;
     justify-content:center;
     scroll-snap-align:start;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     overflow:clip;
     padding:
       calc(var(--nav-height) + max(12px,env(safe-area-inset-top)))
@@ -2140,7 +2156,7 @@ nav .nav-inner{
     max-height:var(--section-height);
     overflow:hidden;
     scroll-snap-align:end;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     align-items:center;
     justify-content:center;
     padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
@@ -2163,7 +2179,7 @@ nav .nav-inner{
     min-height:var(--section-height);
     max-height:var(--section-height);
     overflow:hidden;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left));
   }
 
@@ -2395,6 +2411,8 @@ nav .nav-inner{
     justify-content:center;
     text-align:center;
     gap:0;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 
   #how .sys-node.horse{left:50%;top:9%}
@@ -2530,7 +2548,7 @@ nav .nav-inner{
     max-height:var(--section-height);
     overflow:hidden;
     scroll-snap-align:end;
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
     align-items:center;
     justify-content:center;
     padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
@@ -2572,17 +2590,30 @@ nav .nav-inner{
     }
   }
 
-  html,
-  body{
+  html{
     scroll-snap-type:y mandatory;
     scroll-padding-top:var(--nav-height);
+  }
+
+  body{
+    scroll-snap-type:none;
   }
 
   .hero-section,
   .product-detail,
   .section,
   .footer{
-    scroll-snap-stop:always;
+    scroll-snap-stop:normal;
+  }
+
+  body::before{
+    display:none;
+  }
+
+  nav{
+    background:var(--bg);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 
   .section,
@@ -2673,6 +2704,8 @@ nav .nav-inner{
     width:clamp(96px,12vw,140px);
     min-height:0;
     padding:12px 10px;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 
   #how .sys-node .icon{width:30px;height:30px;font-size:13px}
@@ -4193,6 +4226,15 @@ function toggleTheme(){
   window.addEventListener("pageshow", e=>{
     if(e.persisted) tryPlay();
   });
+
+  if(window.matchMedia("(pointer: coarse)").matches){
+    let scrollTimer;
+    window.addEventListener("scroll", ()=>{
+      if(!heroVideo.paused) heroVideo.pause();
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(tryPlay, 220);
+    },{passive:true});
+  }
 
   const unlockOnGesture = ()=>{
     tryPlay();
