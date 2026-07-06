@@ -69,11 +69,9 @@ body.dark{
 *{box-sizing:border-box;margin:0;padding:0}
 
 html{
-  min-height:100%;
   scroll-behavior:smooth;
   scroll-snap-type:y proximity;
   scroll-padding-top:var(--nav-height);
-  overflow-x:hidden;
   overflow-x:clip;
   background:var(--bg);
   -webkit-text-size-adjust:100%;
@@ -113,7 +111,6 @@ button{font:inherit}
   position:relative;
   z-index:1;
   width:100%;
-  overflow:hidden;
   overflow:clip;
 }
 
@@ -125,15 +122,9 @@ nav{
   display:flex;
   align-items:center;
   border-bottom:1px solid var(--line);
-  background:rgba(246,243,237,.86);
   background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
-}
-
-body.dark nav{
-  background:rgba(16,16,16,.86);
-  background:color-mix(in srgb,var(--bg) 86%,transparent);
 }
 
 .nav-inner{
@@ -197,7 +188,6 @@ body.dark .brand-logo{filter:invert(1) brightness(1.08)}
 }
 
 .section{
-  min-height:calc(100vh - var(--nav-height));
   min-height:calc(100svh - var(--nav-height));
   scroll-snap-align:start;
   scroll-snap-stop:normal;
@@ -297,9 +287,7 @@ h3{
 .hero-section{
   position:relative;
   isolation:isolate;
-  overflow:hidden;
   overflow:clip;
-  min-height:100vh;
   min-height:100svh;
   margin-top:calc(-1 * var(--nav-height));
   padding:
@@ -625,22 +613,18 @@ body.dark .hero-overlay{
 .user-flow-accent-1{color:var(--accent)}
 
 .user-flow-accent-2{
-  color:#6f7790;
   color:color-mix(in srgb,var(--accent) 38%,#5f7f9d);
 }
 
 .user-flow-accent-3{
-  color:#687c55;
   color:color-mix(in srgb,var(--accent) 32%,#5f8560);
 }
 
 body.dark .user-flow-accent-2{
-  color:#c0c0aa;
   color:color-mix(in srgb,var(--accent) 52%,#9eb3c9);
 }
 
 body.dark .user-flow-accent-3{
-  color:#bfc293;
   color:color-mix(in srgb,var(--accent) 48%,#9eb89a);
 }
 
@@ -718,18 +702,12 @@ body.dark .user-flow-accent-3{
   }
 }
 
-.demo-video-poster,
-.demo-video-poster-vid{
+.demo-video-poster{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
   pointer-events:none;
-}
-
-.demo-video-poster-vid:fullscreen,
-.demo-video-poster-vid:-webkit-full-screen{
-  pointer-events:auto;
 }
 
 .demo-video-play{
@@ -740,11 +718,9 @@ body.dark .user-flow-accent-3{
   width:clamp(64px,8vw,88px);
   height:clamp(64px,8vw,88px);
   border-radius:50%;
-  background:rgba(246,243,237,.84);
   background:color-mix(in srgb,var(--bg) 84%,transparent);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
-  border:1px solid var(--line);
   border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
   display:grid;
   place-items:center;
@@ -762,25 +738,8 @@ body.dark .user-flow-accent-3{
 }
 
 @keyframes demoPlayPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(139,111,71,.18)}
   0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 18%,transparent)}
   50%{box-shadow:0 0 0 14px transparent}
-}
-
-.demo-video-duration{
-  position:absolute;
-  right:16px;
-  bottom:14px;
-  padding:5px 10px;
-  border-radius:999px;
-  background:rgba(16,16,16,.74);
-  background:color-mix(in srgb,#101010 74%,transparent);
-  color:#f4f1ea;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.04em;
-  font-variant-numeric:tabular-nums;
-  pointer-events:none;
 }
 
 .demo-video-keywords{
@@ -1173,12 +1132,9 @@ body.dark .user-flow-accent-3{
 }
 
 .sys-node.ai .name{color:var(--bg)}
-.sys-node.ai .sub{color:rgba(246,243,237,.68)}
 .sys-node.ai .sub{color:color-mix(in srgb,var(--bg) 68%,transparent)}
 .sys-node.ai .icon{
-  background:rgba(246,243,237,.12);
   background:color-mix(in srgb,var(--bg) 12%,transparent);
-  border-color:rgba(246,243,237,.18);
   border-color:color-mix(in srgb,var(--bg) 18%,transparent);
   color:var(--bg);
 }
@@ -1366,21 +1322,12 @@ nav .nav-inner{
 
 @media(max-width:980px){
   :root{
-    --section-height:calc(100vh - var(--nav-height));
+    --section-height:calc(100dvh - var(--nav-height) - env(safe-area-inset-top));
     --section-pad-y:clamp(12px,2vh,18px);
-  }
-
-  @supports(height:100dvh){
-    :root{
-      --section-height:calc(100dvh - var(--nav-height));
-    }
   }
 
   nav{
     padding-top:env(safe-area-inset-top);
-    background:var(--bg);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
   }
 
   html{
@@ -1389,27 +1336,13 @@ nav .nav-inner{
     -webkit-overflow-scrolling:touch;
   }
 
-  body{
-    scroll-snap-type:none;
-  }
-
-  body::before{
-    display:none;
-  }
-
-  .demo-video-play,
-  .demo-video-modal-backdrop{
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-  }
-
   .section,
   .footer{
     height:var(--section-height);
     min-height:var(--section-height);
     max-height:var(--section-height);
     scroll-snap-align:start;
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
     overflow:hidden;
     display:flex;
     align-items:center;
@@ -1447,9 +1380,6 @@ nav .nav-inner{
   }
 
   .hero-section{
-    height:100vh;
-    min-height:100vh;
-    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
@@ -1457,7 +1387,7 @@ nav .nav-inner{
     align-items:stretch;
     justify-content:center;
     scroll-snap-align:start;
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
     overflow:clip;
     padding:
       calc(var(--nav-height) + max(12px,env(safe-area-inset-top)))
@@ -2197,7 +2127,7 @@ nav .nav-inner{
     max-height:var(--section-height);
     overflow:hidden;
     scroll-snap-align:end;
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
     align-items:center;
     justify-content:center;
     padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
@@ -2220,7 +2150,7 @@ nav .nav-inner{
     min-height:var(--section-height);
     max-height:var(--section-height);
     overflow:hidden;
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
     padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left));
   }
 
@@ -2233,9 +2163,6 @@ nav .nav-inner{
   }
 
   .hero-section{
-    height:100vh;
-    min-height:100vh;
-    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
@@ -2253,34 +2180,20 @@ nav .nav-inner{
     min-height:100%;
   }
 
-  .hero-video{
-    width:112%;
-    min-width:112%;
-    left:-6%;
-    object-position:center right;
-  }
-
-  .hero-video{
-    width:112%;
-    min-width:112%;
-    left:-6%;
-    object-position:center right;
-  }
-
   .hero-overlay{
     background:
-      linear-gradient(to right,rgba(246,243,237,.9) 0%,rgba(246,243,237,.72) 34%,rgba(246,243,237,.28) 64%,rgba(246,243,237,.02) 100%),
-      linear-gradient(to top,rgba(246,243,237,.34) 0%,transparent 42%);
+      linear-gradient(to right,rgba(246,243,237,.94) 0%,rgba(246,243,237,.78) 36%,rgba(246,243,237,.34) 68%,rgba(246,243,237,.08) 100%),
+      linear-gradient(to top,rgba(246,243,237,.44) 0%,transparent 44%);
   }
 
   body.dark .hero-overlay{
     background:
-      linear-gradient(to right,rgba(15,15,15,.9) 0%,rgba(15,15,15,.72) 34%,rgba(15,15,15,.32) 64%,rgba(15,15,15,.04) 100%),
-      linear-gradient(to top,rgba(15,15,15,.38) 0%,transparent 42%);
+      linear-gradient(to right,rgba(15,15,15,.94) 0%,rgba(15,15,15,.78) 36%,rgba(15,15,15,.38) 68%,rgba(15,15,15,.1) 100%),
+      linear-gradient(to top,rgba(15,15,15,.5) 0%,transparent 44%);
   }
 
   h1{font-size:clamp(52px,7.2vw,72px);line-height:.9}
-  .hero-copy{max-width:min(58%,540px)}
+  .hero-copy{max-width:min(52%,480px)}
   .hero-copy .lead{font-size:clamp(18px,2.4vw,22px);margin-top:20px;line-height:1.55}
   .hero-copy .btn-row{margin-top:24px}
   .btn-row .btn{flex:0 1 auto;min-width:148px}
@@ -2466,8 +2379,6 @@ nav .nav-inner{
     justify-content:center;
     text-align:center;
     gap:0;
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
   }
 
   #how .sys-node.horse{left:50%;top:9%}
@@ -2603,7 +2514,7 @@ nav .nav-inner{
     max-height:var(--section-height);
     overflow:hidden;
     scroll-snap-align:end;
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
     align-items:center;
     justify-content:center;
     padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
@@ -2635,14 +2546,8 @@ nav .nav-inner{
 /* Touch iPad at desktop width (e.g. iPad Pro 12.9" portrait) */
 @media(min-width:981px) and (hover:none) and (pointer:coarse){
   :root{
-    --section-height:calc(100vh - var(--nav-height));
+    --section-height:calc(100dvh - var(--nav-height));
     --gutter:clamp(36px,4vw,56px);
-  }
-
-  @supports(height:100dvh){
-    :root{
-      --section-height:calc(100dvh - var(--nav-height));
-    }
   }
 
   html{
@@ -2650,25 +2555,11 @@ nav .nav-inner{
     scroll-padding-top:var(--nav-height);
   }
 
-  body{
-    scroll-snap-type:none;
-  }
-
   .hero-section,
   .product-detail,
   .section,
   .footer{
-    scroll-snap-stop:normal;
-  }
-
-  body::before{
-    display:none;
-  }
-
-  nav{
-    background:var(--bg);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
+    scroll-snap-stop:always;
   }
 
   .section,
@@ -2691,9 +2582,6 @@ nav .nav-inner{
   }
 
   .hero-section{
-    height:100vh;
-    min-height:100vh;
-    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
@@ -2759,8 +2647,6 @@ nav .nav-inner{
     width:clamp(96px,12vw,140px);
     min-height:0;
     padding:12px 10px;
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
   }
 
   #how .sys-node .icon{width:30px;height:30px;font-size:13px}
@@ -2796,62 +2682,22 @@ nav .nav-inner{
   :root{
     --nav-height:64px;
     --gutter:clamp(16px,4.5vw,22px);
-    --section-pad-y:clamp(8px,1.6vh,12px);
+    --section-pad-y:clamp(10px,1.8vh,14px);
   }
 
   .nav-inner{padding:10px max(var(--gutter),env(safe-area-inset-left)) 10px max(var(--gutter),env(safe-area-inset-right));gap:8px}
   .logo span{font-size:14px}
   .brand-logo{height:22px}
   .nav-actions{gap:4px}
-  .lang{gap:3px;max-width:min(100%,214px)}
-  .lang button,.theme{font-size:10px;padding:6px 7px;min-width:32px;min-height:32px}
-  .theme{padding-inline:8px}
-
-  .hero-section{
-    padding:
-      calc(var(--nav-height) + max(12px,env(safe-area-inset-top)))
-      max(var(--gutter),env(safe-area-inset-right))
-      max(18px,env(safe-area-inset-bottom))
-      max(var(--gutter),env(safe-area-inset-left));
-  }
-
-  .hero-video{
-    width:108%;
-    min-width:108%;
-    left:-4%;
-    object-position:center right;
-  }
-
-  .hero-overlay{
-    background:
-      linear-gradient(to bottom,rgba(246,243,237,.9) 0%,rgba(246,243,237,.7) 42%,rgba(246,243,237,.38) 100%),
-      linear-gradient(to top,rgba(246,243,237,.58) 0%,transparent 48%);
-  }
-
-  body.dark .hero-overlay{
-    background:
-      linear-gradient(to bottom,rgba(15,15,15,.9) 0%,rgba(15,15,15,.72) 42%,rgba(15,15,15,.42) 100%),
-      linear-gradient(to top,rgba(15,15,15,.62) 0%,transparent 48%);
-  }
-
+  .lang{gap:3px;max-width:min(100%,220px)}
+  .lang button,.theme{font-size:10px;padding:6px 8px;min-width:32px;min-height:32px}
   h1{font-size:clamp(36px,10.5vw,50px);line-height:.92}
   .hero-copy .lead{font-size:clamp(16px,4.2vw,18px);line-height:1.52;margin-top:12px}
   .hero-copy .btn-row{margin-top:12px}
   .hero-copy .btn-row .btn{flex:1 1 100%}
-  .product-layout,
-  .product-detail .section-inner.product-layout{gap:8px}
-  .product-visual{height:min(31vh,230px);border-radius:18px}
-  .product-visual.dashboard-visual{height:min(32vh,240px)}
-  .product-copy h2{font-size:clamp(28px,7.6vw,36px)}
-  .product-subtitle{font-size:clamp(16px,4.4vw,21px)}
-  .product-description{
-    font-size:clamp(14px,4vw,16px);
-    line-height:1.48;
-    -webkit-line-clamp:2;
-    line-clamp:2;
-  }
-  .highlight-list{margin-top:8px;gap:5px}
-  .highlight-list li{font-size:11px;padding:5px 8px}
+  .product-copy h2{font-size:clamp(30px,8vw,38px)}
+  .product-subtitle{font-size:clamp(17px,4.8vw,22px)}
+  .product-description{font-size:clamp(14px,4.1vw,16px);line-height:1.5}
   .btn{min-height:44px;padding:12px 16px;font-size:14px}
   .eyebrow{font-size:10px;margin-bottom:6px;letter-spacing:.14em}
   .product-intro h2{font-size:clamp(28px,7.4vw,36px)}
@@ -2877,16 +2723,14 @@ nav .nav-inner{
   #ai .insight-card .text{font-size:14px;-webkit-line-clamp:2;line-clamp:2}
   #built-for h2{font-size:clamp(28px,7.4vw,36px)}
   #built-for .audience-card h3{font-size:16px}
-  #built-for .audience-card .text{font-size:14px;-webkit-line-clamp:2;line-clamp:2}
+  #built-for .audience-card .text{font-size:14px}
   #vision h2{font-size:clamp(28px,7.4vw,36px)}
   #vision .roadmap-step{padding:5px 0;font-size:16px}
   .contact-section h2{font-size:clamp(30px,8vw,38px)}
   .user-flow-section .section-head h2{font-size:clamp(26px,7vw,34px)}
   .user-flow-grid{gap:5px}
   .user-flow-card{padding:9px;gap:4px}
-  .user-flow-card h3{font-size:clamp(16px,4.2vw,19px)}
   .user-flow-desc{-webkit-line-clamp:2;line-clamp:2;font-size:13px}
-  .user-flow-chips li{font-size:10px;padding:4px 6px}
   .user-flow-statement .user-flow-closing{
     font-size:clamp(26px,7.6vw,34px);
     line-height:1.38;
@@ -2894,14 +2738,8 @@ nav .nav-inner{
   }
   .user-flow-accent{font-size:1.05em}
   .demo-video-head h2{font-size:clamp(22px,6vw,28px)}
-  .demo-video-lead{font-size:13px;margin-top:8px}
-  .demo-video-inner{gap:clamp(10px,1.8vh,16px)}
-  .demo-video-stage{width:100%;max-width:100%}
+  .demo-video-lead{font-size:13px}
   .demo-video-preview{border-radius:20px}
-  .demo-video-play{width:56px;height:56px}
-  .demo-video-duration{right:10px;bottom:9px;font-size:11px;padding:4px 8px}
-  .demo-video-keywords{gap:8px;justify-content:center}
-  .demo-video-keywords span:not(.demo-video-kw-sep){font-size:10px}
   .footer{
     padding:
       clamp(18px,5vw,24px)
@@ -2950,13 +2788,6 @@ nav .nav-inner{
 @media(max-width:380px){
   .logo span{display:none}
   .lang{max-width:100%}
-  .lang button,.theme{font-size:9px;padding:5px 6px;min-width:30px;min-height:30px}
-  h1{font-size:clamp(34px,10vw,44px)}
-  .hero-copy .lead{font-size:15px;line-height:1.48}
-  .btn{min-height:42px;padding:10px 14px}
-  .product-visual{height:min(29vh,206px)}
-  .product-copy h2{font-size:clamp(26px,7.3vw,34px)}
-  .product-subtitle{font-size:16px}
   #how .flow-minimal{grid-template-columns:1fr 1fr}
   #how .flow-item{font-size:13px;padding:7px 8px}
   #how .system-map{max-height:min(30vh,196px)}
@@ -2972,9 +2803,6 @@ nav .nav-inner{
   #how .tech-strip span{font-size:9px;padding:3px 6px}
   #ai .insight-grid{gap:6px}
   #ai .insight-card{padding:9px}
-  .demo-video-play{width:50px;height:50px}
-  .demo-video-keywords{gap:6px}
-  .footer-inner{padding:14px 12px}
   .user-flow-statement .user-flow-closing{
     font-size:clamp(24px,7.2vw,32px);
     line-height:1.4;
@@ -2999,9 +2827,6 @@ nav .nav-inner{
   #how .system-map{max-height:min(26vh,172px)}
   #how .tech-strip span{font-size:9px;padding:3px 6px}
   #how .sys-node .sub{display:none}
-  .demo-video-inner{gap:8px}
-  .demo-video-stage{max-width:92%}
-  .demo-video-keywords{display:none}
   .user-flow-grid{gap:6px}
   .user-flow-card{padding:8px}
   .user-flow-desc{-webkit-line-clamp:1;line-clamp:1}
@@ -3009,60 +2834,6 @@ nav .nav-inner{
   .user-flow-statement .user-flow-closing{
     font-size:clamp(20px,6vw,24px);
     line-height:1.4;
-  }
-}
-
-@supports not (aspect-ratio:1 / 1){
-  .demo-video-preview,
-  .demo-video-player-wrap{
-    height:49.5vw;
-    max-height:495px;
-  }
-
-  #how .system-map{
-    height:48vw;
-    max-height:540px;
-    min-height:0;
-  }
-
-  @media(max-width:980px){
-    .demo-video-preview,
-    .demo-video-player-wrap{
-      height:48vw;
-      max-height:360px;
-    }
-
-    #how .system-map{
-      height:30vh;
-      max-height:220px;
-    }
-  }
-
-  @media(min-width:681px) and (max-width:980px){
-    #how .system-map{
-      height:42vh;
-      max-height:360px;
-    }
-  }
-
-  @media(min-width:981px) and (hover:none) and (pointer:coarse){
-    #how .system-map{
-      height:46vh;
-      max-height:460px;
-    }
-  }
-
-  @media(max-width:680px){
-    .demo-video-preview,
-    .demo-video-player-wrap{
-      height:52vw;
-      max-height:260px;
-    }
-
-    #how .system-map{
-      height:30vh;
-      max-height:220px;
-    }
   }
 }
 
@@ -3086,6 +2857,140 @@ nav .nav-inner{
   #how .system-nodes{inset:clamp(12px,2vw,20px)}
   #how .sys-node{width:clamp(72px,9vw,96px)}
   #how .sys-node .sub{display:block}
+}
+
+/* Mobile polish: keep iPhone screens compact without changing tablet layout */
+@media(max-width:680px){
+  .section,
+  .footer{
+    padding-top:max(var(--section-pad-y),10px);
+    padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
+  }
+
+  .hero-section{
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+
+  .hero-inner{
+    justify-content:flex-end;
+    padding-bottom:clamp(18px,7vh,54px);
+  }
+
+  .hero-copy{
+    max-width:min(100%,460px);
+  }
+
+  .hero-copy .lead{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    overflow:hidden;
+  }
+
+  .product-detail .section-inner.product-layout{
+    height:100%;
+    max-height:100%;
+    overflow:hidden;
+  }
+
+  .product-visual{
+    height:min(31vh,250px);
+  }
+
+  .product-visual.dashboard-visual{
+    height:min(32vh,260px);
+  }
+
+  .highlight-list li:nth-child(n+5){
+    display:none;
+  }
+
+  #why .section-inner.split,
+  #how .section-inner.work-grid,
+  #vision .section-inner.vision-grid{
+    height:100%;
+    max-height:100%;
+    overflow:hidden;
+  }
+
+  #how .how-visual{
+    gap:6px;
+  }
+
+  #how .system-map{
+    max-height:min(28vh,210px);
+  }
+
+  #how .tech-strip span:nth-child(n+5){
+    display:none;
+  }
+
+  .demo-video-inner{
+    gap:clamp(10px,1.8vh,16px);
+  }
+
+  .demo-video-stage{
+    max-width:100%;
+  }
+
+  .demo-video-keywords span:not(.demo-video-kw-sep){
+    font-size:10px;
+    padding:5px 8px;
+  }
+
+  .demo-video-modal{
+    padding:
+      max(56px,env(safe-area-inset-top))
+      max(12px,env(safe-area-inset-right))
+      max(20px,env(safe-area-inset-bottom))
+      max(12px,env(safe-area-inset-left));
+  }
+
+  .demo-video-modal-close{
+    top:-48px;
+  }
+
+  .contact-section .lead{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    line-clamp:4;
+    overflow:hidden;
+  }
+}
+
+/* iPhone landscape / split-screen: prioritize usable content over decorative detail */
+@media(max-width:980px) and (max-height:560px){
+  :root{--section-pad-y:8px}
+
+  .hero-copy .lead,
+  .product-description,
+  .user-flow-section .section-head .lead,
+  #ai .lead,
+  #vision .lead,
+  .contact-section .lead{
+    -webkit-line-clamp:2;
+    line-clamp:2;
+  }
+
+  h1{font-size:clamp(34px,8vw,48px)}
+  h2,
+  .product-copy h2,
+  #how h2,
+  #ai h2,
+  #built-for h2,
+  #vision h2{
+    font-size:clamp(24px,6vw,34px);
+  }
+
+  .product-visual{height:min(28vh,190px)}
+  .highlight-list li:nth-child(n+4){display:none}
+  .user-flow-chips{display:none}
+  #how .system-map{max-height:min(30vh,190px)}
+  #how .tech-strip{display:none}
+  .demo-video-keywords{display:none}
+  .footer-inner{gap:8px}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -3452,13 +3357,18 @@ nav .nav-inner{
       </div>
       <div class="demo-video-stage">
         <button type="button" class="demo-video-preview" id="demoVideoTrigger" aria-label="Play demonstration video" data-i18n-aria="demoVideoPlayLabel">
-          <video class="demo-video-poster-vid" preload="metadata" playsinline webkit-playsinline muted poster="img/yuma_rider_demo.jpg" aria-hidden="true">
-            <source src="video.mp4" type="video/mp4">
-          </video>
+          <img
+            class="demo-video-poster"
+            src="https://i.ytimg.com/vi/pE3_5Ua0yV8/maxresdefault.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/pE3_5Ua0yV8/hqdefault.jpg';"
+          >
           <span class="demo-video-play" aria-hidden="true">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
           </span>
-          <span class="demo-video-duration" id="demoVideoDuration">1:08</span>
         </button>
       </div>
       <div class="demo-video-keywords" aria-label="Session flow">
@@ -4249,7 +4159,7 @@ function setLang(lang, btn){
   document.documentElement.lang = lang === "zh" ? "zh" : lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key = el.dataset.i18n;
-    const value = dict[lang] && dict[lang][key];
+    const value = dict[lang]?.[key];
     if(value === undefined) return;
     if(value.includes("\n")){
       el.innerHTML = value.split("\n").map(part=>part.trim()).join("<br>");
@@ -4259,12 +4169,12 @@ function setLang(lang, btn){
   });
   document.querySelectorAll("[data-i18n-aria]").forEach(el=>{
     const key = el.dataset.i18nAria;
-    const value = dict[lang] && dict[lang][key];
+    const value = dict[lang]?.[key];
     if(value === undefined) return;
     el.setAttribute("aria-label", value);
   });
   document.querySelectorAll(".lang button").forEach(item=>item.classList.remove("active"));
-  if(btn) btn.classList.add("active");
+  btn?.classList.add("active");
 }
 
 function toggleTheme(){
@@ -4294,63 +4204,70 @@ function toggleTheme(){
 })();
 
 (function initDemoVideo(){
+  const DEMO_YOUTUBE_ID = "pE3_5Ua0yV8";
+  const DEMO_YOUTUBE_URL = "https://www.youtube.com/embed/";
+  const DEMO_YOUTUBE_WATCH = "https://www.youtube.com/watch?v=pE3_5Ua0yV8";
   const trigger = document.getElementById("demoVideoTrigger");
-  const previewVid = document.querySelector(".demo-video-poster-vid");
-  const durationEl = document.getElementById("demoVideoDuration");
-  if(!trigger || !previewVid) return;
+  const modal = document.getElementById("demoVideoModal");
+  const backdrop = document.getElementById("demoVideoBackdrop");
+  const closeBtn = document.getElementById("demoVideoClose");
+  const playerWrap = document.getElementById("demoVideoPlayerWrap");
+  if(!trigger || !modal || !playerWrap) return;
 
-  function formatDuration(seconds){
-    if(!Number.isFinite(seconds) || seconds <= 0) return "1:08";
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m}:${String(s).padStart(2,"0")}`;
-  }
-
-  if(durationEl){
-    previewVid.addEventListener("loadedmetadata", ()=>{
-      durationEl.textContent = formatDuration(previewVid.duration);
+  function getEmbedSrc(){
+    const params = new URLSearchParams({
+      rel:"0",
+      modestbranding:"1",
+      playsinline:"1"
     });
+
+    if(location.protocol === "http:" || location.protocol === "https:"){
+      params.set("origin", location.origin);
+      params.set("widget_referrer", location.href);
+    }
+
+    return `${DEMO_YOUTUBE_URL}${DEMO_YOUTUBE_ID}?${params.toString()}`;
   }
 
-  function enterFullscreen(video){
-    if(typeof video.webkitEnterFullscreen === "function"){
-      video.webkitEnterFullscreen();
+  function createPlayer(){
+    playerWrap.textContent = "";
+    const iframe = document.createElement("iframe");
+    iframe.id = "demoVideoPlayer";
+    iframe.title = "YUMA demonstration video";
+    iframe.src = getEmbedSrc();
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+    iframe.setAttribute("allowfullscreen", "");
+    playerWrap.appendChild(iframe);
+  }
+
+  function openModal(){
+    if(location.protocol === "file:"){
+      window.open(DEMO_YOUTUBE_WATCH, "_blank", "noopener,noreferrer");
       return;
     }
-    if(typeof video.requestFullscreen === "function"){
-      video.requestFullscreen().catch(()=>{});
-      return;
-    }
-    if(typeof video.webkitRequestFullscreen === "function"){
-      video.webkitRequestFullscreen();
-    }
+
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    createPlayer();
+    closeBtn?.focus();
   }
 
-  function playFullscreen(){
-    previewVid.controls = true;
-    previewVid.muted = false;
-    previewVid.setAttribute("playsinline", "");
-    previewVid.setAttribute("webkit-playsinline", "");
-    if(previewVid.readyState < 1) previewVid.load();
-    previewVid.currentTime = 0;
-    enterFullscreen(previewVid);
-    const playAttempt = previewVid.play();
-    if(playAttempt && typeof playAttempt.catch === "function"){
-      playAttempt.catch(()=>{});
-    }
+  function closeModal(){
+    playerWrap.textContent = "";
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    trigger.focus();
   }
 
-  function resetPreview(){
-    previewVid.pause();
-    previewVid.controls = false;
-    previewVid.muted = true;
-    previewVid.currentTime = 0;
-  }
-
-  trigger.addEventListener("click", playFullscreen);
-  previewVid.addEventListener("webkitendfullscreen", resetPreview);
-  previewVid.addEventListener("fullscreenchange", ()=>{
-    if(!document.fullscreenElement) resetPreview();
+  trigger.addEventListener("click", openModal);
+  backdrop?.addEventListener("click", closeModal);
+  closeBtn?.addEventListener("click", closeModal);
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape" && !modal.hidden) closeModal();
   });
 })();
 
@@ -4384,15 +4301,6 @@ function toggleTheme(){
   window.addEventListener("pageshow", e=>{
     if(e.persisted) tryPlay();
   });
-
-  if(window.matchMedia("(pointer: coarse)").matches){
-    let scrollTimer;
-    window.addEventListener("scroll", ()=>{
-      if(!heroVideo.paused) heroVideo.pause();
-      window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(tryPlay, 220);
-    },{passive:true});
-  }
 
   const unlockOnGesture = ()=>{
     tryPlay();
