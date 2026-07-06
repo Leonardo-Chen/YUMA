@@ -2163,11 +2163,13 @@ nav .nav-inner{
   }
 
   .hero-section{
-    height:100dvh;
-    min-height:100dvh;
-    max-height:100dvh;
+    width:100vw;
+    height:100svh;
+    min-height:100svh;
+    max-height:100svh;
+    margin-left:calc(50% - 50vw);
     margin-top:calc(-1 * var(--nav-height));
-    overflow:clip;
+    overflow:hidden;
     padding:
       calc(var(--nav-height) + max(20px,env(safe-area-inset-top)))
       max(var(--gutter),env(safe-area-inset-right))
@@ -2183,22 +2185,13 @@ nav .nav-inner{
   .hero-bg,
   .hero-video{
     position:absolute;
-    top:0;
-    bottom:auto;
-    left:50%;
-    right:auto;
-    width:100vw;
-    height:100dvh;
+    inset:0;
+    width:100%;
+    height:100%;
     min-height:100%;
   }
 
-  .hero-bg{
-    transform:translateX(-50%);
-  }
-
   .hero-video{
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     min-width:100%;
@@ -2630,16 +2623,18 @@ nav .nav-inner{
   }
 
   .hero-section{
-    height:100dvh;
-    min-height:100dvh;
-    max-height:100dvh;
+    width:100vw;
+    height:100svh;
+    min-height:100svh;
+    max-height:100svh;
+    margin-left:calc(50% - 50vw);
     margin-top:calc(-1 * var(--nav-height));
     padding:
       calc(var(--nav-height) + max(24px,env(safe-area-inset-top)))
       max(var(--gutter),env(safe-area-inset-right))
       max(32px,env(safe-area-inset-bottom))
       max(var(--gutter),env(safe-area-inset-left));
-    overflow:clip;
+    overflow:hidden;
   }
 
   .hero-inner{
@@ -2650,21 +2645,13 @@ nav .nav-inner{
   .hero-bg,
   .hero-video{
     position:absolute;
-    top:0;
-    bottom:auto;
-    left:50%;
-    right:auto;
-    width:100vw;
-    height:100dvh;
+    inset:0;
+    width:100%;
+    height:100%;
     min-height:100%;
   }
 
-  .hero-bg{
-    transform:translateX(-50%);
-  }
-
   .hero-video{
-    left:0;
     width:100%;
     height:100%;
     min-width:100%;
@@ -2974,6 +2961,35 @@ nav .nav-inner{
   #how .system-nodes{inset:clamp(12px,2vw,20px)}
   #how .sys-node{width:clamp(72px,9vw,96px)}
   #how .sys-node .sub{display:block}
+}
+
+/* iPad hero video must fill the full first viewport */
+@media(min-width:681px) and (max-width:1366px) and (hover:none) and (pointer:coarse){
+  .hero-section{
+    width:100vw;
+    height:100svh;
+    min-height:100svh;
+    max-height:100svh;
+    margin-left:calc(50% - 50vw);
+    overflow:hidden;
+  }
+
+  .hero-bg,
+  .hero-video,
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+
+  .hero-video{
+    min-width:100%;
+    min-height:100%;
+    max-width:none;
+    object-fit:cover;
+    object-position:center center;
+  }
 }
 
 /* Mobile polish: keep iPhone screens compact without changing tablet layout */
