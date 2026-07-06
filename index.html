@@ -700,7 +700,7 @@ body.dark .user-flow-accent-3{
   }
 }
 
-.demo-video-poster-vid{
+.demo-video-poster{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -738,21 +738,6 @@ body.dark .user-flow-accent-3{
 @keyframes demoPlayPulse{
   0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 18%,transparent)}
   50%{box-shadow:0 0 0 14px transparent}
-}
-
-.demo-video-duration{
-  position:absolute;
-  right:16px;
-  bottom:14px;
-  padding:5px 10px;
-  border-radius:999px;
-  background:color-mix(in srgb,#101010 74%,transparent);
-  color:#f4f1ea;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.04em;
-  font-variant-numeric:tabular-nums;
-  pointer-events:none;
 }
 
 .demo-video-keywords{
@@ -834,13 +819,14 @@ body.dark .user-flow-accent-3{
   width:min(960px,100%);
 }
 
+.demo-video-modal-panel iframe,
 .demo-video-modal-panel video{
   display:block;
   width:100%;
   aspect-ratio:16 / 9;
+  border:0;
   border-radius:16px;
   background:#000;
-  object-fit:contain;
   box-shadow:0 24px 80px rgba(0,0,0,.45);
 }
 
@@ -2118,29 +2104,19 @@ nav .nav-inner{
 @media(min-width:681px) and (max-width:980px){
   :root{
     --gutter:clamp(28px,4.5vw,44px);
-    --section-pad-y:clamp(20px,3vh,36px);
+    --section-pad-y:clamp(14px,2vh,22px);
     --nav-height:72px;
   }
-
-  html{scroll-snap-type:y proximity}
-
-  .section,
-  .footer{
-    height:auto;
-    min-height:var(--section-height);
-    max-height:none;
-    overflow:visible;
-    scroll-snap-stop:normal;
-    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left));
-  }
-
-  .section-inner{overflow:visible}
 
   .hero-section{
     height:100dvh;
     min-height:100dvh;
-    max-height:none;
+    max-height:100dvh;
     margin-top:calc(-1 * var(--nav-height));
+    align-items:stretch;
+    justify-content:center;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
     overflow:clip;
     padding:
       calc(var(--nav-height) + max(20px,env(safe-area-inset-top)))
@@ -2190,12 +2166,12 @@ nav .nav-inner{
   .product-copy{order:2;max-width:none}
   .product-visual{
     order:1;
-    height:min(44vh,400px);
+    height:min(38vh,340px);
     border-radius:clamp(22px,3vw,32px);
   }
 
   .product-visual.dashboard-visual{
-    height:min(48vh,440px);
+    height:min(42vh,380px);
     border-radius:0;
   }
 
@@ -2204,9 +2180,10 @@ nav .nav-inner{
   .product-description{
     font-size:clamp(16px,1.8vw,18px);
     margin-top:12px;
-    display:block;
-    -webkit-line-clamp:unset;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    overflow:hidden;
   }
 
   .highlight-list{margin-top:14px;gap:8px}
@@ -2231,9 +2208,10 @@ nav .nav-inner{
   .user-flow-section .section-head h2{font-size:clamp(32px,4.2vw,40px)}
   .user-flow-section .section-head .lead{
     font-size:clamp(16px,1.8vw,18px);
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
   }
 
   .user-flow-grid{
@@ -2247,23 +2225,18 @@ nav .nav-inner{
   .user-flow-card h3{font-size:clamp(18px,2vw,21px)}
   .user-flow-desc{
     font-size:14px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
   }
 
-  .user-flow-chips{flex-wrap:wrap;overflow:visible}
-  .user-flow-chips li:nth-child(n+3){display:inline-block}
+  .user-flow-chips{flex-wrap:nowrap;overflow:hidden}
+  .user-flow-chips li:nth-child(n+3){display:none}
 
   .user-flow-statement .user-flow-closing{
     font-size:clamp(32px,4.5vw,44px);
     max-width:min(88vw,24em);
-  }
-
-  .user-flow-statement{
-    height:auto;
-    min-height:var(--section-height);
-    max-height:none;
   }
 
   #how .section-inner.work-grid{
@@ -2271,6 +2244,16 @@ nav .nav-inner{
     grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
     gap:clamp(24px,3.5vw,40px);
     align-items:center;
+  }
+
+  #how .how-visual{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:100%;
+    min-width:0;
+    align-self:stretch;
+    justify-content:center;
   }
 
   #how h2{font-size:clamp(32px,4.2vw,40px)}
@@ -2288,23 +2271,88 @@ nav .nav-inner{
   }
 
   #how .flow-item small{order:0;font-size:11px}
+
   #how .system-map{
+    position:relative;
     width:100%;
-    max-height:min(38vh,340px);
-    border-radius:20px;
+    max-width:none;
+    height:auto;
+    aspect-ratio:900 / 520;
+    min-height:0;
+    max-height:min(34vh,300px);
+    margin-inline:0;
+    padding:0;
+    border-radius:clamp(20px,2.5vw,28px);
+    border:1px solid var(--line);
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    overflow:hidden;
   }
 
-  #how .sys-node{width:clamp(64px,10vw,80px);padding:6px 5px}
-  #how .sys-node .icon{width:24px;height:24px;font-size:11px}
-  #how .sys-node .name{font-size:11px}
-  #how .sys-node .sub{display:block;font-size:9px}
+  #how .system-nodes{
+    position:absolute;
+    inset:clamp(14px,2.2vw,26px);
+    z-index:2;
+    display:block;
+  }
+
+  #how .sys-node,
+  #how .sys-node.horse,
+  #how .sys-node.rider,
+  #how .sys-node.stirrup-l,
+  #how .sys-node.stirrup-r,
+  #how .sys-node.ai{
+    position:absolute;
+    width:clamp(80px,10vw,112px);
+    min-height:0;
+    padding:10px 8px;
+    border-radius:14px;
+    transform:translate(-50%,-50%);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:0;
+  }
+
+  #how .sys-node.horse{left:50%;top:9%}
+  #how .sys-node.rider{left:50%;top:91%}
+  #how .sys-node.stirrup-l{left:11%;top:50%}
+  #how .sys-node.stirrup-r{left:89%;top:50%;display:flex}
+  #how .sys-node.ai{left:50%;top:50%}
+
+  #how .sys-node .icon{
+    width:28px;
+    height:28px;
+    font-size:12px;
+    margin:0 auto 6px;
+    border-radius:10px;
+  }
+
+  #how .sys-node .name{font-size:11px;line-height:1.2}
+  #how .sys-node .sub{
+    display:none;
+    font-size:9px;
+    line-height:1.2;
+    margin-top:2px;
+  }
+
+  #how .tech-strip{
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    margin-top:4px;
+    gap:6px;
+    overflow:hidden;
+  }
+
   #how .tech-strip span{font-size:12px;padding:5px 10px}
 
   #ai h2{font-size:clamp(32px,4.2vw,40px)}
   #ai .lead,#vision .lead{
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
     font-size:clamp(16px,1.8vw,18px);
   }
 
@@ -2312,9 +2360,10 @@ nav .nav-inner{
   #ai .insight-card{padding:14px;border-radius:18px}
   #ai .insight-card .text{
     font-size:15px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    overflow:hidden;
   }
 
   #built-for h2{font-size:clamp(32px,4.2vw,40px)}
@@ -2328,9 +2377,10 @@ nav .nav-inner{
   #built-for .audience-card h3{font-size:18px}
   #built-for .audience-card .text{
     font-size:15px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
   }
 
   #vision .section-inner.vision-grid{
@@ -2344,21 +2394,13 @@ nav .nav-inner{
   #vision .roadmap-step{font-size:clamp(17px,2vw,20px);padding:8px 0}
 
   .demo-video-head h2{font-size:clamp(28px,3.8vw,36px)}
-  .demo-video-lead{font-size:clamp(15px,1.8vw,17px);-webkit-line-clamp:unset;display:block}
-  .demo-video-keywords{flex-wrap:wrap;justify-content:center;overflow:visible}
+  .demo-video-lead{font-size:clamp(15px,1.8vw,17px);-webkit-line-clamp:2}
+  .demo-video-keywords{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}
   .demo-video-play{width:64px;height:64px}
 
   .contact-section h2{font-size:clamp(36px,5vw,48px)}
   .contact-section .lead{font-size:clamp(16px,1.8vw,18px)}
   .contact-section .btn-row .btn{flex:0 1 auto;max-width:none}
-
-  .footer{
-    height:auto;
-    min-height:auto;
-    max-height:none;
-    overflow:visible;
-    padding:clamp(40px,6vh,64px) max(var(--gutter),env(safe-area-inset-right)) max(32px,env(safe-area-inset-bottom)) max(var(--gutter),env(safe-area-inset-left));
-  }
 
   .footer-inner{
     display:grid;
@@ -2385,18 +2427,99 @@ nav .nav-inner{
 
 /* Touch iPad at desktop width (e.g. iPad Pro 12.9" portrait) */
 @media(min-width:981px) and (hover:none) and (pointer:coarse){
-  html{scroll-snap-type:y proximity}
-
-  .hero-section,
-  .product-detail,
-  .section,
-  .footer{
-    scroll-snap-stop:normal;
+  :root{
+    --section-height:calc(100dvh - var(--nav-height));
+    --section-pad-y:clamp(14px,2vh,22px);
+    --gutter:clamp(28px,4vw,48px);
   }
 
+  html{
+    scroll-snap-type:y mandatory;
+    scroll-padding-top:var(--nav-height);
+    -webkit-overflow-scrolling:touch;
+  }
+
+  nav{padding-top:env(safe-area-inset-top)}
+
+  .section,
+  .footer{
+    height:var(--section-height);
+    min-height:var(--section-height);
+    max-height:var(--section-height);
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    box-sizing:border-box;
+    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
+  }
+
+  .section-inner{
+    flex:1;
+    width:100%;
+    height:auto;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .hero-section{
+    height:100dvh;
+    min-height:100dvh;
+    max-height:100dvh;
+    margin-top:calc(-1 * var(--nav-height));
+    align-items:stretch;
+    justify-content:center;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    overflow:clip;
+    padding:
+      calc(var(--nav-height) + max(16px,env(safe-area-inset-top)))
+      max(var(--gutter),env(safe-area-inset-right))
+      max(20px,env(safe-area-inset-bottom))
+      max(var(--gutter),env(safe-area-inset-left));
+  }
+
+  .hero-inner{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:0;
+    height:100%;
+  }
+
+  .hero-copy{max-width:min(52%,520px)}
+
   .hero-bg,
-  .hero-video{
-    min-height:100%;
+  .hero-video{min-height:100%}
+
+  .product-detail,
+  .contact-section,
+  .demo-video-section{
+    min-height:var(--section-height);
+    max-height:var(--section-height);
+  }
+
+  .demo-video-section{
+    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
+  }
+
+  .demo-video-inner{
+    gap:clamp(14px,2vh,20px);
+    height:100%;
+    justify-content:center;
+  }
+
+  .demo-video-lead{-webkit-line-clamp:2}
+
+  .footer{
+    scroll-snap-align:end;
+    padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
   }
 
   .lang button,.theme{
@@ -2407,6 +2530,29 @@ nav .nav-inner{
   }
 
   .btn{min-height:48px;padding:14px 22px}
+
+  #how .how-visual{
+    min-width:0;
+    width:100%;
+  }
+
+  #how .system-map{
+    width:100%;
+    min-height:0;
+    height:auto;
+    aspect-ratio:900 / 520;
+    max-height:min(38vh,360px);
+  }
+
+  #how .sys-node{
+    width:clamp(96px,12vw,140px);
+    min-height:0;
+    padding:12px 10px;
+  }
+
+  #how .sys-node .icon{width:30px;height:30px;font-size:13px}
+  #how .sys-node .name{font-size:12px}
+  #how .sys-node .sub{display:none;font-size:10px}
 }
 
 @media(max-width:680px){
@@ -2471,7 +2617,6 @@ nav .nav-inner{
   .demo-video-head h2{font-size:clamp(22px,6vw,28px)}
   .demo-video-lead{font-size:13px}
   .demo-video-preview{border-radius:20px}
-  .demo-video-duration{right:12px;bottom:10px;font-size:11px}
   .footer{
     padding:
       clamp(18px,5vw,24px)
@@ -2571,21 +2716,22 @@ nav .nav-inner{
 
 /* Keep tablet layout readable in split-screen / short viewports */
 @media(min-width:681px) and (max-width:980px) and (max-height:740px){
-  :root{--section-pad-y:clamp(14px,2vh,20px)}
+  :root{--section-pad-y:clamp(10px,1.6vh,16px)}
 
   .product-detail .section-inner.product-layout{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     grid-template-rows:unset;
-    gap:clamp(16px,2.5vh,24px);
+    gap:clamp(12px,2vh,18px);
   }
 
-  .product-visual{height:min(36vh,280px)}
-  .product-description{-webkit-line-clamp:unset;display:block;overflow:visible}
-  #ai .insight-card .text{-webkit-line-clamp:unset;display:block;overflow:visible}
-  .user-flow-desc{-webkit-line-clamp:unset;display:block;overflow:visible}
-  .user-flow-chips li:nth-child(n+2){display:inline-block}
+  .product-visual{height:min(32vh,240px)}
+  .product-description{-webkit-line-clamp:3}
+  #ai .insight-card .text{-webkit-line-clamp:2}
+  .user-flow-desc{-webkit-line-clamp:1}
+  .user-flow-chips li:nth-child(n+2){display:none}
   .user-flow-statement .user-flow-closing{font-size:clamp(26px,4vw,32px)}
-  #how .system-map{max-height:min(32vh,260px)}
+  #how .system-map{max-height:min(28vh,220px)}
+  #how .sys-node .sub{display:none}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -2952,13 +3098,18 @@ nav .nav-inner{
       </div>
       <div class="demo-video-stage">
         <button type="button" class="demo-video-preview" id="demoVideoTrigger" aria-label="Play demonstration video" data-i18n-aria="demoVideoPlayLabel">
-          <video class="demo-video-poster-vid" preload="metadata" playsinline muted poster="img/yuma_rider_demo.jpg" aria-hidden="true">
-            <source src="video.mp4" type="video/mp4">
-          </video>
+          <img
+            class="demo-video-poster"
+            src="https://i.ytimg.com/vi/pE3_5Ua0yV8/maxresdefault.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/pE3_5Ua0yV8/hqdefault.jpg';"
+          >
           <span class="demo-video-play" aria-hidden="true">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
           </span>
-          <span class="demo-video-duration" id="demoVideoDuration">1:08</span>
         </button>
       </div>
       <div class="demo-video-keywords" aria-label="Session flow">
@@ -3051,9 +3202,13 @@ nav .nav-inner{
   <div class="demo-video-modal-backdrop" id="demoVideoBackdrop"></div>
   <div class="demo-video-modal-panel" role="dialog" aria-modal="true" aria-label="YUMA demonstration video" data-i18n-aria="demoVideoModalLabel">
     <button type="button" class="demo-video-modal-close" id="demoVideoClose" aria-label="Close video" data-i18n-aria="demoVideoCloseLabel">×</button>
-    <video id="demoVideoPlayer" controls playsinline preload="none">
-      <source src="video.mp4" type="video/mp4">
-    </video>
+    <iframe
+      id="demoVideoPlayer"
+      title="YUMA demonstration video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
   </div>
 </div>
 
@@ -3795,39 +3950,26 @@ function toggleTheme(){
 })();
 
 (function initDemoVideo(){
+  const DEMO_YOUTUBE_ID = "pE3_5Ua0yV8";
+  const DEMO_YOUTUBE_EMBED = "https://www.youtube-nocookie.com/embed/";
   const trigger = document.getElementById("demoVideoTrigger");
   const modal = document.getElementById("demoVideoModal");
   const backdrop = document.getElementById("demoVideoBackdrop");
   const closeBtn = document.getElementById("demoVideoClose");
   const player = document.getElementById("demoVideoPlayer");
-  const previewVid = document.querySelector(".demo-video-poster-vid");
-  const durationEl = document.getElementById("demoVideoDuration");
   if(!trigger || !modal || !player) return;
-
-  function formatDuration(seconds){
-    if(!Number.isFinite(seconds) || seconds <= 0) return "1:08";
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m}:${String(s).padStart(2,"0")}`;
-  }
-
-  if(previewVid && durationEl){
-    previewVid.addEventListener("loadedmetadata", ()=>{
-      durationEl.textContent = formatDuration(previewVid.duration);
-    });
-  }
 
   function openModal(){
     modal.hidden = false;
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    player.currentTime = 0;
-    player.play().catch(()=>{});
+    player.src = `${DEMO_YOUTUBE_EMBED}${DEMO_YOUTUBE_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
     closeBtn?.focus();
   }
 
   function closeModal(){
-    player.pause();
+    player.removeAttribute("src");
+    player.src = "";
     modal.hidden = true;
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
