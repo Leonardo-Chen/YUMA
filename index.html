@@ -286,7 +286,7 @@ h3{
 .hero-section{
   position:relative;
   isolation:isolate;
-  overflow:hidden;
+  overflow:clip;
   min-height:100svh;
   margin-top:calc(-1 * var(--nav-height));
   padding:
@@ -308,6 +308,9 @@ h3{
   inset:0;
   z-index:0;
   overflow:hidden;
+  width:100%;
+  height:100%;
+  min-height:100%;
   background:
     linear-gradient(105deg,rgba(246,243,237,.94) 0%,rgba(246,243,237,.5) 100%),
     url(img/yuma_stirrup_product.jpg) center/cover no-repeat;
@@ -326,12 +329,14 @@ body.dark .hero-bg{
   z-index:0;
   width:100%;
   height:100%;
+  min-width:100%;
+  min-height:100%;
+  max-width:none;
   object-fit:cover;
   object-position:center;
+  -webkit-object-fit:cover;
   background:#F6F3ED;
-  transform:translateZ(0);
-  -webkit-transform:translateZ(0);
-  backface-visibility:hidden;
+  pointer-events:none;
 }
 
 body.dark .hero-video{background:#101010}
@@ -1371,7 +1376,7 @@ nav .nav-inner{
     justify-content:center;
     scroll-snap-align:start;
     scroll-snap-stop:always;
-    overflow:hidden;
+    overflow:clip;
     padding:
       calc(var(--nav-height) + max(12px,env(safe-area-inset-top)))
       max(var(--gutter),env(safe-area-inset-right))
@@ -2136,11 +2141,17 @@ nav .nav-inner{
     min-height:100dvh;
     max-height:none;
     margin-top:calc(-1 * var(--nav-height));
+    overflow:clip;
     padding:
       calc(var(--nav-height) + max(20px,env(safe-area-inset-top)))
       max(var(--gutter),env(safe-area-inset-right))
       max(28px,env(safe-area-inset-bottom))
       max(var(--gutter),env(safe-area-inset-left));
+  }
+
+  .hero-bg,
+  .hero-video{
+    min-height:100%;
   }
 
   .hero-overlay{
@@ -2156,6 +2167,7 @@ nav .nav-inner{
   }
 
   h1{font-size:clamp(52px,7.2vw,72px);line-height:.9}
+  .hero-copy{max-width:min(52%,480px)}
   .hero-copy .lead{font-size:clamp(18px,2.4vw,22px);margin-top:20px;line-height:1.55}
   .hero-copy .btn-row{margin-top:24px}
   .btn-row .btn{flex:0 1 auto;min-width:148px}
@@ -2380,6 +2392,11 @@ nav .nav-inner{
   .section,
   .footer{
     scroll-snap-stop:normal;
+  }
+
+  .hero-bg,
+  .hero-video{
+    min-height:100%;
   }
 
   .lang button,.theme{
@@ -3823,6 +3840,47 @@ function toggleTheme(){
   document.addEventListener("keydown", e=>{
     if(e.key === "Escape" && !modal.hidden) closeModal();
   });
+})();
+
+(function initHeroVideo(){
+  const heroVideo = document.querySelector(".hero-video");
+  if(!heroVideo) return;
+
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.playsInline = true;
+  heroVideo.setAttribute("playsinline", "");
+  heroVideo.setAttribute("webkit-playsinline", "");
+
+  const tryPlay = ()=>{
+    if(!heroVideo.paused && !heroVideo.ended) return;
+    const playAttempt = heroVideo.play();
+    if(playAttempt && typeof playAttempt.catch === "function"){
+      playAttempt.catch(()=>{});
+    }
+  };
+
+  tryPlay();
+  heroVideo.addEventListener("loadeddata", tryPlay, {once:true});
+  heroVideo.addEventListener("canplay", tryPlay, {once:true});
+  heroVideo.addEventListener("canplaythrough", tryPlay, {once:true});
+
+  document.addEventListener("visibilitychange", ()=>{
+    if(!document.hidden) tryPlay();
+  });
+
+  window.addEventListener("pageshow", e=>{
+    if(e.persisted) tryPlay();
+  });
+
+  const unlockOnGesture = ()=>{
+    tryPlay();
+    document.removeEventListener("touchstart", unlockOnGesture, true);
+    document.removeEventListener("click", unlockOnGesture, true);
+  };
+
+  document.addEventListener("touchstart", unlockOnGesture, {capture:true, passive:true});
+  document.addEventListener("click", unlockOnGesture, {capture:true});
 })();
 </script>
 </body>
