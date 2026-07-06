@@ -3831,6 +3831,23 @@ nav .nav-inner{
 }
 
 @media(min-width:681px) and (max-width:980px){
+  :root{
+    --ipad-hero-overscan:clamp(28px,4vw,64px);
+  }
+
+  .hero-bg{
+    left:calc(-1 * var(--ipad-hero-overscan));
+    right:calc(-1 * var(--ipad-hero-overscan));
+    width:auto;
+  }
+
+  .hero-video{
+    left:0;
+    right:0;
+    width:100%;
+    object-position:center center;
+  }
+
   .product-layout,
   #why .section-inner.split,
   #how .section-inner.work-grid,
@@ -3877,6 +3894,20 @@ nav .nav-inner{
 @media(min-width:981px) and (max-width:1366px) and (hover:none) and (pointer:coarse){
   :root{
     --mobile-section-space:clamp(64px,9vh,104px);
+    --ipad-hero-overscan:clamp(28px,4vw,72px);
+  }
+
+  .hero-bg{
+    left:calc(-1 * var(--ipad-hero-overscan));
+    right:calc(-1 * var(--ipad-hero-overscan));
+    width:auto;
+  }
+
+  .hero-video{
+    left:0;
+    right:0;
+    width:100%;
+    object-position:center center;
   }
 
   .product-layout,
