@@ -662,6 +662,7 @@ body.dark .user-flow-accent-3{
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
+  line-clamp:2;
   overflow:hidden;
 }
 
@@ -1453,6 +1454,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+    line-clamp:2;
     overflow:hidden;
   }
 
@@ -1492,6 +1494,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+    line-clamp:2;
     overflow:hidden;
   }
 
@@ -1567,6 +1570,7 @@ nav .nav-inner{
     font-size:clamp(13px,3.4vw,15px);
     margin-top:10px;
     -webkit-line-clamp:2;
+    line-clamp:2;
   }
 
   .demo-video-stage{
@@ -1675,6 +1679,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:3;
+    line-clamp:3;
     overflow:hidden;
   }
 
@@ -1944,6 +1949,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+    line-clamp:2;
     overflow:hidden;
   }
 
@@ -1966,6 +1972,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:3;
+    line-clamp:3;
     overflow:hidden;
   }
 
@@ -2002,6 +2009,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+    line-clamp:2;
     overflow:hidden;
   }
 
@@ -2022,6 +2030,7 @@ nav .nav-inner{
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+    line-clamp:2;
     overflow:hidden;
   }
 
@@ -2104,7 +2113,7 @@ nav .nav-inner{
 @media(min-width:681px) and (max-width:980px){
   :root{
     --gutter:clamp(28px,4.5vw,44px);
-    --section-pad-y:clamp(16px,2.5vh,28px);
+    --section-pad-y:clamp(14px,2.2vh,24px);
     --nav-height:72px;
   }
 
@@ -2122,8 +2131,10 @@ nav .nav-inner{
 
   .section-inner{
     overflow:hidden;
+    height:100%;
     max-height:100%;
     min-height:0;
+    justify-content:center;
   }
 
   .hero-section{
@@ -2180,23 +2191,25 @@ nav .nav-inner{
   .product-copy{order:2;max-width:none}
   .product-visual{
     order:1;
-    height:min(44vh,400px);
+    height:min(42vh,380px);
     border-radius:clamp(22px,3vw,32px);
   }
 
   .product-visual.dashboard-visual{
-    height:min(48vh,440px);
+    height:min(44vh,400px);
     border-radius:0;
   }
 
-  .product-copy h2{font-size:clamp(36px,5vw,52px)}
+  .product-copy h2{font-size:clamp(34px,4.8vw,50px)}
   .product-subtitle{font-size:clamp(20px,2.6vw,26px);margin-top:10px}
   .product-description{
     font-size:clamp(16px,1.8vw,18px);
     margin-top:12px;
-    display:block;
-    -webkit-line-clamp:unset;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    line-clamp:4;
+    overflow:hidden;
   }
 
   .highlight-list{margin-top:14px;gap:8px}
@@ -2222,6 +2235,7 @@ nav .nav-inner{
   .user-flow-section .section-head .lead{
     font-size:clamp(16px,1.8vw,18px);
     -webkit-line-clamp:unset;
+    line-clamp:unset;
     display:block;
     overflow:visible;
   }
@@ -2237,13 +2251,15 @@ nav .nav-inner{
   .user-flow-card h3{font-size:clamp(18px,2vw,21px)}
   .user-flow-desc{
     font-size:14px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    overflow:hidden;
   }
 
   .user-flow-chips{flex-wrap:wrap;overflow:visible}
-  .user-flow-chips li:nth-child(n+3){display:inline-block}
+  .user-flow-chips li:nth-child(n+3){display:none}
 
   .user-flow-statement .user-flow-closing{
     font-size:clamp(32px,4.5vw,44px);
@@ -2375,6 +2391,7 @@ nav .nav-inner{
   #ai h2{font-size:clamp(32px,4.2vw,40px)}
   #ai .lead,#vision .lead{
     -webkit-line-clamp:unset;
+    line-clamp:unset;
     display:block;
     overflow:visible;
     font-size:clamp(16px,1.8vw,18px);
@@ -2384,9 +2401,11 @@ nav .nav-inner{
   #ai .insight-card{padding:14px;border-radius:18px}
   #ai .insight-card .text{
     font-size:15px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    line-clamp:4;
+    overflow:hidden;
   }
 
   #built-for h2{font-size:clamp(32px,4.2vw,40px)}
@@ -2400,9 +2419,11 @@ nav .nav-inner{
   #built-for .audience-card h3{font-size:18px}
   #built-for .audience-card .text{
     font-size:15px;
-    -webkit-line-clamp:unset;
-    display:block;
-    overflow:visible;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    overflow:hidden;
   }
 
   #vision .section-inner.vision-grid{
@@ -2416,7 +2437,15 @@ nav .nav-inner{
   #vision .roadmap-step{font-size:clamp(17px,2vw,20px);padding:8px 0}
 
   .demo-video-head h2{font-size:clamp(28px,3.8vw,36px)}
-  .demo-video-lead{font-size:clamp(15px,1.8vw,17px);-webkit-line-clamp:unset;display:block}
+  .demo-video-lead{
+    font-size:clamp(15px,1.8vw,17px);
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    overflow:hidden;
+  }
+  .demo-video-stage{width:min(100%,760px);max-width:92%}
   .demo-video-keywords{flex-wrap:wrap;justify-content:center;overflow:visible}
   .demo-video-play{width:64px;height:64px}
 
@@ -2491,19 +2520,71 @@ nav .nav-inner{
 
 /* Touch iPad at desktop width (e.g. iPad Pro 12.9" portrait) */
 @media(min-width:981px) and (hover:none) and (pointer:coarse){
-  html{scroll-snap-type:y proximity}
+  :root{
+    --section-height:calc(100dvh - var(--nav-height));
+    --gutter:clamp(36px,4vw,56px);
+  }
+
+  html{
+    scroll-snap-type:y mandatory;
+    scroll-padding-top:var(--nav-height);
+  }
 
   .hero-section,
   .product-detail,
   .section,
   .footer{
-    scroll-snap-stop:normal;
+    scroll-snap-stop:always;
+  }
+
+  .section,
+  .product-detail,
+  .footer{
+    height:var(--section-height);
+    min-height:var(--section-height);
+    max-height:var(--section-height);
+    overflow:hidden;
+  }
+
+  .section{
+    padding-top:clamp(36px,5vh,64px);
+    padding-bottom:clamp(36px,5vh,64px);
+  }
+
+  .section-inner{
+    max-height:100%;
+    overflow:hidden;
+  }
+
+  .hero-section{
+    height:100dvh;
+    min-height:100dvh;
+    max-height:100dvh;
+    overflow:clip;
   }
 
   .hero-bg,
   .hero-video{
     min-height:100%;
   }
+
+  .product-visual{
+    height:min(54vh,560px);
+  }
+
+  .product-visual.dashboard-visual{
+    height:min(58vh,600px);
+  }
+
+  .product-description{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    line-clamp:4;
+    overflow:hidden;
+  }
+
+  .highlight-list{margin-top:22px}
 
   .lang button,.theme{
     min-height:40px;
@@ -2513,6 +2594,16 @@ nav .nav-inner{
   }
 
   .btn{min-height:48px;padding:14px 22px}
+
+  .user-flow-grid{gap:14px}
+  .user-flow-card{padding:clamp(18px,2vw,24px)}
+  .user-flow-desc{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    overflow:hidden;
+  }
 
   #how .how-visual{
     min-width:0;
@@ -2524,6 +2615,7 @@ nav .nav-inner{
     min-height:0;
     height:auto;
     aspect-ratio:900 / 520;
+    max-height:min(46vh,460px);
   }
 
   #how .sys-node{
@@ -2535,6 +2627,30 @@ nav .nav-inner{
   #how .sys-node .icon{width:30px;height:30px;font-size:13px}
   #how .sys-node .name{font-size:12px}
   #how .sys-node .sub{font-size:10px}
+
+  #ai .insight-card .text,
+  #built-for .audience-card .text{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    line-clamp:4;
+    overflow:hidden;
+  }
+
+  .demo-video-section{
+    padding-top:clamp(36px,5vh,64px);
+    padding-bottom:clamp(36px,5vh,64px);
+  }
+
+  .demo-video-stage{
+    width:min(100%,820px);
+    max-width:86%;
+  }
+
+  .footer{
+    display:flex;
+    align-items:center;
+  }
 }
 
 @media(max-width:680px){
@@ -2579,7 +2695,7 @@ nav .nav-inner{
   #how .tech-strip span{font-size:10px;padding:4px 7px}
   #ai h2{font-size:clamp(28px,7.4vw,36px)}
   #ai .insight-card{padding:8px}
-  #ai .insight-card .text{font-size:14px;-webkit-line-clamp:2}
+  #ai .insight-card .text{font-size:14px;-webkit-line-clamp:2;line-clamp:2}
   #built-for h2{font-size:clamp(28px,7.4vw,36px)}
   #built-for .audience-card h3{font-size:16px}
   #built-for .audience-card .text{font-size:14px}
@@ -2589,7 +2705,7 @@ nav .nav-inner{
   .user-flow-section .section-head h2{font-size:clamp(26px,7vw,34px)}
   .user-flow-grid{gap:5px}
   .user-flow-card{padding:9px;gap:4px}
-  .user-flow-desc{-webkit-line-clamp:2;font-size:13px}
+  .user-flow-desc{-webkit-line-clamp:2;line-clamp:2;font-size:13px}
   .user-flow-statement .user-flow-closing{
     font-size:clamp(26px,7.6vw,34px);
     line-height:1.38;
@@ -2678,9 +2794,9 @@ nav .nav-inner{
     gap:8px;
   }
   .product-visual{height:min(34vh,240px)}
-  .product-description{-webkit-line-clamp:2}
+  .product-description{-webkit-line-clamp:2;line-clamp:2}
   .highlight-list li{font-size:9px;padding:3px 7px}
-  #ai .insight-card .text{-webkit-line-clamp:2}
+  #ai .insight-card .text{-webkit-line-clamp:2;line-clamp:2}
   #vision .roadmap-step{padding:4px 0;font-size:13px}
   #built-for .audience-card{padding:8px 10px}
   #how .system-map{max-height:min(26vh,172px)}
@@ -2688,7 +2804,7 @@ nav .nav-inner{
   #how .sys-node .sub{display:none}
   .user-flow-grid{gap:6px}
   .user-flow-card{padding:8px}
-  .user-flow-desc{-webkit-line-clamp:1}
+  .user-flow-desc{-webkit-line-clamp:1;line-clamp:1}
   .user-flow-chips li:nth-child(n+2){display:none}
   .user-flow-statement .user-flow-closing{
     font-size:clamp(20px,6vw,24px);
@@ -2707,10 +2823,10 @@ nav .nav-inner{
   }
 
   .product-visual{height:min(36vh,280px)}
-  .product-description{-webkit-line-clamp:unset;display:block;overflow:visible}
-  #ai .insight-card .text{-webkit-line-clamp:unset;display:block;overflow:visible}
-  .user-flow-desc{-webkit-line-clamp:unset;display:block;overflow:visible}
-  .user-flow-chips li:nth-child(n+2){display:inline-block}
+  .product-description{-webkit-line-clamp:3;line-clamp:3}
+  #ai .insight-card .text{-webkit-line-clamp:3;line-clamp:3}
+  .user-flow-desc{-webkit-line-clamp:2;line-clamp:2}
+  .user-flow-chips li:nth-child(n+2){display:none}
   .user-flow-statement .user-flow-closing{font-size:clamp(26px,4vw,32px)}
   #how .system-map{max-height:min(36vh,300px)}
   #how .system-nodes{inset:clamp(12px,2vw,20px)}
