@@ -2104,8 +2104,26 @@ nav .nav-inner{
 @media(min-width:681px) and (max-width:980px){
   :root{
     --gutter:clamp(28px,4.5vw,44px);
-    --section-pad-y:clamp(14px,2vh,22px);
+    --section-pad-y:clamp(16px,2.5vh,28px);
     --nav-height:72px;
+  }
+
+  html{scroll-snap-type:y mandatory}
+
+  .section,
+  .footer{
+    height:var(--section-height);
+    min-height:var(--section-height);
+    max-height:var(--section-height);
+    overflow:hidden;
+    scroll-snap-stop:always;
+    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left));
+  }
+
+  .section-inner{
+    overflow:hidden;
+    max-height:100%;
+    min-height:0;
   }
 
   .hero-section{
@@ -2113,10 +2131,6 @@ nav .nav-inner{
     min-height:100dvh;
     max-height:100dvh;
     margin-top:calc(-1 * var(--nav-height));
-    align-items:stretch;
-    justify-content:center;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
     overflow:clip;
     padding:
       calc(var(--nav-height) + max(20px,env(safe-area-inset-top)))
@@ -2166,12 +2180,12 @@ nav .nav-inner{
   .product-copy{order:2;max-width:none}
   .product-visual{
     order:1;
-    height:min(38vh,340px);
+    height:min(44vh,400px);
     border-radius:clamp(22px,3vw,32px);
   }
 
   .product-visual.dashboard-visual{
-    height:min(42vh,380px);
+    height:min(48vh,440px);
     border-radius:0;
   }
 
@@ -2180,10 +2194,9 @@ nav .nav-inner{
   .product-description{
     font-size:clamp(16px,1.8vw,18px);
     margin-top:12px;
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:4;
-    overflow:hidden;
+    display:block;
+    -webkit-line-clamp:unset;
+    overflow:visible;
   }
 
   .highlight-list{margin-top:14px;gap:8px}
@@ -2208,10 +2221,9 @@ nav .nav-inner{
   .user-flow-section .section-head h2{font-size:clamp(32px,4.2vw,40px)}
   .user-flow-section .section-head .lead{
     font-size:clamp(16px,1.8vw,18px);
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2;
-    overflow:hidden;
+    -webkit-line-clamp:unset;
+    display:block;
+    overflow:visible;
   }
 
   .user-flow-grid{
@@ -2225,18 +2237,23 @@ nav .nav-inner{
   .user-flow-card h3{font-size:clamp(18px,2vw,21px)}
   .user-flow-desc{
     font-size:14px;
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2;
-    overflow:hidden;
+    -webkit-line-clamp:unset;
+    display:block;
+    overflow:visible;
   }
 
-  .user-flow-chips{flex-wrap:nowrap;overflow:hidden}
-  .user-flow-chips li:nth-child(n+3){display:none}
+  .user-flow-chips{flex-wrap:wrap;overflow:visible}
+  .user-flow-chips li:nth-child(n+3){display:inline-block}
 
   .user-flow-statement .user-flow-closing{
     font-size:clamp(32px,4.5vw,44px);
     max-width:min(88vw,24em);
+  }
+
+  .user-flow-statement{
+    height:var(--section-height);
+    min-height:var(--section-height);
+    max-height:var(--section-height);
   }
 
   #how .section-inner.work-grid{
@@ -2244,16 +2261,23 @@ nav .nav-inner{
     grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
     gap:clamp(24px,3.5vw,40px);
     align-items:center;
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
   }
 
   #how .how-visual{
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:10px;
     width:100%;
     min-width:0;
+    min-height:0;
+    max-height:100%;
     align-self:stretch;
     justify-content:center;
+    overflow:hidden;
   }
 
   #how h2{font-size:clamp(32px,4.2vw,40px)}
@@ -2279,7 +2303,8 @@ nav .nav-inner{
     height:auto;
     aspect-ratio:900 / 520;
     min-height:0;
-    max-height:min(34vh,300px);
+    max-height:min(42vh,360px);
+    flex:0 1 auto;
     margin-inline:0;
     padding:0;
     border-radius:clamp(20px,2.5vw,28px);
@@ -2331,7 +2356,7 @@ nav .nav-inner{
 
   #how .sys-node .name{font-size:11px;line-height:1.2}
   #how .sys-node .sub{
-    display:none;
+    display:block;
     font-size:9px;
     line-height:1.2;
     margin-top:2px;
@@ -2342,17 +2367,16 @@ nav .nav-inner{
     justify-content:flex-start;
     margin-top:4px;
     gap:6px;
-    overflow:hidden;
+    overflow:visible;
   }
 
   #how .tech-strip span{font-size:12px;padding:5px 10px}
 
   #ai h2{font-size:clamp(32px,4.2vw,40px)}
   #ai .lead,#vision .lead{
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2;
-    overflow:hidden;
+    -webkit-line-clamp:unset;
+    display:block;
+    overflow:visible;
     font-size:clamp(16px,1.8vw,18px);
   }
 
@@ -2360,10 +2384,9 @@ nav .nav-inner{
   #ai .insight-card{padding:14px;border-radius:18px}
   #ai .insight-card .text{
     font-size:15px;
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:3;
-    overflow:hidden;
+    -webkit-line-clamp:unset;
+    display:block;
+    overflow:visible;
   }
 
   #built-for h2{font-size:clamp(32px,4.2vw,40px)}
@@ -2377,10 +2400,9 @@ nav .nav-inner{
   #built-for .audience-card h3{font-size:18px}
   #built-for .audience-card .text{
     font-size:15px;
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2;
-    overflow:hidden;
+    -webkit-line-clamp:unset;
+    display:block;
+    overflow:visible;
   }
 
   #vision .section-inner.vision-grid{
@@ -2394,13 +2416,55 @@ nav .nav-inner{
   #vision .roadmap-step{font-size:clamp(17px,2vw,20px);padding:8px 0}
 
   .demo-video-head h2{font-size:clamp(28px,3.8vw,36px)}
-  .demo-video-lead{font-size:clamp(15px,1.8vw,17px);-webkit-line-clamp:2}
-  .demo-video-keywords{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}
+  .demo-video-lead{font-size:clamp(15px,1.8vw,17px);-webkit-line-clamp:unset;display:block}
+  .demo-video-keywords{flex-wrap:wrap;justify-content:center;overflow:visible}
   .demo-video-play{width:64px;height:64px}
 
   .contact-section h2{font-size:clamp(36px,5vw,48px)}
   .contact-section .lead{font-size:clamp(16px,1.8vw,18px)}
   .contact-section .btn-row .btn{flex:0 1 auto;max-width:none}
+
+  #why .section-inner.split,
+  #vision .section-inner.vision-grid{
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .product-detail .section-inner.product-layout{
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .demo-video-section .section-inner,
+  .demo-video-inner{
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .contact-section .section-inner{
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .footer{
+    height:var(--section-height);
+    min-height:var(--section-height);
+    max-height:var(--section-height);
+    overflow:hidden;
+    scroll-snap-align:end;
+    scroll-snap-stop:always;
+    align-items:center;
+    justify-content:center;
+    padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
+  }
 
   .footer-inner{
     display:grid;
@@ -2427,99 +2491,18 @@ nav .nav-inner{
 
 /* Touch iPad at desktop width (e.g. iPad Pro 12.9" portrait) */
 @media(min-width:981px) and (hover:none) and (pointer:coarse){
-  :root{
-    --section-height:calc(100dvh - var(--nav-height));
-    --section-pad-y:clamp(14px,2vh,22px);
-    --gutter:clamp(28px,4vw,48px);
-  }
+  html{scroll-snap-type:y proximity}
 
-  html{
-    scroll-snap-type:y mandatory;
-    scroll-padding-top:var(--nav-height);
-    -webkit-overflow-scrolling:touch;
-  }
-
-  nav{padding-top:env(safe-area-inset-top)}
-
+  .hero-section,
+  .product-detail,
   .section,
   .footer{
-    height:var(--section-height);
-    min-height:var(--section-height);
-    max-height:var(--section-height);
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    box-sizing:border-box;
-    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
+    scroll-snap-stop:normal;
   }
-
-  .section-inner{
-    flex:1;
-    width:100%;
-    height:auto;
-    max-height:100%;
-    min-height:0;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-  }
-
-  .hero-section{
-    height:100dvh;
-    min-height:100dvh;
-    max-height:100dvh;
-    margin-top:calc(-1 * var(--nav-height));
-    align-items:stretch;
-    justify-content:center;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    overflow:clip;
-    padding:
-      calc(var(--nav-height) + max(16px,env(safe-area-inset-top)))
-      max(var(--gutter),env(safe-area-inset-right))
-      max(20px,env(safe-area-inset-bottom))
-      max(var(--gutter),env(safe-area-inset-left));
-  }
-
-  .hero-inner{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    min-height:0;
-    height:100%;
-  }
-
-  .hero-copy{max-width:min(52%,520px)}
 
   .hero-bg,
-  .hero-video{min-height:100%}
-
-  .product-detail,
-  .contact-section,
-  .demo-video-section{
-    min-height:var(--section-height);
-    max-height:var(--section-height);
-  }
-
-  .demo-video-section{
-    padding:var(--section-pad-y) max(var(--gutter),env(safe-area-inset-left)) var(--section-pad-y) max(var(--gutter),env(safe-area-inset-right));
-  }
-
-  .demo-video-inner{
-    gap:clamp(14px,2vh,20px);
-    height:100%;
-    justify-content:center;
-  }
-
-  .demo-video-lead{-webkit-line-clamp:2}
-
-  .footer{
-    scroll-snap-align:end;
-    padding-bottom:max(var(--section-pad-y),env(safe-area-inset-bottom));
+  .hero-video{
+    min-height:100%;
   }
 
   .lang button,.theme{
@@ -2541,7 +2524,6 @@ nav .nav-inner{
     min-height:0;
     height:auto;
     aspect-ratio:900 / 520;
-    max-height:min(38vh,360px);
   }
 
   #how .sys-node{
@@ -2552,7 +2534,7 @@ nav .nav-inner{
 
   #how .sys-node .icon{width:30px;height:30px;font-size:13px}
   #how .sys-node .name{font-size:12px}
-  #how .sys-node .sub{display:none;font-size:10px}
+  #how .sys-node .sub{font-size:10px}
 }
 
 @media(max-width:680px){
@@ -2716,22 +2698,24 @@ nav .nav-inner{
 
 /* Keep tablet layout readable in split-screen / short viewports */
 @media(min-width:681px) and (max-width:980px) and (max-height:740px){
-  :root{--section-pad-y:clamp(10px,1.6vh,16px)}
+  :root{--section-pad-y:clamp(14px,2vh,20px)}
 
   .product-detail .section-inner.product-layout{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     grid-template-rows:unset;
-    gap:clamp(12px,2vh,18px);
+    gap:clamp(16px,2.5vh,24px);
   }
 
-  .product-visual{height:min(32vh,240px)}
-  .product-description{-webkit-line-clamp:3}
-  #ai .insight-card .text{-webkit-line-clamp:2}
-  .user-flow-desc{-webkit-line-clamp:1}
-  .user-flow-chips li:nth-child(n+2){display:none}
+  .product-visual{height:min(36vh,280px)}
+  .product-description{-webkit-line-clamp:unset;display:block;overflow:visible}
+  #ai .insight-card .text{-webkit-line-clamp:unset;display:block;overflow:visible}
+  .user-flow-desc{-webkit-line-clamp:unset;display:block;overflow:visible}
+  .user-flow-chips li:nth-child(n+2){display:inline-block}
   .user-flow-statement .user-flow-closing{font-size:clamp(26px,4vw,32px)}
-  #how .system-map{max-height:min(28vh,220px)}
-  #how .sys-node .sub{display:none}
+  #how .system-map{max-height:min(36vh,300px)}
+  #how .system-nodes{inset:clamp(12px,2vw,20px)}
+  #how .sys-node{width:clamp(72px,9vw,96px)}
+  #how .sys-node .sub{display:block}
 }
 
 @media(prefers-reduced-motion:reduce){
