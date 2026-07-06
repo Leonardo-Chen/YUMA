@@ -2375,10 +2375,10 @@ nav .nav-inner{
     position:relative;
     width:100%;
     max-width:none;
-    height:auto;
-    aspect-ratio:900 / 520;
+    height:clamp(260px,36vh,360px);
+    aspect-ratio:auto;
     min-height:0;
-    max-height:min(42vh,360px);
+    max-height:calc(100% - 48px);
     flex:0 1 auto;
     margin-inline:0;
     padding:0;
@@ -2389,11 +2389,25 @@ nav .nav-inner{
     overflow:hidden;
   }
 
+  #how .system-svg{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:visible;
+  }
+
   #how .system-nodes{
     position:absolute;
     inset:clamp(14px,2.2vw,26px);
     z-index:2;
     display:block;
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:0;
   }
 
   #how .sys-node,
@@ -2720,9 +2734,30 @@ nav .nav-inner{
   #how .system-map{
     width:100%;
     min-height:0;
-    height:auto;
-    aspect-ratio:900 / 520;
+    height:clamp(320px,42vh,460px);
+    aspect-ratio:auto;
     max-height:min(46vh,460px);
+  }
+
+  #how .system-svg{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:visible;
+  }
+
+  #how .system-nodes{
+    position:absolute;
+    inset:clamp(22px,3vw,42px);
+    z-index:2;
+    display:block;
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:0;
   }
 
   #how .sys-node{
@@ -3073,6 +3108,21 @@ nav .nav-inner{
   #how .tech-strip{display:none}
   .demo-video-keywords{display:none}
   .footer-inner{gap:8px}
+}
+
+/* Disable scroll snapping on touch devices for smoother mobile browsing */
+@media(max-width:980px), (hover:none) and (pointer:coarse){
+  html{
+    scroll-snap-type:none;
+  }
+
+  .section,
+  .hero-section,
+  .product-detail,
+  .footer{
+    scroll-snap-align:none;
+    scroll-snap-stop:normal;
+  }
 }
 
 @media(prefers-reduced-motion:reduce){
