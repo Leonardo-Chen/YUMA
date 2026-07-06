@@ -51,6 +51,8 @@
   --nav-height:76px;
   --footer-space:clamp(76px,8vh,104px);
   --texture-opacity:.12;
+  --vh:1vh;
+  --viewport-height:calc(var(--vh) * 100);
 }
 
 body.dark{
@@ -2198,7 +2200,7 @@ nav .nav-inner{
     min-height:100%;
     max-width:none;
     object-fit:cover;
-    object-position:center;
+    object-position:42% center;
     transform:none;
     -webkit-transform:none;
     will-change:auto;
@@ -2213,14 +2215,14 @@ nav .nav-inner{
 
   .hero-overlay{
     background:
-      linear-gradient(to right,rgba(246,243,237,.68) 0%,rgba(246,243,237,.42) 36%,rgba(246,243,237,.18) 68%,rgba(246,243,237,.04) 100%),
-      linear-gradient(to top,rgba(246,243,237,.26) 0%,transparent 44%);
+      linear-gradient(to right,rgba(246,243,237,.32) 0%,rgba(246,243,237,.22) 34%,rgba(246,243,237,.1) 64%,rgba(246,243,237,.02) 100%),
+      linear-gradient(to top,rgba(246,243,237,.16) 0%,transparent 42%);
   }
 
   body.dark .hero-overlay{
     background:
-      linear-gradient(to right,rgba(15,15,15,.7) 0%,rgba(15,15,15,.46) 36%,rgba(15,15,15,.22) 68%,rgba(15,15,15,.06) 100%),
-      linear-gradient(to top,rgba(15,15,15,.3) 0%,transparent 44%);
+      linear-gradient(to right,rgba(15,15,15,.38) 0%,rgba(15,15,15,.26) 34%,rgba(15,15,15,.12) 64%,rgba(15,15,15,.03) 100%),
+      linear-gradient(to top,rgba(15,15,15,.18) 0%,transparent 42%);
   }
 
   h1{font-size:clamp(52px,7.2vw,72px);line-height:.9}
@@ -2662,7 +2664,7 @@ nav .nav-inner{
     min-height:100%;
     max-width:none;
     object-fit:cover;
-    object-position:center;
+    object-position:42% center;
     transform:none;
     -webkit-transform:none;
     will-change:auto;
@@ -2674,14 +2676,14 @@ nav .nav-inner{
     height:100%;
     transform:none;
     background:
-      linear-gradient(to right,rgba(246,243,237,.64) 0%,rgba(246,243,237,.38) 36%,rgba(246,243,237,.16) 68%,rgba(246,243,237,.04) 100%),
-      linear-gradient(to top,rgba(246,243,237,.24) 0%,transparent 44%);
+      linear-gradient(to right,rgba(246,243,237,.3) 0%,rgba(246,243,237,.2) 34%,rgba(246,243,237,.09) 64%,rgba(246,243,237,.02) 100%),
+      linear-gradient(to top,rgba(246,243,237,.14) 0%,transparent 42%);
   }
 
   body.dark .hero-overlay{
     background:
-      linear-gradient(to right,rgba(15,15,15,.68) 0%,rgba(15,15,15,.42) 36%,rgba(15,15,15,.2) 68%,rgba(15,15,15,.06) 100%),
-      linear-gradient(to top,rgba(15,15,15,.28) 0%,transparent 44%);
+      linear-gradient(to right,rgba(15,15,15,.36) 0%,rgba(15,15,15,.24) 34%,rgba(15,15,15,.11) 64%,rgba(15,15,15,.03) 100%),
+      linear-gradient(to top,rgba(15,15,15,.16) 0%,transparent 42%);
   }
 
   .product-visual{
@@ -2973,11 +2975,15 @@ nav .nav-inner{
 
 /* iPad hero video must fill the full first viewport */
 @media(min-width:681px) and (max-width:1366px) and (hover:none) and (pointer:coarse){
+  :root{
+    --section-height:calc(var(--viewport-height) - var(--nav-height) - env(safe-area-inset-top));
+  }
+
   .hero-section{
     width:100%;
-    height:100dvh;
-    min-height:100dvh;
-    max-height:100dvh;
+    height:var(--viewport-height);
+    min-height:var(--viewport-height);
+    max-height:var(--viewport-height);
     margin-left:0;
     overflow:hidden;
   }
@@ -2996,7 +3002,7 @@ nav .nav-inner{
     min-height:100%;
     max-width:none;
     object-fit:cover;
-    object-position:center center;
+    object-position:42% center;
     transform:none;
     -webkit-transform:none;
     will-change:auto;
@@ -3702,6 +3708,17 @@ nav .nav-inner{
 </div>
 
 <script>
+function updateViewportHeight(){
+  document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+}
+
+updateViewportHeight();
+window.addEventListener("resize", updateViewportHeight, {passive:true});
+window.addEventListener("orientationchange", ()=>{
+  window.setTimeout(updateViewportHeight, 250);
+}, {passive:true});
+window.addEventListener("pageshow", updateViewportHeight);
+
 const dict = {
   en:{
     heroTitle:"Reflective Riding System",
