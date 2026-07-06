@@ -69,6 +69,7 @@ body.dark{
 *{box-sizing:border-box;margin:0;padding:0}
 
 html{
+  min-height:100%;
   scroll-behavior:smooth;
   scroll-snap-type:y proximity;
   scroll-padding-top:var(--nav-height);
@@ -188,6 +189,7 @@ body.dark .brand-logo{filter:invert(1) brightness(1.08)}
 }
 
 .section{
+  min-height:calc(100vh - var(--nav-height));
   min-height:calc(100svh - var(--nav-height));
   scroll-snap-align:start;
   scroll-snap-stop:normal;
@@ -288,6 +290,7 @@ h3{
   position:relative;
   isolation:isolate;
   overflow:clip;
+  min-height:100vh;
   min-height:100svh;
   margin-top:calc(-1 * var(--nav-height));
   padding:
@@ -1322,15 +1325,22 @@ nav .nav-inner{
 
 @media(max-width:980px){
   :root{
-    --section-height:calc(100dvh - var(--nav-height));
+    --section-height:calc(100vh - var(--nav-height));
     --section-pad-y:clamp(12px,2vh,18px);
+  }
+
+  @supports(height:100dvh){
+    :root{
+      --section-height:calc(100dvh - var(--nav-height));
+    }
   }
 
   nav{
     padding-top:env(safe-area-inset-top);
   }
 
-  html{
+  html,
+  body{
     scroll-snap-type:y mandatory;
     scroll-padding-top:var(--nav-height);
     -webkit-overflow-scrolling:touch;
@@ -1380,6 +1390,9 @@ nav .nav-inner{
   }
 
   .hero-section{
+    height:100vh;
+    min-height:100vh;
+    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
@@ -2163,6 +2176,9 @@ nav .nav-inner{
   }
 
   .hero-section{
+    height:100vh;
+    min-height:100vh;
+    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
@@ -2546,11 +2562,18 @@ nav .nav-inner{
 /* Touch iPad at desktop width (e.g. iPad Pro 12.9" portrait) */
 @media(min-width:981px) and (hover:none) and (pointer:coarse){
   :root{
-    --section-height:calc(100dvh - var(--nav-height));
+    --section-height:calc(100vh - var(--nav-height));
     --gutter:clamp(36px,4vw,56px);
   }
 
-  html{
+  @supports(height:100dvh){
+    :root{
+      --section-height:calc(100dvh - var(--nav-height));
+    }
+  }
+
+  html,
+  body{
     scroll-snap-type:y mandatory;
     scroll-padding-top:var(--nav-height);
   }
@@ -2582,6 +2605,9 @@ nav .nav-inner{
   }
 
   .hero-section{
+    height:100vh;
+    min-height:100vh;
+    max-height:100vh;
     height:100dvh;
     min-height:100dvh;
     max-height:100dvh;
