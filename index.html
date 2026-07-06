@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="referrer" content="origin-when-cross-origin" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="format-detection" content="telephone=no,email=no,address=no" />
@@ -820,15 +821,39 @@ body.dark .user-flow-accent-3{
   width:min(960px,100%);
 }
 
+.demo-video-player-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 9;
+  border-radius:16px;
+  background:#000;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+
 .demo-video-modal-panel iframe,
 .demo-video-modal-panel video{
   display:block;
   width:100%;
-  aspect-ratio:16 / 9;
+  height:100%;
   border:0;
-  border-radius:16px;
   background:#000;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+
+.demo-video-fallback{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:14px;
+  color:#f4f1ea;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  opacity:.82;
+}
+
+.demo-video-fallback:hover{
+  opacity:1;
 }
 
 .demo-video-modal-close{
@@ -3302,13 +3327,8 @@ nav .nav-inner{
   <div class="demo-video-modal-backdrop" id="demoVideoBackdrop"></div>
   <div class="demo-video-modal-panel" role="dialog" aria-modal="true" aria-label="YUMA demonstration video" data-i18n-aria="demoVideoModalLabel">
     <button type="button" class="demo-video-modal-close" id="demoVideoClose" aria-label="Close video" data-i18n-aria="demoVideoCloseLabel">×</button>
-    <iframe
-      id="demoVideoPlayer"
-      title="YUMA demonstration video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-    ></iframe>
+    <div class="demo-video-player-wrap" id="demoVideoPlayerWrap"></div>
+    <a class="demo-video-fallback" href="https://youtu.be/pE3_5Ua0yV8" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
   </div>
 </div>
 
@@ -4051,25 +4071,58 @@ function toggleTheme(){
 
 (function initDemoVideo(){
   const DEMO_YOUTUBE_ID = "pE3_5Ua0yV8";
-  const DEMO_YOUTUBE_EMBED = "https://www.youtube-nocookie.com/embed/";
+  const DEMO_YOUTUBE_URL = "https://www.youtube.com/embed/";
+  const DEMO_YOUTUBE_WATCH = "https://www.youtube.com/watch?v=pE3_5Ua0yV8";
   const trigger = document.getElementById("demoVideoTrigger");
   const modal = document.getElementById("demoVideoModal");
   const backdrop = document.getElementById("demoVideoBackdrop");
   const closeBtn = document.getElementById("demoVideoClose");
-  const player = document.getElementById("demoVideoPlayer");
-  if(!trigger || !modal || !player) return;
+  const playerWrap = document.getElementById("demoVideoPlayerWrap");
+  if(!trigger || !modal || !playerWrap) return;
+
+  function getEmbedSrc(){
+    const params = new URLSearchParams({
+      rel:"0",
+      modestbranding:"1",
+      playsinline:"1"
+    });
+
+    if(location.protocol === "http:" || location.protocol === "https:"){
+      params.set("origin", location.origin);
+      params.set("widget_referrer", location.href);
+    }
+
+    return `${DEMO_YOUTUBE_URL}${DEMO_YOUTUBE_ID}?${params.toString()}`;
+  }
+
+  function createPlayer(){
+    playerWrap.textContent = "";
+    const iframe = document.createElement("iframe");
+    iframe.id = "demoVideoPlayer";
+    iframe.title = "YUMA demonstration video";
+    iframe.src = getEmbedSrc();
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+    iframe.setAttribute("allowfullscreen", "");
+    playerWrap.appendChild(iframe);
+  }
 
   function openModal(){
+    if(location.protocol === "file:"){
+      window.open(DEMO_YOUTUBE_WATCH, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     modal.hidden = false;
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    player.src = `${DEMO_YOUTUBE_EMBED}${DEMO_YOUTUBE_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    createPlayer();
     closeBtn?.focus();
   }
 
   function closeModal(){
-    player.removeAttribute("src");
-    player.src = "";
+    playerWrap.textContent = "";
     modal.hidden = true;
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
