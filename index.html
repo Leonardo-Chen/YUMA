@@ -717,16 +717,18 @@ body.dark .user-flow-accent-3{
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  width:clamp(64px,8vw,88px);
-  height:clamp(64px,8vw,88px);
+  width:clamp(68px,7.6vw,84px);
+  height:clamp(68px,7.6vw,84px);
   border-radius:50%;
-  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   color:var(--text);
+  box-shadow:0 10px 28px rgba(40,34,24,.12);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease);
   animation:demoPlayPulse 3.2s var(--ease) infinite;
   pointer-events:none;
@@ -735,7 +737,9 @@ body.dark .user-flow-accent-3{
 .demo-video-play svg{
   width:34%;
   height:34%;
-  margin-left:5%;
+  display:block;
+  margin:0 0 0 4%;
+  transform:none;
   fill:currentColor;
 }
 
@@ -1610,8 +1614,15 @@ nav .nav-inner{
   }
 
   .demo-video-play{
-    width:clamp(56px,14vw,72px);
-    height:clamp(56px,14vw,72px);
+    width:clamp(60px,13vw,72px);
+    height:clamp(60px,13vw,72px);
+  }
+
+  .demo-video-play svg{
+    width:34%;
+    height:34%;
+    margin:0 0 0 4%;
+    transform:none;
   }
 
   .demo-video-keywords{
@@ -2519,7 +2530,8 @@ nav .nav-inner{
   }
   .demo-video-stage{width:min(100%,760px);max-width:92%}
   .demo-video-keywords{flex-wrap:wrap;justify-content:center;overflow:visible}
-  .demo-video-play{width:64px;height:64px}
+  .demo-video-play{width:72px;height:72px}
+  .demo-video-play svg{width:34%;height:34%;margin:0 0 0 4%;transform:none}
 
   .contact-section h2{font-size:clamp(36px,5vw,48px)}
   .contact-section .lead{font-size:clamp(16px,1.8vw,18px)}
@@ -4571,7 +4583,7 @@ nav .nav-inner{
             onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/pE3_5Ua0yV8/hqdefault.jpg';"
           >
           <span class="demo-video-play" aria-hidden="true">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+            <svg viewBox="8 5 11 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </span>
         </button>
       </div>
